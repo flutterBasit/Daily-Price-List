@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routenames.signinScreen,
+          initialRoute: Routenames.verficationScreen,
           getPages: Routes.routes,
         );
       },

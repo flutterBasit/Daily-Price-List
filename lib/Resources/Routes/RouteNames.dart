@@ -4,4 +4,5 @@ class Routenames {
   static const String signinScreen = '/signinScreen';
   static const String numberScreen = '/NumberScreen';
   static const String verficationScreen = '/VerficationScreen';
+  static const String selectlocationScreen = '/SelectlocationScreen';
 }

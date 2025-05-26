@@ -64,16 +64,16 @@ class VerficationScreen extends StatelessWidget {
               // this makes everything to the end to the bottom
               Expanded(child: Container()),
               Obx(() {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Resend Code',
-                        style: TextStyle(
-                          color: Constants.greenColor,
-                        )),
-                    Visibility(
-                        visible: numberScreen_Controller.showNextButton.value,
-                        child: Padding(
+                return Visibility(
+                    visible: numberScreen_Controller.showNextButton.value,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Resend Code',
+                            style: TextStyle(
+                              color: Constants.greenColor,
+                            )),
+                        Padding(
                           padding: EdgeInsets.only(bottom: 20.h),
                           child: Align(
                             alignment: Alignment.bottomRight,
@@ -91,9 +91,9 @@ class VerficationScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ))
-                  ],
-                );
+                        )
+                      ],
+                    ));
               })
             ],
           ),

@@ -53,4 +53,11 @@ class Constants {
 
   static TextStyle numberTextStyle2 = googleFontStyle(TextStyle(
       fontSize: 16.sp, fontWeight: FontWeight.w600, color: greyColor2));
+
+// SELECT LOCATION SCREEN
+  static TextStyle selectlocationTextStyle = googleFontStyle(TextStyle(
+      fontSize: 23.sp, fontWeight: FontWeight.w600, color: blackColor2));
+
+  static TextStyle selectlocationTextStyle2 = googleFontStyle(TextStyle(
+      fontSize: 13.sp, fontWeight: FontWeight.w400, color: greyColor2));
 }

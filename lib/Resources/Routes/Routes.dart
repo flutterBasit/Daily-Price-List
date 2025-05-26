@@ -1,6 +1,7 @@
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/View/NumberScreen.dart';
 import 'package:daily_price_list/View/OnBoardingScreen.dart';
+import 'package:daily_price_list/View/SelectLocationScreen.dart';
 import 'package:daily_price_list/View/SigninScreen.dart';
 import 'package:daily_price_list/View/SplashScreen.dart';
 import 'package:daily_price_list/View/VerficationScreen.dart';
@@ -12,6 +13,10 @@ class Routes {
     GetPage(name: Routenames.onBoardingScreen, page: () => OnBoardingScreen()),
     GetPage(name: Routenames.signinScreen, page: () => Signinscreen()),
     GetPage(name: Routenames.numberScreen, page: () => Numberscreen()),
-    GetPage(name: Routenames.verficationScreen, page: () => VerficationScreen())
+    GetPage(
+        name: Routenames.verficationScreen, page: () => VerficationScreen()),
+    GetPage(
+        name: Routenames.selectlocationScreen,
+        page: () => SelectlocationScreen())
   ];
 }

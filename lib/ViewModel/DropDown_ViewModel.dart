@@ -35,4 +35,13 @@ class DropdownController extends GetxController {
     selectedDistrict.value = '';
     selectedZone.value = '';
   }
+
+  void selectDistrict(String value) {
+    selectedDistrict.value = value;
+    selectedZone.value = '';
+  }
+
+  void selectZone(String value) {
+    selectedZone.value = value;
+  }
 }

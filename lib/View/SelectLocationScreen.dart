@@ -1,6 +1,7 @@
 import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Components/CustomDropDown.dart';
-import 'package:daily_price_list/Resources/Constants/Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/ViewModel/DropDown_ViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class SelectlocationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.whiteColor2,
+      backgroundColor: ColorsConstants.whiteColor2,
       body: SafeArea(
           child: Padding(
         padding: EdgeInsets.all(14.w),
@@ -25,7 +26,7 @@ class SelectlocationScreen extends StatelessWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_back_ios,
-                color: Constants.blackColor,
+                color: ColorsConstants.blackColor,
               ),
             ),
             SizedBox(
@@ -38,7 +39,7 @@ class SelectlocationScreen extends StatelessWidget {
             Center(
               child: Text(
                 'Select Your Location',
-                style: Constants.selectlocationTextStyle,
+                style: Stringsconstants.selectlocationTextStyle,
               ),
             ),
             SizedBox(
@@ -47,7 +48,7 @@ class SelectlocationScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Switch on your location to stay in tune with \nwhat's happening in your area",
-                style: Constants.selectlocationTextStyle2,
+                style: Stringsconstants.selectlocationTextStyle2,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -88,8 +89,8 @@ class SelectlocationScreen extends StatelessWidget {
             Center(
                 child: Buttons(
               title: 'Submit',
-              color: Constants.greenColor,
-              titleStyle: Constants.signInButtonStyle,
+              color: ColorsConstants.greenColor,
+              titleStyle: Stringsconstants.signInButtonStyle,
             ))
           ],
         ),

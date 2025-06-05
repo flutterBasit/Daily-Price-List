@@ -1,5 +1,6 @@
-import 'package:daily_price_list/Resources/Constants/Constants.dart';
-import 'package:daily_price_list/View/SigninScreen.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+
 import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class VerficationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.whiteColor2,
+      backgroundColor: ColorsConstants.whiteColor2,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(14.w),
@@ -27,7 +28,7 @@ class VerficationScreen extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(
                       Icons.arrow_back_ios,
-                      color: Constants.blackColor,
+                      color: ColorsConstants.blackColor,
                     ),
                   ),
                   SizedBox(
@@ -35,14 +36,14 @@ class VerficationScreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter your 4-digit code',
-                    style: Constants.numberTextStyle,
+                    style: Stringsconstants.numberTextStyle,
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
                   Text(
                     'Code',
-                    style: Constants.numberTextStyle2,
+                    style: Stringsconstants.numberTextStyle2,
                   ),
                   //  CountryCodeDropdown(),
                   TextField(
@@ -71,7 +72,7 @@ class VerficationScreen extends StatelessWidget {
                       children: [
                         Text('Resend Code',
                             style: TextStyle(
-                              color: Constants.greenColor,
+                              color: ColorsConstants.greenColor,
                             )),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20.h),
@@ -81,11 +82,11 @@ class VerficationScreen extends StatelessWidget {
                               onTap: () {},
                               child: CircleAvatar(
                                 radius: 25.r,
-                                backgroundColor: Constants.greenColor,
+                                backgroundColor: ColorsConstants.greenColor,
                                 child: Center(
                                   child: Icon(
                                     Icons.arrow_forward_ios,
-                                    color: Constants.whiteColor3,
+                                    color: ColorsConstants.whiteColor3,
                                   ),
                                 ),
                               ),

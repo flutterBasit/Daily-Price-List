@@ -1,4 +1,5 @@
-import 'package:daily_price_list/Resources/Constants/Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/View/SigninScreen.dart';
 import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
@@ -14,7 +15,7 @@ class Numberscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.whiteColor2,
+      backgroundColor: ColorsConstants.whiteColor2,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(14.w),
@@ -27,7 +28,7 @@ class Numberscreen extends StatelessWidget {
                     onPressed: () {},
                     icon: Icon(
                       Icons.arrow_back_ios,
-                      color: Constants.blackColor,
+                      color: ColorsConstants.blackColor,
                     ),
                   ),
                   SizedBox(
@@ -35,14 +36,14 @@ class Numberscreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter your mobile number',
-                    style: Constants.numberTextStyle,
+                    style: Stringsconstants.numberTextStyle,
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
                   Text(
                     'Mobile Number',
-                    style: Constants.numberTextStyle2,
+                    style: Stringsconstants.numberTextStyle2,
                   ),
                   Row(
                     children: [
@@ -79,11 +80,11 @@ class Numberscreen extends StatelessWidget {
                           onTap: () {},
                           child: CircleAvatar(
                             radius: 25.r,
-                            backgroundColor: Constants.greenColor,
+                            backgroundColor: ColorsConstants.greenColor,
                             child: Center(
                               child: Icon(
                                 Icons.arrow_forward_ios,
-                                color: Constants.whiteColor3,
+                                color: ColorsConstants.whiteColor3,
                               ),
                             ),
                           ),

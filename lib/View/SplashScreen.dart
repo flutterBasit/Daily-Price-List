@@ -1,4 +1,5 @@
-import 'package:daily_price_list/Resources/Constants/Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:flutter/material.dart';
 
 class Splashscreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class Splashscreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.greenColor,
+      backgroundColor: ColorsConstants.greenColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
@@ -20,11 +21,11 @@ class Splashscreen extends StatelessWidget {
                 children: [
                   Text(
                     'Daily Price List',
-                    style: Constants.splashScreenStyle,
+                    style: Stringsconstants.splashScreenStyle,
                   ),
                   Text(
                     "Online       Market       Rates",
-                    style: Constants.splashScreenStyle2,
+                    style: Stringsconstants.splashScreenStyle2,
                   ),
                 ],
               )

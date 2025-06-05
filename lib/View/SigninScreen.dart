@@ -1,9 +1,10 @@
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
 import 'package:daily_price_list/Resources/Components/Buttons.dart';
-import 'package:daily_price_list/Resources/Constants/Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
-import 'package:daily_price_list/Resources/Routes/Routes.dart';
+
 import 'package:daily_price_list/ViewModel/phone_ViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,7 +21,7 @@ class _SigninscreenState extends State<Signinscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.whiteColor2,
+      backgroundColor: ColorsConstants.whiteColor2,
       body: SingleChildScrollView(
         child: Column(
           //mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +35,7 @@ class _SigninscreenState extends State<Signinscreen> {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 'Dive into Daily Price \nof K.P.K',
-                style: Constants.signInTextStyle,
+                style: Stringsconstants.signInTextStyle,
               ),
             ),
             Row(
@@ -64,7 +65,7 @@ class _SigninscreenState extends State<Signinscreen> {
             Center(
                 child: Text(
               'Or connect with social media',
-              style: Constants.signInTextStyle2,
+              style: Stringsconstants.signInTextStyle2,
             )),
             SizedBox(
               height: 20.h,
@@ -73,8 +74,8 @@ class _SigninscreenState extends State<Signinscreen> {
               child: Buttons(
                   assetImagePath: 'assets/images/Google.png',
                   title: 'Continue with Google',
-                  titleStyle: Constants.signInButtonStyle,
-                  color: Constants.blueColor),
+                  titleStyle: Stringsconstants.signInButtonStyle,
+                  color: ColorsConstants.blueColor),
             ),
             SizedBox(
               height: 20.h,
@@ -83,8 +84,8 @@ class _SigninscreenState extends State<Signinscreen> {
               child: Buttons(
                 assetImagePath: 'assets/images/facebook.png',
                 title: 'Continue with Facebook',
-                color: Constants.blueColor2,
-                titleStyle: Constants.signInButtonStyle,
+                color: ColorsConstants.blueColor2,
+                titleStyle: Stringsconstants.signInButtonStyle,
               ),
             )
           ],

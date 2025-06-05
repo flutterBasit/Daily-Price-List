@@ -1,5 +1,6 @@
 import 'package:daily_price_list/Resources/Components/Buttons.dart';
-import 'package:daily_price_list/Resources/Constants/Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -36,19 +37,19 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
                 Text(
                   "Welcome\nto our app",
-                  style: Constants.onBoardingStyle,
+                  style: Stringsconstants.onBoardingStyle,
                 ),
                 Text(
                   'Track Daily Prices, Save Smartly!',
-                  style: Constants.onBoardingStyle2,
+                  style: Stringsconstants.onBoardingStyle2,
                 ),
                 SizedBox(
                   height: 30.h,
                 ),
                 Buttons(
                   title: 'Get Started',
-                  color: Constants.greenColor,
-                  titleStyle: Constants.onBoardingStyleButton,
+                  color: ColorsConstants.greenColor,
+                  titleStyle: Stringsconstants.onBoardingStyleButton,
                   onTap: () {},
                 )
               ],

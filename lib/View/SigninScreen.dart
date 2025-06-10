@@ -35,7 +35,7 @@ class _SigninscreenState extends State<Signinscreen> {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 'Dive into Daily Price \nof K.P.K',
-                style: Stringsconstants.signInTextStyle,
+                style: StringsConstants.signInTextStyle,
               ),
             ),
             Row(
@@ -65,7 +65,7 @@ class _SigninscreenState extends State<Signinscreen> {
             Center(
                 child: Text(
               'Or connect with social media',
-              style: Stringsconstants.signInTextStyle2,
+              style: StringsConstants.signInTextStyle2,
             )),
             SizedBox(
               height: 20.h,
@@ -74,7 +74,7 @@ class _SigninscreenState extends State<Signinscreen> {
               child: Buttons(
                   assetImagePath: 'assets/images/Google.png',
                   title: 'Continue with Google',
-                  titleStyle: Stringsconstants.signInButtonStyle,
+                  titleStyle: StringsConstants.signInButtonStyle,
                   color: ColorsConstants.blueColor),
             ),
             SizedBox(
@@ -85,7 +85,7 @@ class _SigninscreenState extends State<Signinscreen> {
                 assetImagePath: 'assets/images/facebook.png',
                 title: 'Continue with Facebook',
                 color: ColorsConstants.blueColor2,
-                titleStyle: Stringsconstants.signInButtonStyle,
+                titleStyle: StringsConstants.signInButtonStyle,
               ),
             )
           ],

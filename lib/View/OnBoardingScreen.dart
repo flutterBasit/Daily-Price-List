@@ -37,11 +37,11 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
                 Text(
                   "Welcome\nto our app",
-                  style: Stringsconstants.onBoardingStyle,
+                  style: StringsConstants.onBoardingStyle,
                 ),
                 Text(
                   'Track Daily Prices, Save Smartly!',
-                  style: Stringsconstants.onBoardingStyle2,
+                  style: StringsConstants.onBoardingStyle2,
                 ),
                 SizedBox(
                   height: 30.h,
@@ -49,7 +49,7 @@ class OnBoardingScreen extends StatelessWidget {
                 Buttons(
                   title: 'Get Started',
                   color: ColorsConstants.greenColor,
-                  titleStyle: Stringsconstants.onBoardingStyleButton,
+                  titleStyle: StringsConstants.onBoardingStyleButton,
                   onTap: () {},
                 )
               ],

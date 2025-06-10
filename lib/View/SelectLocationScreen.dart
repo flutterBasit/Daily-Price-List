@@ -39,7 +39,7 @@ class SelectlocationScreen extends StatelessWidget {
             Center(
               child: Text(
                 'Select Your Location',
-                style: Stringsconstants.selectlocationTextStyle,
+                style: StringsConstants.selectlocationTextStyle,
               ),
             ),
             SizedBox(
@@ -48,7 +48,7 @@ class SelectlocationScreen extends StatelessWidget {
             Center(
               child: Text(
                 "Switch on your location to stay in tune with \nwhat's happening in your area",
-                style: Stringsconstants.selectlocationTextStyle2,
+                style: StringsConstants.selectlocationTextStyle2,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -90,7 +90,7 @@ class SelectlocationScreen extends StatelessWidget {
                 child: Buttons(
               title: 'Submit',
               color: ColorsConstants.greenColor,
-              titleStyle: Stringsconstants.signInButtonStyle,
+              titleStyle: StringsConstants.signInButtonStyle,
             ))
           ],
         ),

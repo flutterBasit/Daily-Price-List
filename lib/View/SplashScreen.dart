@@ -21,11 +21,11 @@ class Splashscreen extends StatelessWidget {
                 children: [
                   Text(
                     'Daily Price List',
-                    style: Stringsconstants.splashScreenStyle,
+                    style: StringsConstants.splashScreenStyle,
                   ),
                   Text(
                     "Online       Market       Rates",
-                    style: Stringsconstants.splashScreenStyle2,
+                    style: StringsConstants.splashScreenStyle2,
                   ),
                 ],
               )

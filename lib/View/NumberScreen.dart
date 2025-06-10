@@ -36,14 +36,14 @@ class Numberscreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter your mobile number',
-                    style: Stringsconstants.numberTextStyle,
+                    style: StringsConstants.numberTextStyle,
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
                   Text(
                     'Mobile Number',
-                    style: Stringsconstants.numberTextStyle2,
+                    style: StringsConstants.numberTextStyle2,
                   ),
                   Row(
                     children: [

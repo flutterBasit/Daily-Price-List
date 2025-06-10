@@ -36,14 +36,14 @@ class VerficationScreen extends StatelessWidget {
                   ),
                   Text(
                     'Enter your 4-digit code',
-                    style: Stringsconstants.numberTextStyle,
+                    style: StringsConstants.numberTextStyle,
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
                   Text(
                     'Code',
-                    style: Stringsconstants.numberTextStyle2,
+                    style: StringsConstants.numberTextStyle2,
                   ),
                   //  CountryCodeDropdown(),
                   TextField(

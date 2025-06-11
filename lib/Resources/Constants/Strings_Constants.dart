@@ -94,12 +94,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class StringsConstants {
   static const String fontStyle = "Gilroy";
 
-  static TextStyle customFontStyle({
-    double fontSize = 14,
-    FontWeight fontWeight = FontWeight.w400,
-    Color color = Colors.black,
-  }) {
+  static TextStyle customFontStyle(
+      {double fontSize = 14,
+      FontWeight fontWeight = FontWeight.w400,
+      Color color = Colors.black,
+      double letterSpacing = 0}) {
     return TextStyle(
+      letterSpacing: letterSpacing,
       fontFamily: fontStyle,
       fontSize: fontSize,
       fontWeight: fontWeight,
@@ -184,14 +185,14 @@ class StringsConstants {
     color: ColorsConstants.greyColor2,
   );
 
-  // LOGIN SCREEN
-  static TextStyle loginScreenTextColor = customFontStyle(
+  // LOGIN SCREEN and SIGNUP SCREEN
+  static TextStyle loginScreenTextStyle = customFontStyle(
     fontSize: 23.sp,
     fontWeight: FontWeight.w600,
     color: ColorsConstants.blackColor2,
   );
 
-  static TextStyle loginScreenTextColor2 = customFontStyle(
+  static TextStyle loginScreenTextStyle2 = customFontStyle(
       fontSize: 14.sp,
       fontWeight: FontWeight.w400,
       color: ColorsConstants.greyColor2);
@@ -200,4 +201,26 @@ class StringsConstants {
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.greyColor2);
+
+  static TextStyle loginScreenTextStyle3 = customFontStyle(
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle loginScreenTextStyle4 = customFontStyle(
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.greenColor);
+
+  static TextStyle signupScreenTextStyle = customFontStyle(
+      letterSpacing: 1.sp,
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w400,
+      color: ColorsConstants.blackColor);
+
+  static TextStyle signupScreenTextStyle2 = customFontStyle(
+      fontSize: 12.sp,
+      letterSpacing: 1.sp,
+      fontWeight: FontWeight.w400,
+      color: ColorsConstants.greenColor);
 }

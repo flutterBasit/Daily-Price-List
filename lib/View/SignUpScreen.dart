@@ -6,14 +6,14 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Loginscreen extends StatefulWidget {
-  const Loginscreen({super.key});
+class Signupscreen extends StatefulWidget {
+  const Signupscreen({super.key});
 
   @override
-  State<Loginscreen> createState() => _LoginscreenState();
+  State<Signupscreen> createState() => _SignupscreenState();
 }
 
-class _LoginscreenState extends State<Loginscreen> {
+class _SignupscreenState extends State<Signupscreen> {
   final _EmailController = TextEditingController();
 
   final _PasswordController = TextEditingController();
@@ -23,6 +23,8 @@ class _LoginscreenState extends State<Loginscreen> {
   final _EmailFocusNode = FocusNode();
 
   final _PasswordFocusNode = FocusNode();
+
+  final _UsernameFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +49,14 @@ class _LoginscreenState extends State<Loginscreen> {
                     height: 80.h,
                   ),
                   Text(
-                    'Loging',
+                    'Sign Up',
                     style: StringsConstants.loginScreenTextStyle,
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
                   Text(
-                    'Enter your emails and password',
+                    'Enter your credentials to continue',
                     style: StringsConstants.loginScreenTextStyle2,
                   ),
                   SizedBox(
@@ -66,6 +68,23 @@ class _LoginscreenState extends State<Loginscreen> {
 // In this case, onFieldSubmitted passes the submitted value (i.e., the text the user typed before hitting "Done" or "Next"). But if you don’t need to use that value, you can just write _ to say:
 
 // “Yes, I accept a parameter here, but I don’t care about its value.”
+                  AuthTextField(
+                    controller: _EmailController,
+                    labelText: 'Username',
+                    hintText: 'Example User Name',
+                    keyboardType: TextInputType.name,
+                    focusNode: _UsernameFocusNode,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_EmailFocusNode);
+                    },
+                    validator: (value) => EmailValidator.validate(value ?? '')
+                        ? null
+                        : 'Enter valid Username',
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   AuthTextField(
                     controller: _EmailController,
                     labelText: 'Email',
@@ -96,26 +115,39 @@ class _LoginscreenState extends State<Loginscreen> {
                         value!.length >= 8 ? null : 'Minimun 8 characters',
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 15.h,
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          'Forgot Password?',
-                          style: StringsConstants.loginScreenTextStyle3,
-                        )
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "By continuing you agree to our ",
+                            style: StringsConstants.signupScreenTextStyle,
+                          ),
+                          Text("Terms of Services",
+                              style: StringsConstants.signupScreenTextStyle2),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "and",
+                            style: StringsConstants.signupScreenTextStyle,
+                          ),
+                          Text(" Privacy Policy",
+                              style: StringsConstants.signupScreenTextStyle2),
+                        ],
+                      )
+                    ],
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: 20.h,
                   ),
                   Center(
                     child: Buttons(
-                      title: 'Log in',
+                      title: 'Sign Up',
                       titleStyle: StringsConstants.signInButtonStyle,
                       color: ColorsConstants.greenColor,
                       onTap: () {
@@ -130,17 +162,14 @@ class _LoginscreenState extends State<Loginscreen> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have an account?",
-                        style: StringsConstants.loginScreenTextStyle3,
-                      ),
-                      Text(" Signup",
-                          style: StringsConstants.loginScreenTextStyle4)
-                    ],
-                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      "Already have an account?",
+                      style: StringsConstants.loginScreenTextStyle3,
+                    ),
+                    Text(" Signup",
+                        style: TextStyle(color: ColorsConstants.greenColor))
+                  ])
                 ],
               ),
             ),

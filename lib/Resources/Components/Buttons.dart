@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Buttons extends StatelessWidget {
   final String title;
-  final Function? onTap;
+  final GestureTapCallback? onTap;
   final Color color;
   final TextStyle? titleStyle;
   final String? assetImagePath;
@@ -18,9 +18,7 @@ class Buttons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          onTap;
-        },
+        onTap: onTap,
         child: Container(
           height: 67.h,
           width: 320.w,

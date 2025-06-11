@@ -16,6 +16,7 @@ class AuthTextField extends StatefulWidget {
   final TextInputAction? textInputAction;
   final FocusNode? focusNode;
   final VoidCallback? onSubmitted;
+  final void Function(String)? onFieldSubmitted;
 
   AuthTextField(
       {super.key,
@@ -31,7 +32,8 @@ class AuthTextField extends StatefulWidget {
       this.showPasswordToggle = true,
       this.textInputAction,
       this.focusNode,
-      this.onSubmitted});
+      this.onSubmitted,
+      this.onFieldSubmitted});
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -47,33 +49,46 @@ class _AuthTextFieldState extends State<AuthTextField> {
       obscureText: widget.isPassword && _obsecureText,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
+      textInputAction: widget.textInputAction,
       focusNode: widget.focusNode,
-      onFieldSubmitted: (_) => widget.onSubmitted?.call(),
+      onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
-          labelStyle: StringsConstants.CustomTextFieldLabelStyle,
-          hintText: widget.hintText,
-          labelText: widget.labelText,
-          prefixIcon:
-              widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
-          suffixIcon: widget.isPassword && widget.showPasswordToggle
-              ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _obsecureText = !_obsecureText;
-                    });
-                  },
-                  //condition ? valueIfTrue : valueIfFalse
-                  icon: Icon(
-                      _obsecureText ? Icons.visibility_off : Icons.visibility))
-              : null,
-          enabledBorder: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: ColorsConstants.whiteColor4, width: 1.5)),
-          focusedBorder: UnderlineInputBorder(
-              borderSide:
-                  BorderSide(color: ColorsConstants.whiteColor4, width: 1.5))
-          //  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r))
+        labelStyle: StringsConstants.CustomTextFieldLabelStyle,
+        hintText: widget.hintText,
+        labelText: widget.labelText,
+        prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,
+        suffixIcon: widget.isPassword && widget.showPasswordToggle
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    _obsecureText = !_obsecureText;
+                  });
+                },
+                //condition ? valueIfTrue : valueIfFalse
+                icon: Icon(
+                    _obsecureText ? Icons.visibility_off : Icons.visibility))
+            : null,
+        enabledBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: ColorsConstants.whiteColor4, width: 1.5)),
+        focusedBorder: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: ColorsConstants.whiteColor4, width: 1.5)),
+        //  border: OutlineInputBorder(borderRadius: BorderRadius.circular(8.r))
+        errorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red, // Standard error color
+            width: 1.5,
           ),
+        ),
+        // Add the focusedErrorBorder
+        focusedErrorBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red, // Standard error color
+            width: 2.0, // Often slightly thicker when focused with an error
+          ),
+        ),
+      ),
     );
   }
 }

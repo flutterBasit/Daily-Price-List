@@ -53,7 +53,8 @@ class _AuthTextFieldState extends State<AuthTextField> {
       focusNode: widget.focusNode,
       onFieldSubmitted: widget.onFieldSubmitted,
       decoration: InputDecoration(
-        labelStyle: StringsConstants.CustomTextFieldLabelStyle,
+        labelStyle: StringsConstants.customTextFieldLabelStyle,
+        hintStyle: StringsConstants.customTextFieldHintStyle,
         hintText: widget.hintText,
         labelText: widget.labelText,
         prefixIcon: widget.prefixIcon != null ? Icon(widget.prefixIcon) : null,

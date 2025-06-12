@@ -1,8 +1,10 @@
 import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -24,7 +26,7 @@ class OnBoardingScreen extends StatelessWidget {
           ),
           Positioned(
             // top: 100,
-            bottom: 50.h,
+            bottom: 48.h,
             left: 30.5.w,
             child: Column(
               // mainAxisAlignment: MainAxisAlignment.end,
@@ -35,8 +37,11 @@ class OnBoardingScreen extends StatelessWidget {
                   height: 56.36.h,
                   width: 48.47.w,
                 ),
+                SizedBox(
+                  height: 15.h,
+                ),
                 Text(
-                  "Welcome\nto our app",
+                  " Welcome\nto our app",
                   style: StringsConstants.onBoardingStyle,
                 ),
                 Text(
@@ -50,7 +55,9 @@ class OnBoardingScreen extends StatelessWidget {
                   title: 'Get Started',
                   color: ColorsConstants.greenColor,
                   titleStyle: StringsConstants.onBoardingStyleButton,
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routenames.signinScreen);
+                  },
                 )
               ],
             ),

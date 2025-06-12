@@ -18,6 +18,8 @@ class _SignupscreenState extends State<Signupscreen> {
 
   final _PasswordController = TextEditingController();
 
+  final _UsernameController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   final _EmailFocusNode = FocusNode();
@@ -69,7 +71,7 @@ class _SignupscreenState extends State<Signupscreen> {
 
 // “Yes, I accept a parameter here, but I don’t care about its value.”
                   AuthTextField(
-                    controller: _EmailController,
+                    controller: _UsernameController,
                     labelText: 'Username',
                     hintText: 'Example User Name',
                     keyboardType: TextInputType.name,
@@ -105,7 +107,7 @@ class _SignupscreenState extends State<Signupscreen> {
                   AuthTextField(
                     controller: _PasswordController,
                     labelText: 'Password',
-                    hintText: '*******',
+                    hintText: '* * * * * * * *',
                     keyboardType: TextInputType.visiblePassword,
                     // prefixIcon: Icons.lock,
                     isPassword: true,
@@ -130,6 +132,9 @@ class _SignupscreenState extends State<Signupscreen> {
                               style: StringsConstants.signupScreenTextStyle2),
                         ],
                       ),
+                      SizedBox(
+                        height: 5.h,
+                      ),
                       Row(
                         children: [
                           Text(
@@ -143,13 +148,13 @@ class _SignupscreenState extends State<Signupscreen> {
                     ],
                   ),
                   SizedBox(
-                    height: 20.h,
+                    height: 25.h,
                   ),
                   Center(
                     child: Buttons(
                       title: 'Sign Up',
-                      titleStyle: StringsConstants.signInButtonStyle,
-                      color: ColorsConstants.greenColor,
+                      // titleStyle: StringsConstants.signInButtonStyle,
+                      // color: ColorsConstants.greenColor,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           print('SUCCESS');

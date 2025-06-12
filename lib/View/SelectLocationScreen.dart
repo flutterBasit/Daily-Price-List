@@ -89,8 +89,8 @@ class SelectlocationScreen extends StatelessWidget {
             Center(
                 child: Buttons(
               title: 'Submit',
-              color: ColorsConstants.greenColor,
-              titleStyle: StringsConstants.signInButtonStyle,
+              // color: ColorsConstants.greenColor,
+              // titleStyle: StringsConstants.signInButtonStyle,
             ))
           ],
         ),

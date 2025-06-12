@@ -123,13 +123,13 @@ class StringsConstants {
 
   // ONBOARDING SCREEN
   static TextStyle onBoardingStyle = customFontStyle(
-    fontSize: 48.sp,
+    fontSize: 46.sp,
     fontWeight: FontWeight.w600,
     color: ColorsConstants.whiteColor,
   );
 
   static TextStyle onBoardingStyle2 = customFontStyle(
-    fontSize: 16.sp,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     color: ColorsConstants.whiteColor2,
   );
@@ -142,7 +142,7 @@ class StringsConstants {
 
   // SIGN IN SCREEN
   static TextStyle signInTextStyle = customFontStyle(
-    fontSize: 26.sp,
+    fontSize: 22.sp,
     fontWeight: FontWeight.w600,
     color: ColorsConstants.blackColor,
   );
@@ -197,10 +197,15 @@ class StringsConstants {
       fontWeight: FontWeight.w400,
       color: ColorsConstants.greyColor2);
 
-  static TextStyle CustomTextFieldLabelStyle = customFontStyle(
+  static TextStyle customTextFieldLabelStyle = customFontStyle(
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.greyColor2);
+
+  static TextStyle customTextFieldHintStyle = customFontStyle(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w400,
+      color: ColorsConstants.blackColor);
 
   static TextStyle loginScreenTextStyle3 = customFontStyle(
       fontSize: 13.sp,

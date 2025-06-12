@@ -49,7 +49,7 @@ class _SigninscreenState extends State<Signinscreen> {
                         disabledBorder: InputBorder.none),
                     // maxLength: 10,
                     onTap: () {
-                      Get.toNamed(Routenames.splashScreen);
+                      Get.toNamed(Routenames.numberScreen);
                     },
                   ),
                 )

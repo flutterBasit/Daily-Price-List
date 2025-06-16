@@ -312,6 +312,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  tap_builder:
+    dependency: "direct main"
+    description:
+      name: tap_builder
+      sha256: "10f00a5acb179aae7b22288042782bbca8624d8877ca425dcd3e87618ad88b09"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.0"
   term_glyph:
     dependency: transitive
     description:

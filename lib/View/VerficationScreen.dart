@@ -1,5 +1,6 @@
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 
 import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
@@ -25,7 +26,9 @@ class VerficationScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                     icon: Icon(
                       Icons.arrow_back_ios,
                       color: ColorsConstants.blackColor,
@@ -47,18 +50,18 @@ class VerficationScreen extends StatelessWidget {
                   ),
                   //  CountryCodeDropdown(),
                   TextField(
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        hintText: '- - - -'),
-                    onChanged: numberScreen_Controller.updatePhoneNumber,
-                    onTap: () =>
-                        numberScreen_Controller.keyboardVisible.value = true,
-                  ),
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                          enabledBorder: InputBorder.none,
+                          disabledBorder: InputBorder.none,
+                          hintText: '- - - -'),
+                      onChanged: numberScreen_Controller.updateEnteredOTP,
+                      onTap: () {
+                        numberScreen_Controller.keyboardVisible.value = true;
+                      }),
                   Divider(
-                    indent: 20,
-                    endIndent: 20,
+                    indent: 10,
+                    endIndent: 10,
                   ),
                 ],
               ),
@@ -66,20 +69,32 @@ class VerficationScreen extends StatelessWidget {
               Expanded(child: Container()),
               Obx(() {
                 return Visibility(
-                    visible: numberScreen_Controller.showNextButton.value,
+                    visible:
+                        numberScreen_Controller.enteredOpt.value.length == 4,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Resend Code',
-                            style: TextStyle(
-                              color: ColorsConstants.greenColor,
-                            )),
+                        TextButton(
+                          onPressed: () {},
+                          child: Text('Resend Code',
+                              style: TextStyle(
+                                color: ColorsConstants.greenColor,
+                              )),
+                        ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 20.h),
                           child: Align(
                             alignment: Alignment.bottomRight,
-                            child: GestureDetector(
-                              onTap: () {},
+                            child: InkWell(
+                              onTap: () {
+                                if (numberScreen_Controller.verfitynumber()) {
+                                  Get.snackbar('Success', 'OTP verified ✅');
+                                  // Get.offNamed(Routenames.selectlocationScreen);
+                                } else {
+                                  Get.snackbar('Error',
+                                      'Invalid OTP or network issue ❌');
+                                }
+                              },
                               child: CircleAvatar(
                                 radius: 25.r,
                                 backgroundColor: ColorsConstants.greenColor,

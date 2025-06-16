@@ -51,7 +51,7 @@ class OnBoardingScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                Buttons(
+                Buttons1(
                   title: 'Get Started',
                   color: ColorsConstants.greenColor,
                   titleStyle: StringsConstants.onBoardingStyleButton,

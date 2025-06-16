@@ -1,17 +1,17 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-// class Buttons extends StatelessWidget {
+// class Buttons1 extends StatelessWidget {
 //   final String title;
 //   final GestureTapCallback? onTap;
-//   final Color color;
+//   final Color? color;
 //   final TextStyle? titleStyle;
 //   final String? assetImagePath;
-//   const Buttons(
+//   const Buttons1(
 //       {super.key,
 //       required this.title,
 //       this.onTap,
-//       required this.color,
+//       this.color,
 //       this.titleStyle,
 //       this.assetImagePath});
 
@@ -55,14 +55,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Buttons extends StatelessWidget {
+class Buttons1 extends StatelessWidget {
   final String title;
   final GestureTapCallback? onTap;
   final Color? color;
   final TextStyle? titleStyle;
   final String? assetImagePath;
 
-  const Buttons({
+  const Buttons1({
     super.key,
     required this.title,
     this.onTap,

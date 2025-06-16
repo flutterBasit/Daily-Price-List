@@ -71,17 +71,25 @@ class _SigninscreenState extends State<Signinscreen> {
               height: 20.h,
             ),
             Center(
-              child: Buttons(
+              child: Buttons1(
                   assetImagePath: 'assets/images/Google.png',
                   title: 'Continue with Google',
                   titleStyle: StringsConstants.signInButtonStyle,
                   color: ColorsConstants.blueColor),
             ),
             SizedBox(
-              height: 20.h,
+              height: 18.h,
             ),
+            // SignInButton(
+            //   Buttons.facebook,
+            //   mini: true,
+            //   onPressed: () {
+            //     Get.toNamed(Routenames.splashScreen);
+            //   },
+            // ),
+
             Center(
-              child: Buttons(
+              child: Buttons1(
                 assetImagePath: 'assets/images/facebook.png',
                 title: 'Continue with Facebook',
                 color: ColorsConstants.blueColor2,

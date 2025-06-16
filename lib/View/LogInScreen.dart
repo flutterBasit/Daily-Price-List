@@ -114,7 +114,7 @@ class _LoginscreenState extends State<Loginscreen> {
                     height: 15.h,
                   ),
                   Center(
-                    child: Buttons(
+                    child: Buttons1(
                       title: 'Log in',
                       titleStyle: StringsConstants.signInButtonStyle,
                       color: ColorsConstants.greenColor,

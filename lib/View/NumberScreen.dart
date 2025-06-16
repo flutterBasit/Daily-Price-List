@@ -1,5 +1,6 @@
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/View/SigninScreen.dart';
 import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
@@ -62,8 +63,8 @@ class Numberscreen extends StatelessWidget {
                     ],
                   ),
                   Divider(
-                    indent: 30,
-                    endIndent: 30,
+                    indent: 20,
+                    endIndent: 20,
                   ),
                 ],
               ),
@@ -76,8 +77,11 @@ class Numberscreen extends StatelessWidget {
                       padding: EdgeInsets.only(bottom: 20.h),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: GestureDetector(
-                          onTap: () {},
+                        child: InkWell(
+                          onTap: () {
+                            numberScreen_Controller.geerateFakeOtp();
+                            Get.toNamed(Routenames.verficationScreen);
+                          },
                           child: CircleAvatar(
                             radius: 25.r,
                             backgroundColor: ColorsConstants.greenColor,

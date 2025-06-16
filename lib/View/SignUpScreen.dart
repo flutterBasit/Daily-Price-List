@@ -151,10 +151,10 @@ class _SignupscreenState extends State<Signupscreen> {
                     height: 25.h,
                   ),
                   Center(
-                    child: Buttons(
+                    child: Buttons1(
                       title: 'Sign Up',
-                      // titleStyle: StringsConstants.signInButtonStyle,
-                      // color: ColorsConstants.greenColor,
+                      titleStyle: StringsConstants.signInButtonStyle,
+                      color: ColorsConstants.greenColor,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           print('SUCCESS');

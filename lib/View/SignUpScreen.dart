@@ -2,9 +2,11 @@ import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Components/CustomTextFormField.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class Signupscreen extends StatefulWidget {
   const Signupscreen({super.key});
@@ -70,6 +72,20 @@ class _SignupscreenState extends State<Signupscreen> {
 // In this case, onFieldSubmitted passes the submitted value (i.e., the text the user typed before hitting "Done" or "Next"). But if you don’t need to use that value, you can just write _ to say:
 
 // “Yes, I accept a parameter here, but I don’t care about its value.”
+                  // AuthTextField(
+                  //   controller: _UsernameController,
+                  //   labelText: 'Username',
+                  //   hintText: 'Example User Name',
+                  //   keyboardType: TextInputType.name,
+                  //   focusNode: _UsernameFocusNode,
+                  //   textInputAction: TextInputAction.next,
+                  //   onFieldSubmitted: (_) {
+                  //     FocusScope.of(context).requestFocus(_EmailFocusNode);
+                  //   },
+                  //   validator: (value) => EmailValidator.validate(value ?? '')
+                  //       ? null
+                  //       : 'Enter valid Username',
+                  // ),
                   AuthTextField(
                     controller: _UsernameController,
                     labelText: 'Username',
@@ -80,10 +96,16 @@ class _SignupscreenState extends State<Signupscreen> {
                     onFieldSubmitted: (_) {
                       FocusScope.of(context).requestFocus(_EmailFocusNode);
                     },
-                    validator: (value) => EmailValidator.validate(value ?? '')
-                        ? null
-                        : 'Enter valid Username',
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Username is required';
+                      } else if (value.trim().length < 3) {
+                        return 'Username must be at least 3 characters';
+                      }
+                      return null;
+                    },
                   ),
+
                   SizedBox(
                     height: 20.h,
                   ),
@@ -157,9 +179,19 @@ class _SignupscreenState extends State<Signupscreen> {
                       color: ColorsConstants.greenColor,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          print('SUCCESS');
+                          Get.snackbar(
+                            'Success',
+                            'Signed Up ✅',
+                            backgroundColor: ColorsConstants.greenColor,
+                            colorText: Colors.white,
+                          );
                         } else {
-                          print('Failure');
+                          Get.snackbar(
+                            'Error',
+                            'Please fill all required fields ❌',
+                            backgroundColor: Colors.redAccent,
+                            colorText: Colors.white,
+                          );
                         }
                       },
                     ),
@@ -172,8 +204,13 @@ class _SignupscreenState extends State<Signupscreen> {
                       "Already have an account?",
                       style: StringsConstants.loginScreenTextStyle3,
                     ),
-                    Text(" Signup",
-                        style: TextStyle(color: ColorsConstants.greenColor))
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(Routenames.logInScreen);
+                      },
+                      child: Text(" Signin",
+                          style: StringsConstants.loginScreenTextStyle4),
+                    )
                   ])
                 ],
               ),

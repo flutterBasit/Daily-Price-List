@@ -2,9 +2,12 @@ import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Components/CustomTextFormField.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -95,24 +98,26 @@ class _LoginscreenState extends State<Loginscreen> {
                     validator: (value) =>
                         value!.length >= 8 ? null : 'Minimun 8 characters',
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
                   Padding(
                     padding: EdgeInsets.all(10.h),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Text(
-                          'Forgot Password?',
-                          style: StringsConstants.loginScreenTextStyle3,
-                        )
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Forgot Password?',
+                              style: StringsConstants.loginScreenTextStyle3,
+                            ))
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
+                  // SizedBox(
+                  //   height: 15.h,
+                  // ),
                   Center(
                     child: Buttons1(
                       title: 'Log in',
@@ -120,9 +125,19 @@ class _LoginscreenState extends State<Loginscreen> {
                       color: ColorsConstants.greenColor,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          print('SUCCESS');
+                          Get.snackbar(
+                            'Success',
+                            'Logged In ✅',
+                            backgroundColor: ColorsConstants.greenColor,
+                            colorText: Colors.white,
+                          );
                         } else {
-                          print('Failure');
+                          Get.snackbar(
+                            'Error',
+                            'Please fill all required fields ❌',
+                            backgroundColor: Colors.redAccent,
+                            colorText: Colors.white,
+                          );
                         }
                       },
                     ),
@@ -137,8 +152,13 @@ class _LoginscreenState extends State<Loginscreen> {
                         "Don't have an account?",
                         style: StringsConstants.loginScreenTextStyle3,
                       ),
-                      Text(" Signup",
-                          style: StringsConstants.loginScreenTextStyle4)
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(Routenames.SignUpScreen);
+                        },
+                        child: Text(" Signup",
+                            style: StringsConstants.loginScreenTextStyle4),
+                      )
                     ],
                   ),
                 ],

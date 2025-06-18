@@ -1,3 +1,5 @@
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NumberScreen_Controller extends GetxController {
@@ -18,7 +20,11 @@ class NumberScreen_Controller extends GetxController {
   void geerateFakeOtp() {
     otp.value = '1234';
     Get.snackbar(
-        'Fake OTP sent...', 'Plese use this otp to register ${otp.value}');
+      'Fake OTP sent...',
+      'Plese use this otp to register ${otp.value}',
+      backgroundColor: ColorsConstants.greenColor,
+      colorText: Colors.white,
+    );
   }
 
   void updateEnteredOTP(String value) {

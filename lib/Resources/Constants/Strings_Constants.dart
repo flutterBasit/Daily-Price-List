@@ -167,14 +167,14 @@ class StringsConstants {
   );
 
   static TextStyle numberTextStyle2 = customFontStyle(
-    fontSize: 16.sp,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: ColorsConstants.greyColor2,
   );
 
   // LOCATION SCREEN
   static TextStyle selectlocationTextStyle = customFontStyle(
-    fontSize: 23.sp,
+    fontSize: 24.sp,
     fontWeight: FontWeight.w600,
     color: ColorsConstants.blackColor2,
   );

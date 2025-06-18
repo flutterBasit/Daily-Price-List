@@ -52,9 +52,18 @@ class VerficationScreen extends StatelessWidget {
                   TextField(
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
-                          enabledBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          hintText: '- - - -'),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none, // No border
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide.none, // No border when enabled
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide.none, // No border when focused
+                          ),
+                          hintText: ' - - - -'),
                       onChanged: numberScreen_Controller.updateEnteredOTP,
                       onTap: () {
                         numberScreen_Controller.keyboardVisible.value = true;
@@ -88,11 +97,20 @@ class VerficationScreen extends StatelessWidget {
                             child: InkWell(
                               onTap: () {
                                 if (numberScreen_Controller.verfitynumber()) {
-                                  Get.snackbar('Success', 'OTP verified ✅');
-                                  // Get.offNamed(Routenames.selectlocationScreen);
+                                  Get.snackbar(
+                                    'Success',
+                                    'OTP verified ✅',
+                                    backgroundColor: ColorsConstants.greenColor,
+                                    colorText: Colors.white,
+                                  );
+                                  Get.offNamed(Routenames.selectlocationScreen);
                                 } else {
-                                  Get.snackbar('Error',
-                                      'Invalid OTP or network issue ❌');
+                                  Get.snackbar(
+                                    'Error',
+                                    'Invalid OTP or network issue ❌',
+                                    backgroundColor: Colors.redAccent,
+                                    colorText: Colors.white,
+                                  );
                                 }
                               },
                               child: CircleAvatar(

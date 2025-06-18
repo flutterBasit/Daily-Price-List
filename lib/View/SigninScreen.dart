@@ -77,6 +77,7 @@ class _SigninscreenState extends State<Signinscreen> {
                   titleStyle: StringsConstants.signInButtonStyle,
                   color: ColorsConstants.blueColor),
             ),
+
             SizedBox(
               height: 18.h,
             ),

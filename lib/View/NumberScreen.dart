@@ -26,7 +26,9 @@ class Numberscreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                     icon: Icon(
                       Icons.arrow_back_ios,
                       color: ColorsConstants.blackColor,
@@ -53,8 +55,17 @@ class Numberscreen extends StatelessWidget {
                           child: TextField(
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
-                            enabledBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none, // No border
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide.none, // No border when enabled
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide.none, // No border when focused
+                            ),
                             hintText: 'Enter your number'),
                         onChanged: numberScreen_Controller.updatePhoneNumber,
                         onTap: () => numberScreen_Controller

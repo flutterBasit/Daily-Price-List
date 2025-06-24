@@ -9,12 +9,42 @@ class Bottomnavbar extends StatelessWidget {
       Get.put(HomeScreen_ViewController());
 
   //list of the compomnets in Nav Bar
-  final List<NavItem> items = const [
-    NavItem(icon: Icons.shop, label: 'Shop'),
-    NavItem(icon: Icons.explore, label: 'Explore'),
-    NavItem(icon: Icons.shopping_cart, label: 'Cart'),
-    NavItem(icon: Icons.favorite, label: 'Favourite'),
-    NavItem(icon: Icons.account_circle, label: 'Account')
+  final List<NavItem> items = [
+    NavItem(
+        icon: Image.asset(
+          'assets/icons/store.png',
+          height: 24.h,
+          width: 24.h,
+        ),
+        label: 'Shop'),
+    NavItem(
+        icon: Image.asset(
+          'assets/icons/explore.png',
+          height: 24.h,
+          width: 24.h,
+        ),
+        label: 'Explore'),
+    NavItem(
+        icon: Image.asset(
+          'assets/icons/cart.png',
+          height: 24.h,
+          width: 24.h,
+        ),
+        label: 'Cart'),
+    NavItem(
+        icon: Image.asset(
+          'assets/icons/favourite.png',
+          height: 24.h,
+          width: 24.h,
+        ),
+        label: 'Favourite'),
+    NavItem(
+        icon: Image.asset(
+          'assets/icons/account.png',
+          height: 24.h,
+          width: 24.h,
+        ),
+        label: 'Account')
   ];
   Bottomnavbar({super.key});
 
@@ -52,11 +82,26 @@ class Bottomnavbar extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      items[index].icon,
-                      color: selected ? Colors.green : Colors.grey,
-                      size: selected ? 28 : 24,
-                    ),
+                    // Image.asset(
+                    //   items[index].icon,
+                    //   color: selected ? Colors.green : Colors.grey,
+                    //   size: selected ? 28 : 24,
+                    // ),
+
+                    Builder(builder: (_) {
+                      Color iconColor = selected ? Colors.green : Colors.grey;
+                      ColorFilter? colorfilter =
+                          ColorFilter.mode(iconColor, BlendMode.srcIn);
+
+                      return SizedBox(
+                        height: 24.h,
+                        width: 24.h,
+                        child: ColorFiltered(
+                          colorFilter: colorfilter,
+                          child: items[index].icon,
+                        ),
+                      );
+                    }),
                     AnimatedSwitcher(
                         duration: Duration(milliseconds: 200),
                         child: selected
@@ -66,7 +111,7 @@ class Bottomnavbar extends StatelessWidget {
                                 style: TextStyle(
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 12.sp,
+                                  fontSize: 11.sp,
                                 ),
                               )
                             : const SizedBox.shrink())
@@ -82,7 +127,7 @@ class Bottomnavbar extends StatelessWidget {
 }
 
 class NavItem {
-  final IconData icon;
+  final Image icon;
   final String label;
 
   const NavItem({required this.icon, required this.label});

@@ -41,6 +41,7 @@ dependencies:
   country_pickers:
   email_validator: ^3.0.0
   tap_builder:
+  flutter_svg:
 
 dev_dependencies:
   flutter_test:

@@ -8,4 +8,6 @@ class Routenames {
   static const String logInScreen = '/LogInScreen';
   static const String SignUpScreen = '/SignUpScreen';
   static const String HomeScreen = '/HomeScreen';
+  static const String ShopScreen = '/ShopScreen';
+  static const String ExploreScreen = '/ExploreScreen';
 }

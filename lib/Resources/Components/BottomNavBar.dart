@@ -70,7 +70,7 @@ class Bottomnavbar extends StatelessWidget {
                 child: GestureDetector(
               onTap: () => controller.updateIndex(index),
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
                 decoration: BoxDecoration(
                     color: Colors.white,

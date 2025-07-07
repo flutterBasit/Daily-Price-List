@@ -40,8 +40,8 @@ dependencies:
   flutter_screenutil: ^5.9.3
   country_pickers:
   email_validator: ^3.0.0
-  tap_builder:
-  flutter_svg:
+  dio:
+  carousel_slider:
 
 dev_dependencies:
   flutter_test:

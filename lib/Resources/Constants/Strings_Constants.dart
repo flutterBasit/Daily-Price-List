@@ -228,4 +228,35 @@ class StringsConstants {
       letterSpacing: 1.sp,
       fontWeight: FontWeight.w400,
       color: ColorsConstants.greenColor);
+
+  // HOME SCREEN ---- SHOP SCREEN
+  static TextStyle shopScreenTextColor = customFontStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor3);
+
+  static TextStyle shopSearchTextField = customFontStyle(
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.greyColor2);
+
+  static TextStyle shopcarouseltitle1 = customFontStyle(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w500,
+      color: ColorsConstants.blackColor);
+
+  static TextStyle shopcarouseltitle2 = customFontStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w700,
+      color: ColorsConstants.greenColor);
+
+  static TextStyle shopTitle1a = customFontStyle(
+      fontSize: 22.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle shopTitle1b = customFontStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.greenColor);
 }

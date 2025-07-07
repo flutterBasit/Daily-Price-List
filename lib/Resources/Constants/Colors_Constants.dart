@@ -8,8 +8,10 @@ class ColorsConstants {
   static const Color whiteColor4 = Color(0xffE2E2E2);
   static const Color blackColor = Color(0xff030303);
   static const Color blackColor2 = Color(0xff181725);
+  static const Color blackColor3 = Color(0xff4C4F4D);
   static const Color blueColor = Color(0xff5383EC);
   static const Color greyColor = Color(0xff828282);
   static const Color greyColor2 = Color(0xff7C7C7C);
+  static Color greyColor3 = Colors.blueGrey.withOpacity(0.5);
   static const Color blueColor2 = Color(0xff4A66AC);
 }

@@ -109,7 +109,7 @@ class SelectlocationScreen extends StatelessWidget {
                       colorText: Colors.white,
                     );
                     // Get.offNamed(Routenames.logInScreen);
-                    Get.offNamed(Routenames.ShopScreen);
+                    Get.offNamed(Routenames.HomeScreen);
                   } else {
                     Get.snackbar(
                       'Incomplete Selection',

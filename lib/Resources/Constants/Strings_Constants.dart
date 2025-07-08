@@ -259,4 +259,19 @@ class StringsConstants {
       fontSize: 14.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.greenColor);
+
+  static TextStyle shopExclusiveTitle = customFontStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.bold,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle shopExclusivesubtitle = customFontStyle(
+      fontSize: 13.sp,
+      fontWeight: FontWeight.w400,
+      color: ColorsConstants.greyColor2);
+
+  static TextStyle shopExclusivePrice = customFontStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
 }

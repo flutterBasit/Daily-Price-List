@@ -390,6 +390,28 @@ class Shopscreen extends StatelessWidget {
                             });
                       }),
                     ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Groceries",
+                            style: StringsConstants.shopTitle1a,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed(Routenames.ExploreScreen);
+                            },
+                            child: Text(
+                              "See all",
+                              style: StringsConstants.shopTitle1b,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),

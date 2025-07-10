@@ -26,6 +26,7 @@ class HomeScreen_ViewController extends GetxController {
     super.onInit();
   }
 
+// API fetch for the -------------------banner------------
   void fetchPromoBanner() async {
     try {
       isLoading(true);
@@ -48,7 +49,7 @@ class HomeScreen_ViewController extends GetxController {
   //for the banner dots
   RxInt currentBannerIndex = 0.obs;
 
-  // API fetch for the Exclusive offers
+  // API fetch for the ------------------------Exclusive offers------------
   // for products
   var products = <Map<String, dynamic>>[].obs;
 
@@ -66,7 +67,7 @@ class HomeScreen_ViewController extends GetxController {
     }
   }
 
-  // API fetch for the Best Selling
+  // API fetch for the--------------------- Best Selling----------------
   // for products
   var products2 = <Map<String, dynamic>>[].obs;
 
@@ -79,6 +80,39 @@ class HomeScreen_ViewController extends GetxController {
           .where((p) => (p['tags'] as List).contains('vegetables')));
     } catch (e) {
       Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //------   Api fetch for the -------------------groceries----------
+
+  var Groceries = <Map<String, dynamic>>[].obs;
+
+  void fetchGroceriesProducts() async {
+    try {
+      isLoading.value = true;
+      final response = await ApiServices.get('products/category/groceries');
+      Groceries.value = List<Map<String, dynamic>>.from(response['products']);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //------   Api fetch for the -------------------Meat----------
+
+  var Meat = <Map<String, dynamic>>[].obs;
+
+  void fetchMeatProducts() async {
+    try {
+      isLoading.value = true;
+      final response = await ApiServices.get('products/category/groceries');
+      Meat.value = List<Map<String, dynamic>>.from(response['products']
+          .where((p) => (p['tags'] as List).contains('meat')));
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
     } finally {
       isLoading.value = false;
     }

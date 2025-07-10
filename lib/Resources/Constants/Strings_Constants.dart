@@ -274,4 +274,9 @@ class StringsConstants {
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.blackColor2);
+
+  static TextStyle shopGroceriesTitle = customFontStyle(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor4);
 }

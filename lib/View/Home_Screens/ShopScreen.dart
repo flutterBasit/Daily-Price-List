@@ -12,6 +12,16 @@ class Shopscreen extends StatelessWidget {
   final DropdownController controller = Get.find<DropdownController>();
   final HomeScreen_ViewController controller2 =
       Get.put(HomeScreen_ViewController());
+
+  //defining the List of colors of containers for groceries
+  final List<Color> containerColor = [
+    Color(0xffF8A44C),
+    Color(0xff53B175),
+    Color(0xffF7A593),
+    Color(0xffD3B0E0),
+    Color(0xffFDE598),
+    Color(0xffB7Dff5)
+  ];
   Shopscreen({super.key});
 
   @override
@@ -314,7 +324,8 @@ class Shopscreen extends StatelessWidget {
                       height: 250.h,
                       child: Obx(() {
                         if (controller2.isLoading.value) {
-                          return CircularProgressIndicator();
+                          return SizedBox(
+                              height: 50.h, child: CircularProgressIndicator());
                         }
                         return ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -411,6 +422,135 @@ class Shopscreen extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+
+                    SizedBox(
+                      height: 105,
+                      child: Obx(() {
+                        if (controller2.isLoading.value) {
+                          return SizedBox(
+                            height: 50.h,
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: controller2.Groceries.length,
+                            padding: EdgeInsets.all(12.0.w),
+                            itemBuilder: (context, index) {
+                              final product = controller2.Groceries[index];
+                              return Container(
+                                height: 105.h,
+                                width: 248.w,
+                                decoration: BoxDecoration(
+                                  color: containerColor[
+                                      index % containerColor.length],
+                                  borderRadius: BorderRadius.circular(18.r),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image.network(
+                                      product['images'][0],
+                                      height: 72.h,
+                                      width: 72.h,
+                                      fit: BoxFit.fill,
+                                    ),
+                                    SizedBox(
+                                      width: 10.w,
+                                    ),
+                                    Text(
+                                      product['tags'].join(', '),
+                                      style:
+                                          StringsConstants.shopGroceriesTitle,
+                                    )
+                                  ],
+                                ),
+                              );
+                            });
+                      }),
+                    ),
+
+                    // vertical scroll ------------- BEST SELLING WIDGET-----------------
+                    SizedBox(
+                      height: 250.h,
+                      child: Obx(() {
+                        if (controller2.isLoading.value) {
+                          return SizedBox(
+                              height: 50.h, child: CircularProgressIndicator());
+                        }
+                        return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.all(12.0.w),
+                            itemCount: controller2.Meat.length,
+                            itemBuilder: (context, index) {
+                              final product = controller2.Meat[index];
+
+                              return Container(
+                                height: 230.h,
+                                width: 160.w,
+                                margin: EdgeInsets.only(right: 10.w),
+                                padding: EdgeInsets.all(12.w),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12.r),
+                                    border: Border.all(
+                                        color: ColorsConstants.greyColor4),
+                                    color: ColorsConstants.whiteColor),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: Image.network(
+                                        product['thumbnail'],
+                                        height: 90.h,
+                                        width: 100.w,
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                    Text(product['title'],
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: StringsConstants
+                                            .shopExclusiveTitle),
+                                    Text(
+                                      product['tags'].join(', '),
+                                      style: StringsConstants
+                                          .shopExclusivesubtitle,
+                                    ),
+                                    Text(product['availabilityStatus'],
+                                        style: StringsConstants
+                                            .shopExclusivesubtitle),
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("\$${product['price']}",
+                                            style: StringsConstants
+                                                .shopExclusivePrice),
+                                        Container(
+                                          height: 42.h,
+                                          width: 42.w,
+                                          decoration: BoxDecoration(
+                                              color: ColorsConstants.greenColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(17.r)),
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: Icon(Icons.add,
+                                                color:
+                                                    ColorsConstants.whiteColor),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      }),
                     ),
                   ],
                 ),

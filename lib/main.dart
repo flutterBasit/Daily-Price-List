@@ -1,10 +1,19 @@
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/Resources/Routes/Routes.dart';
+import 'package:daily_price_list/ViewModel/DropDown_ViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  Get.put(DropdownController());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //lock orientation of the screen
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+
   runApp(const MyApp());
 }
 

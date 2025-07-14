@@ -9,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class Shopscreen extends StatelessWidget {
-  final DropdownController controller = Get.find<DropdownController>();
+  final DropdownController controller = Get.put(DropdownController());
   final HomeScreen_ViewController controller2 =
       Get.put(HomeScreen_ViewController());
 
@@ -216,86 +216,96 @@ class Shopscreen extends StatelessWidget {
                     ),
 
                     //Vertical Scroll ---- EXCLUSIVE OFFER -----------------
-                    SizedBox(
-                      height: 250.h,
-                      child: Obx(() {
-                        if (controller2.isLoading.value) {
-                          return CircularProgressIndicator();
-                        }
-                        return ListView.builder(
+                    Obx(() {
+                      if (controller2.isLoading.value) {
+                        return SizedBox(
+                            height: 150.h, child: CircularProgressIndicator());
+                      }
+                      return SizedBox(
+                        height: 250.h,
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             padding: EdgeInsets.all(12.0.w),
                             itemCount: controller2.products.length,
                             itemBuilder: (context, index) {
                               final product = controller2.products[index];
 
-                              return Container(
-                                height: 230.h,
-                                width: 160.w,
-                                margin: EdgeInsets.only(right: 10.w),
-                                padding: EdgeInsets.all(12.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(
-                                        color: ColorsConstants.greyColor4),
-                                    color: ColorsConstants.whiteColor),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Image.network(
-                                        product['thumbnail'],
-                                        height: 90.h,
-                                        width: 100.w,
-                                        fit: BoxFit.fill,
+                              return InkWell(
+                                onTap: () {
+                                  Get.toNamed(Routenames.ShopScreen2,
+                                      arguments: product);
+                                },
+                                child: Container(
+                                  height: 230.h,
+                                  width: 160.w,
+                                  margin: EdgeInsets.only(right: 10.w),
+                                  padding: EdgeInsets.all(12.w),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      border: Border.all(
+                                          color: ColorsConstants.greyColor4),
+                                      color: ColorsConstants.whiteColor),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Image.network(
+                                          product['thumbnail'],
+                                          height: 90.h,
+                                          width: 100.w,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
-                                    ),
-                                    Text(product['title'],
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                      Text(product['title'],
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: StringsConstants
+                                              .shopExclusiveTitle),
+                                      Text(
+                                        product['tags'].join(', '),
                                         style: StringsConstants
-                                            .shopExclusiveTitle),
-                                    Text(
-                                      product['tags'].join(', '),
-                                      style: StringsConstants
-                                          .shopExclusivesubtitle,
-                                    ),
-                                    Text(product['availabilityStatus'],
-                                        style: StringsConstants
-                                            .shopExclusivesubtitle),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("\$${product['price']}",
-                                            style: StringsConstants
-                                                .shopExclusivePrice),
-                                        Container(
-                                          height: 42.h,
-                                          width: 42.w,
-                                          decoration: BoxDecoration(
-                                              color: ColorsConstants.greenColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(17.r)),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Icon(Icons.add,
+                                            .shopExclusivesubtitle,
+                                      ),
+                                      Text(product['availabilityStatus'],
+                                          style: StringsConstants
+                                              .shopExclusivesubtitle),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("\$${product['price']}",
+                                              style: StringsConstants
+                                                  .shopExclusivePrice),
+                                          Container(
+                                            height: 42.h,
+                                            width: 42.w,
+                                            decoration: BoxDecoration(
                                                 color:
-                                                    ColorsConstants.whiteColor),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                                    ColorsConstants.greenColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        17.r)),
+                                            child: InkWell(
+                                              onTap: () {},
+                                              child: Icon(Icons.add,
+                                                  color: ColorsConstants
+                                                      .whiteColor),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
-                            });
-                      }),
-                    ),
+                            }),
+                      );
+                    }),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -320,14 +330,14 @@ class Shopscreen extends StatelessWidget {
                     ),
 
                     // vertical scroll ------------- BEST SELLING WIDGET-----------------
-                    SizedBox(
-                      height: 250.h,
-                      child: Obx(() {
-                        if (controller2.isLoading.value) {
-                          return SizedBox(
-                              height: 50.h, child: CircularProgressIndicator());
-                        }
-                        return ListView.builder(
+                    Obx(() {
+                      if (controller2.isLoading.value) {
+                        return SizedBox(
+                            height: 50.h, child: CircularProgressIndicator());
+                      }
+                      return SizedBox(
+                        height: 250.h,
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             padding: EdgeInsets.all(12.0.w),
                             itemCount: controller2.products2.length,
@@ -398,9 +408,9 @@ class Shopscreen extends StatelessWidget {
                                   ],
                                 ),
                               );
-                            });
-                      }),
-                    ),
+                            }),
+                      );
+                    }),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -424,23 +434,25 @@ class Shopscreen extends StatelessWidget {
                       ),
                     ),
 
-                    SizedBox(
-                      height: 105,
-                      child: Obx(() {
-                        if (controller2.isLoading.value) {
-                          return SizedBox(
-                            height: 50.h,
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return ListView.builder(
+                    Obx(() {
+                      if (controller2.isLoading.value) {
+                        return SizedBox(
+                          height: 50.h,
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return SizedBox(
+                        height: 105,
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: controller2.Groceries.length,
                             padding: EdgeInsets.all(12.0.w),
                             itemBuilder: (context, index) {
                               final product = controller2.Groceries[index];
                               return Container(
-                                height: 105.h,
+                                margin: EdgeInsets.only(right: 10.w),
+                                padding: EdgeInsets.all(12.w),
+                                height: 100.h,
                                 width: 248.w,
                                 decoration: BoxDecoration(
                                   color: containerColor[
@@ -456,29 +468,34 @@ class Shopscreen extends StatelessWidget {
                                       fit: BoxFit.fill,
                                     ),
                                     SizedBox(
-                                      width: 10.w,
+                                      width: 20.w,
                                     ),
                                     Text(
-                                      product['tags'].join(', '),
+                                      product['tags']
+                                          .map((tag) => tag.contains(' ')
+                                              ? tag.replaceFirst(' ', '\n')
+                                              : tag)
+                                          .join(
+                                              '\n'), // if the tag contains a space has 2 words then make the \n between them
                                       style:
                                           StringsConstants.shopGroceriesTitle,
                                     )
                                   ],
                                 ),
                               );
-                            });
-                      }),
-                    ),
+                            }),
+                      );
+                    }),
 
-                    // vertical scroll ------------- BEST SELLING WIDGET-----------------
-                    SizedBox(
-                      height: 250.h,
-                      child: Obx(() {
-                        if (controller2.isLoading.value) {
-                          return SizedBox(
-                              height: 50.h, child: CircularProgressIndicator());
-                        }
-                        return ListView.builder(
+                    // vertical scroll ------------- After GROCERIES Meat WIDGET-----------------
+                    Obx(() {
+                      if (controller2.isLoading.value) {
+                        return SizedBox(
+                            height: 50.h, child: CircularProgressIndicator());
+                      }
+                      return SizedBox(
+                        height: 250.h,
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             padding: EdgeInsets.all(12.0.w),
                             itemCount: controller2.Meat.length,
@@ -549,9 +566,9 @@ class Shopscreen extends StatelessWidget {
                                   ],
                                 ),
                               );
-                            });
-                      }),
-                    ),
+                            }),
+                      );
+                    }),
                   ],
                 ),
               ),

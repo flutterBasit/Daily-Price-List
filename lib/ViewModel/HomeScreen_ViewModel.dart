@@ -23,6 +23,8 @@ class HomeScreen_ViewController extends GetxController {
     fetchPromoBanner();
     fetchExclusiveProducts();
     fetchBestSellingProducts();
+    fetchGroceriesProducts();
+    fetchMeatProducts();
     super.onInit();
   }
 

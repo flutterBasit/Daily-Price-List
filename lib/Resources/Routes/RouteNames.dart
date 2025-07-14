@@ -9,5 +9,6 @@ class Routenames {
   static const String SignUpScreen = '/SignUpScreen';
   static const String HomeScreen = '/HomeScreen';
   static const String ShopScreen = '/ShopScreen';
+  static const String ShopScreen2 = '/ShopScreen2';
   static const String ExploreScreen = '/ExploreScreen';
 }

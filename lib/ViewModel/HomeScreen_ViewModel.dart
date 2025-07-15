@@ -135,4 +135,9 @@ class HomeScreen_ViewController extends GetxController {
       count.value--;
     }
   }
+
+  // rx variable for the making the Product Details and other expandable
+  final RxBool showDetails = false.obs;
+  final RxBool showCategoryDetails = false.obs;
+  final RxBool showReviewDetails = false.obs;
 }

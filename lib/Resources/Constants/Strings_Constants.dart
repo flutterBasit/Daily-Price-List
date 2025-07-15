@@ -286,4 +286,19 @@ class StringsConstants {
       fontSize: 22.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.blackColor2);
+
+  static TextStyle shopeScreen2ProductDetails1 = customFontStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle shopScreen2counter = customFontStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle shopScreen2Button = customFontStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.whiteColor3);
 }

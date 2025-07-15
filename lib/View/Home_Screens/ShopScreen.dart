@@ -344,68 +344,77 @@ class Shopscreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final product = controller2.products2[index];
 
-                              return Container(
-                                height: 230.h,
-                                width: 160.w,
-                                margin: EdgeInsets.only(right: 10.w),
-                                padding: EdgeInsets.all(12.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(
-                                        color: ColorsConstants.greyColor4),
-                                    color: ColorsConstants.whiteColor),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Image.network(
-                                        product['thumbnail'],
-                                        height: 90.h,
-                                        width: 100.w,
-                                        fit: BoxFit.fill,
+                              return InkWell(
+                                onTap: () {
+                                  Get.toNamed(Routenames.ShopScreen2,
+                                      arguments: product);
+                                },
+                                child: Container(
+                                  height: 230.h,
+                                  width: 160.w,
+                                  margin: EdgeInsets.only(right: 10.w),
+                                  padding: EdgeInsets.all(12.w),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      border: Border.all(
+                                          color: ColorsConstants.greyColor4),
+                                      color: ColorsConstants.whiteColor),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Image.network(
+                                          product['thumbnail'],
+                                          height: 90.h,
+                                          width: 100.w,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
-                                    ),
-                                    Text(product['title'],
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                      Text(product['title'],
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: StringsConstants
+                                              .shopExclusiveTitle),
+                                      Text(
+                                        product['tags'].join(', '),
                                         style: StringsConstants
-                                            .shopExclusiveTitle),
-                                    Text(
-                                      product['tags'].join(', '),
-                                      style: StringsConstants
-                                          .shopExclusivesubtitle,
-                                    ),
-                                    Text(product['availabilityStatus'],
-                                        style: StringsConstants
-                                            .shopExclusivesubtitle),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("\$${product['price']}",
-                                            style: StringsConstants
-                                                .shopExclusivePrice),
-                                        Container(
-                                          height: 42.h,
-                                          width: 42.w,
-                                          decoration: BoxDecoration(
-                                              color: ColorsConstants.greenColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(17.r)),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Icon(Icons.add,
+                                            .shopExclusivesubtitle,
+                                      ),
+                                      Text(product['availabilityStatus'],
+                                          style: StringsConstants
+                                              .shopExclusivesubtitle),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("\$${product['price']}",
+                                              style: StringsConstants
+                                                  .shopExclusivePrice),
+                                          Container(
+                                            height: 42.h,
+                                            width: 42.w,
+                                            decoration: BoxDecoration(
                                                 color:
-                                                    ColorsConstants.whiteColor),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                                    ColorsConstants.greenColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        17.r)),
+                                            child: InkWell(
+                                              onTap: () {},
+                                              child: Icon(Icons.add,
+                                                  color: ColorsConstants
+                                                      .whiteColor),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             }),
@@ -502,68 +511,77 @@ class Shopscreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final product = controller2.Meat[index];
 
-                              return Container(
-                                height: 230.h,
-                                width: 160.w,
-                                margin: EdgeInsets.only(right: 10.w),
-                                padding: EdgeInsets.all(12.w),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    border: Border.all(
-                                        color: ColorsConstants.greyColor4),
-                                    color: ColorsConstants.whiteColor),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Center(
-                                      child: Image.network(
-                                        product['thumbnail'],
-                                        height: 90.h,
-                                        width: 100.w,
-                                        fit: BoxFit.fill,
+                              return InkWell(
+                                onTap: () {
+                                  Get.toNamed(Routenames.ShopScreen2,
+                                      arguments: product);
+                                },
+                                child: Container(
+                                  height: 230.h,
+                                  width: 160.w,
+                                  margin: EdgeInsets.only(right: 10.w),
+                                  padding: EdgeInsets.all(12.w),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      border: Border.all(
+                                          color: ColorsConstants.greyColor4),
+                                      color: ColorsConstants.whiteColor),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Image.network(
+                                          product['thumbnail'],
+                                          height: 90.h,
+                                          width: 100.w,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
-                                    ),
-                                    Text(product['title'],
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
+                                      Text(product['title'],
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: StringsConstants
+                                              .shopExclusiveTitle),
+                                      Text(
+                                        product['tags'].join(', '),
                                         style: StringsConstants
-                                            .shopExclusiveTitle),
-                                    Text(
-                                      product['tags'].join(', '),
-                                      style: StringsConstants
-                                          .shopExclusivesubtitle,
-                                    ),
-                                    Text(product['availabilityStatus'],
-                                        style: StringsConstants
-                                            .shopExclusivesubtitle),
-                                    SizedBox(
-                                      height: 5.h,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("\$${product['price']}",
-                                            style: StringsConstants
-                                                .shopExclusivePrice),
-                                        Container(
-                                          height: 42.h,
-                                          width: 42.w,
-                                          decoration: BoxDecoration(
-                                              color: ColorsConstants.greenColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(17.r)),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Icon(Icons.add,
+                                            .shopExclusivesubtitle,
+                                      ),
+                                      Text(product['availabilityStatus'],
+                                          style: StringsConstants
+                                              .shopExclusivesubtitle),
+                                      SizedBox(
+                                        height: 5.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("\$${product['price']}",
+                                              style: StringsConstants
+                                                  .shopExclusivePrice),
+                                          Container(
+                                            height: 42.h,
+                                            width: 42.w,
+                                            decoration: BoxDecoration(
                                                 color:
-                                                    ColorsConstants.whiteColor),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                                    ColorsConstants.greenColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        17.r)),
+                                            child: InkWell(
+                                              onTap: () {},
+                                              child: Icon(Icons.add,
+                                                  color: ColorsConstants
+                                                      .whiteColor),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             }),

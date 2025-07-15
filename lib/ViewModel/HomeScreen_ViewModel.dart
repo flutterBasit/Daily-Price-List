@@ -119,4 +119,20 @@ class HomeScreen_ViewController extends GetxController {
       isLoading.value = false;
     }
   }
+
+  //-----------------------SHOP SCREEN-2--------------------------------------------------
+
+  RxInt count = 1.obs;
+
+  // function for increment
+  void increment() {
+    count.value++;
+  }
+
+  // function for decrement
+  void decrement() {
+    if (count.value > 1) {
+      count.value--;
+    }
+  }
 }

@@ -279,4 +279,11 @@ class StringsConstants {
       fontSize: 18.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.blackColor4);
+
+  // HOME SCREEN ---- SHOP SCREEN2
+
+  static TextStyle ShopScreen2title = customFontStyle(
+      fontSize: 22.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
 }

@@ -17,4 +17,5 @@ class ColorsConstants {
   static Color greyColor3 = Colors.blueGrey.withOpacity(0.5);
   static Color greyColor4 = Colors.grey.shade300;
   static const Color blueColor2 = Color(0xff4A66AC);
+  static const Color AmberColor = Color(0xffF3603F);
 }

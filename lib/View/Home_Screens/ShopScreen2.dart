@@ -39,6 +39,9 @@ class Shopscreen2 extends StatelessWidget {
                           IconButton(
                             onPressed: () {
                               Get.offNamed(Routenames.ShopScreen);
+                              controller.showDetails.value = false;
+                              controller.showCategoryDetails.value = false;
+                              controller.showReviewDetails.value = false;
                             },
                             icon: Icon(
                               Icons.arrow_back_ios,
@@ -197,11 +200,16 @@ class Shopscreen2 extends StatelessWidget {
                                     style: StringsConstants
                                         .shopeScreen2ProductDetails1,
                                   ),
-                                  Icon(
-                                    controller.showCategoryDetails.value
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_right,
-                                    size: 25,
+                                  Row(
+                                    children: [
+                                      Text(product['tags'].join(', ')),
+                                      Icon(
+                                        controller.showCategoryDetails.value
+                                            ? Icons.keyboard_arrow_down
+                                            : Icons.keyboard_arrow_right,
+                                        size: 25,
+                                      )
+                                    ],
                                   )
                                 ],
                               ),
@@ -239,11 +247,25 @@ class Shopscreen2 extends StatelessWidget {
                                     style: StringsConstants
                                         .shopeScreen2ProductDetails1,
                                   ),
-                                  Icon(
-                                    controller.showReviewDetails.value
-                                        ? Icons.keyboard_arrow_down
-                                        : Icons.keyboard_arrow_right,
-                                    size: 25,
+                                  Row(
+                                    children: [
+                                      Row(
+                                        children: List.generate(
+                                            5,
+                                            (i) => Icon(
+                                                  Icons.star,
+                                                  color: ColorsConstants
+                                                      .AmberColor,
+                                                  size: 18,
+                                                )),
+                                      ),
+                                      Icon(
+                                        controller.showReviewDetails.value
+                                            ? Icons.keyboard_arrow_down
+                                            : Icons.keyboard_arrow_right,
+                                        size: 25,
+                                      )
+                                    ],
                                   )
                                 ],
                               ),
@@ -273,7 +295,8 @@ class Shopscreen2 extends StatelessWidget {
                                                       i < review['rating']
                                                           ? Icons.star
                                                           : Icons.star_border,
-                                                      color: Colors.amber,
+                                                      color: ColorsConstants
+                                                          .AmberColor,
                                                       size: 18,
                                                     )),
                                           )

@@ -1,4 +1,8 @@
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Services/Api_services.dart';
+import 'package:daily_price_list/main.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomeScreen_ViewController extends GetxController {
@@ -140,4 +144,34 @@ class HomeScreen_ViewController extends GetxController {
   final RxBool showDetails = false.obs;
   final RxBool showCategoryDetails = false.obs;
   final RxBool showReviewDetails = false.obs;
+
+  //---Functionallity for the favourite
+  var favouriteProduct = <int>[].obs;
+
+//toggling
+  void toggleFavourite(int productId) {
+    if (favouriteProduct.contains(productId)) {
+      favouriteProduct.remove(productId);
+    } else {
+      favouriteProduct.add(productId);
+      Get.snackbar('Favourite', 'Product Added to Favourites!',
+          icon: Icon(
+            Icons.favorite,
+            color: Colors.red,
+          ),
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2));
+    }
+  }
+
+  //toggle
+  bool isFavourite(int productId) {
+    return favouriteProduct.contains(productId);
+  }
+
+  var allProducts = <Map<String, dynamic>>[].obs;
+
+  List<Map<String, dynamic>> get favouriteProductDetails => allProducts
+      .where((product) => favouriteProduct.contains(product['id']))
+      .toList();
 }

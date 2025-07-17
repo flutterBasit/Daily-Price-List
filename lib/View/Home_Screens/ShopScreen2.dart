@@ -83,7 +83,18 @@ class Shopscreen2 extends StatelessWidget {
                           product['title'],
                           style: StringsConstants.ShopScreen2title,
                         ),
-                        Icon(Icons.favorite)
+                        IconButton(onPressed: () {
+                          controller.toggleFavourite(product['id']);
+                        }, icon: Obx(() {
+                          return Icon(
+                            controller.isFavourite(product['id'])
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: controller.isFavourite(product['id'])
+                                ? Colors.red
+                                : Colors.grey,
+                          );
+                        }))
                       ],
                     ),
                     Text(

@@ -301,4 +301,15 @@ class StringsConstants {
       fontSize: 16.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.whiteColor3);
+
+  //-----------FAVOURITE SCREEN------------------
+  static TextStyle favouriteScreenTitle = customFontStyle(
+      fontSize: 18.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle favouriteScreenPrice = customFontStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
 }

@@ -66,6 +66,8 @@ class HomeScreen_ViewController extends GetxController {
       final response = await ApiServices.get('products/category/groceries');
       products.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('fruits')));
+//for adding favourite
+      addProductUnique(products);
     } catch (e) {
       Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
     } finally {
@@ -84,6 +86,8 @@ class HomeScreen_ViewController extends GetxController {
       final response = await ApiServices.get('products/category/groceries');
       products2.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('vegetables')));
+//for adding favourite
+      addProductUnique(products2);
     } catch (e) {
       Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
     } finally {
@@ -100,6 +104,9 @@ class HomeScreen_ViewController extends GetxController {
       isLoading.value = true;
       final response = await ApiServices.get('products/category/groceries');
       Groceries.value = List<Map<String, dynamic>>.from(response['products']);
+
+//for adding favourite
+      addProductUnique(Groceries);
     } catch (e) {
       Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
     } finally {
@@ -117,6 +124,9 @@ class HomeScreen_ViewController extends GetxController {
       final response = await ApiServices.get('products/category/groceries');
       Meat.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('meat')));
+
+      //for adding favourite
+      addProductUnique(Meat);
     } catch (e) {
       Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
     } finally {
@@ -164,7 +174,6 @@ class HomeScreen_ViewController extends GetxController {
     }
   }
 
-  //toggle
   bool isFavourite(int productId) {
     return favouriteProduct.contains(productId);
   }
@@ -174,4 +183,13 @@ class HomeScreen_ViewController extends GetxController {
   List<Map<String, dynamic>> get favouriteProductDetails => allProducts
       .where((product) => favouriteProduct.contains(product['id']))
       .toList();
+//helper for the favourite so that it should not be duplicated
+
+  void addProductUnique(List<Map<String, dynamic>> newProducts) {
+    for (var product in newProducts) {
+      if (!allProducts.any((p) => p['id'] == product['id'])) {
+        allProducts.add(product);
+      }
+    }
+  }
 }

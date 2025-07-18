@@ -38,7 +38,7 @@ class Shopscreen2 extends StatelessWidget {
                         children: [
                           IconButton(
                             onPressed: () {
-                              Get.offNamed(Routenames.ShopScreen);
+                              Get.back();
                               controller.showDetails.value = false;
                               controller.showCategoryDetails.value = false;
                               controller.showReviewDetails.value = false;

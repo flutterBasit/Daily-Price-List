@@ -72,10 +72,12 @@ class _SigninscreenState extends State<Signinscreen> {
             ),
             Center(
               child: Buttons1(
-                  assetImagePath: 'assets/images/Google.png',
-                  title: 'Continue with Google',
-                  titleStyle: StringsConstants.signInButtonStyle,
-                  color: ColorsConstants.blueColor),
+                assetImagePath: 'assets/images/Google.png',
+                title: 'Continue with Google',
+                titleStyle: StringsConstants.signInButtonStyle,
+                color: ColorsConstants.blueColor,
+                onTap: () {},
+              ),
             ),
 
             SizedBox(
@@ -95,6 +97,7 @@ class _SigninscreenState extends State<Signinscreen> {
                 title: 'Continue with Facebook',
                 color: ColorsConstants.blueColor2,
                 titleStyle: StringsConstants.signInButtonStyle,
+                onTap: () {},
               ),
             )
           ],

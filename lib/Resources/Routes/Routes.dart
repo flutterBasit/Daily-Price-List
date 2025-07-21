@@ -1,4 +1,5 @@
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+import 'package:daily_price_list/View/Home_Screens/CartScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/ExploreScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/HomeScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/ShopScreen.dart';
@@ -28,7 +29,8 @@ class Routes {
     GetPage(name: Routenames.SignUpScreen, page: () => Signupscreen()),
     GetPage(name: Routenames.HomeScreen, page: () => HomeScreen()),
     GetPage(name: Routenames.ShopScreen, page: () => Shopscreen()),
+    GetPage(name: Routenames.ShopScreen2, page: () => Shopscreen2()),
+    GetPage(name: Routenames.CartScreen, page: () => Cartscreen()),
     GetPage(name: Routenames.ExploreScreen, page: () => Explorescreen()),
-    GetPage(name: Routenames.ShopScreen2, page: () => Shopscreen2())
   ];
 }

@@ -332,6 +332,9 @@ class Shopscreen2 extends StatelessWidget {
           title: 'Add To Basket',
           titleStyle: StringsConstants.shopScreen2Button,
           color: ColorsConstants.greenColor,
+          onTap: () {
+            Get.toNamed(Routenames.CartScreen, arguments: product);
+          },
         ),
       ),
     );

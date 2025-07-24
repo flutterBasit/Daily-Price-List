@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routenames.splashScreen,
+          initialRoute: Routenames.selectlocationScreen,
           getPages: Routes.routes,
         );
       },

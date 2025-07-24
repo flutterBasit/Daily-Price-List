@@ -216,5 +216,11 @@ class HomeScreen_ViewController extends GetxController {
       .where((product) => myCartProduct.contains(product['id']))
       .toList();
 
+//clearing all the cart
   void clearCart() => myCartProduct.clear();
+//remove the item from cart
+
+  void removeFromCart(int productID) {
+    myCartProduct.remove(productID);
+  }
 }

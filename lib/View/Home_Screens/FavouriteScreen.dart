@@ -31,7 +31,7 @@ class Favouritescreen extends StatelessWidget {
           Expanded(
             child: favourite.isEmpty
                 ? Center(
-                    child: Text('No Favourites Added yet!'),
+                    child: Text('No Favourites Added Yet!'),
                   )
                 : ListView.separated(
                     // physics: NeverScrollableScrollPhysics(),

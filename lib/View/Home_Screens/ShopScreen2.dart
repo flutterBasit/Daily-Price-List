@@ -333,7 +333,8 @@ class Shopscreen2 extends StatelessWidget {
           titleStyle: StringsConstants.shopScreen2Button,
           color: ColorsConstants.greenColor,
           onTap: () {
-            Get.toNamed(Routenames.CartScreen, arguments: product);
+            // Get.toNamed(Routenames.CartScreen, arguments: product);
+            controller.addToCart(product['id']);
           },
         ),
       ),

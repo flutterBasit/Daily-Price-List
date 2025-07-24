@@ -1,8 +1,8 @@
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Services/Api_services.dart';
-import 'package:daily_price_list/main.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 
 class HomeScreen_ViewController extends GetxController {
@@ -155,6 +155,7 @@ class HomeScreen_ViewController extends GetxController {
   final RxBool showCategoryDetails = false.obs;
   final RxBool showReviewDetails = false.obs;
 
+//----------------------FAVOURITE SCREEN---------------------
   //---Functionallity for the favourite
   var favouriteProduct = <int>[].obs;
 
@@ -192,4 +193,28 @@ class HomeScreen_ViewController extends GetxController {
       }
     }
   }
+
+  //-------------------CART SCREEN-----------------------------
+  var myCartProduct = <int>[].obs;
+
+  //getting the product id
+  void addToCart(int productID) {
+    if (!myCartProduct.contains(productID)) {
+      myCartProduct.add(productID);
+      Get.snackbar('Cart', 'Product Added to Cart!',
+          icon: Icon(
+            Icons.shopping_cart,
+            color: ColorsConstants.greenColor,
+          ),
+          snackPosition: SnackPosition.BOTTOM,
+          duration: Duration(seconds: 2));
+    }
+  }
+
+  //getter function for the cart products to get
+  List<Map<String, dynamic>> get cartProductDetails => allProducts
+      .where((product) => myCartProduct.contains(product['id']))
+      .toList();
+
+  void clearCart() => myCartProduct.clear();
 }

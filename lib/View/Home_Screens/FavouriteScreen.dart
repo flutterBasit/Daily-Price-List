@@ -86,7 +86,9 @@ class Favouritescreen extends StatelessWidget {
               : Buttons1(
                   title: 'Add All To Cart',
                   color: ColorsConstants.greenColor,
-                  onTap: () {},
+                  onTap: () {
+                    controller.addAllFavouriteToCart();
+                  },
                 )
         ],
       );

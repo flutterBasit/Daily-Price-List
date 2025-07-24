@@ -194,6 +194,13 @@ class HomeScreen_ViewController extends GetxController {
     }
   }
 
+  //function for the items in favourite to be added to cart
+  void addAllFavouriteToCart() {
+    for (var productId in favouriteProduct) {
+      addToCart(productId);
+    }
+  }
+
   //-------------------CART SCREEN-----------------------------
   var myCartProduct = <int>[].obs;
 

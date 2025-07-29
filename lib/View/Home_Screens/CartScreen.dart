@@ -253,17 +253,29 @@ class Cartscreen extends StatelessWidget {
                                                       .whiteColor4)),
                                           child: IconButton(
                                               onPressed: () {
-                                                controller.decrement();
+                                                controller.decreaseQuantity(
+                                                    product['id']);
                                               },
                                               icon: Icon(Icons.remove)),
                                         ),
                                         SizedBox(
                                           width: 15.w,
                                         ),
+                                        // Obx(() {
+                                        //   return Center(
+                                        //       child: Text(
+                                        //     controller.count.value.toString(),
+                                        //     style: StringsConstants
+                                        //         .shopScreen2counter,
+                                        //   ));
+                                        // }),
                                         Obx(() {
+                                          int qty = controller.myCartProduct[
+                                                  product['id']] ??
+                                              1;
                                           return Center(
                                               child: Text(
-                                            controller.count.value.toString(),
+                                            qty.toString(),
                                             style: StringsConstants
                                                 .shopScreen2counter,
                                           ));
@@ -283,7 +295,8 @@ class Cartscreen extends StatelessWidget {
                                                       .whiteColor4)),
                                           child: IconButton(
                                               onPressed: () {
-                                                controller.increment();
+                                                controller.increaseQuantity(
+                                                    product['id']);
                                               },
                                               icon: Icon(
                                                 Icons.add,
@@ -311,11 +324,22 @@ class Cartscreen extends StatelessWidget {
                                     SizedBox(
                                       height: 25.h,
                                     ),
-                                    Text(
-                                      '\$${product['price'].toString()}',
-                                      style:
-                                          StringsConstants.favouriteScreenPrice,
-                                    ),
+                                    // Text(
+                                    //   '\$${product['price'].toString()}',
+                                    //   style:
+                                    //       StringsConstants.favouriteScreenPrice,
+                                    // ),
+                                    Obx(() {
+                                      int qty = controller
+                                              .myCartProduct[product['id']] ??
+                                          1;
+
+                                      double price = product['price'] * qty;
+                                      return Text(
+                                          "\$${price.toStringAsFixed(2)}",
+                                          style: StringsConstants
+                                              .ShopScreen2title);
+                                    }),
                                     SizedBox(
                                       height: 15.h,
                                     ),

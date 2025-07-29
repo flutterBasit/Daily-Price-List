@@ -215,7 +215,7 @@ class Shopscreen extends StatelessWidget {
                       ),
                     ),
 
-                    //Vertical Scroll ---- EXCLUSIVE OFFER -----------------
+                    //Horizontal Scroll ---- EXCLUSIVE OFFER -----------------
                     Obx(() {
                       if (controller2.isLoading.value) {
                         return SizedBox(
@@ -281,17 +281,20 @@ class Shopscreen extends StatelessWidget {
                                           Text("\$${product['price']}",
                                               style: StringsConstants
                                                   .shopExclusivePrice),
-                                          Container(
-                                            height: 42.h,
-                                            width: 42.w,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    ColorsConstants.greenColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        17.r)),
-                                            child: InkWell(
-                                              onTap: () {},
+                                          InkWell(
+                                            onTap: () {
+                                              controller2
+                                                  .addToCart(product['id']);
+                                            },
+                                            child: Container(
+                                              height: 42.h,
+                                              width: 42.w,
+                                              decoration: BoxDecoration(
+                                                  color: ColorsConstants
+                                                      .greenColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          17.r)),
                                               child: Icon(Icons.add,
                                                   color: ColorsConstants
                                                       .whiteColor),
@@ -395,17 +398,20 @@ class Shopscreen extends StatelessWidget {
                                           Text("\$${product['price']}",
                                               style: StringsConstants
                                                   .shopExclusivePrice),
-                                          Container(
-                                            height: 42.h,
-                                            width: 42.w,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    ColorsConstants.greenColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        17.r)),
-                                            child: InkWell(
-                                              onTap: () {},
+                                          InkWell(
+                                            onTap: () {
+                                              controller2
+                                                  .addToCart(product['id']);
+                                            },
+                                            child: Container(
+                                              height: 42.h,
+                                              width: 42.w,
+                                              decoration: BoxDecoration(
+                                                  color: ColorsConstants
+                                                      .greenColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          17.r)),
                                               child: Icon(Icons.add,
                                                   color: ColorsConstants
                                                       .whiteColor),
@@ -496,7 +502,7 @@ class Shopscreen extends StatelessWidget {
                       );
                     }),
 
-                    // vertical scroll ------------- After GROCERIES Meat WIDGET-----------------
+                    // Horizontal scroll ------------- After GROCERIES Meat WIDGET-----------------
                     Obx(() {
                       if (controller2.isLoading.value) {
                         return SizedBox(
@@ -562,17 +568,20 @@ class Shopscreen extends StatelessWidget {
                                           Text("\$${product['price']}",
                                               style: StringsConstants
                                                   .shopExclusivePrice),
-                                          Container(
-                                            height: 42.h,
-                                            width: 42.w,
-                                            decoration: BoxDecoration(
-                                                color:
-                                                    ColorsConstants.greenColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        17.r)),
-                                            child: InkWell(
-                                              onTap: () {},
+                                          InkWell(
+                                            onTap: () {
+                                              controller2
+                                                  .addToCart(product['id']);
+                                            },
+                                            child: Container(
+                                              height: 42.h,
+                                              width: 42.w,
+                                              decoration: BoxDecoration(
+                                                  color: ColorsConstants
+                                                      .greenColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          17.r)),
                                               child: Icon(Icons.add,
                                                   color: ColorsConstants
                                                       .whiteColor),

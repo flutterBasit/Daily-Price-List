@@ -202,26 +202,125 @@ class HomeScreen_ViewController extends GetxController {
   }
 
   //-------------------CART SCREEN-----------------------------
-  var myCartProduct = <int>[].obs;
+  // var myCartProduct = <int>[].obs;
+  var myCartProduct = <int, int>{}.obs;
 
-  //getting the product id
-  void addToCart(int productID) {
-    if (!myCartProduct.contains(productID)) {
-      myCartProduct.add(productID);
-      Get.snackbar('Cart', 'Product Added to Cart!',
-          icon: Icon(
-            Icons.shopping_cart,
-            color: ColorsConstants.greenColor,
-          ),
+  // //getting the product id
+  // void addToCart(int productID) {
+  //   if (!myCartProduct.contains(productID)) {
+  //     myCartProduct.add(productID);
+  //     Get.snackbar('Cart', 'Product Added to Cart!',
+  //         icon: Icon(
+  //           Icons.shopping_cart,
+  //           color: ColorsConstants.greenColor,
+  //         ),
+  //         snackPosition: SnackPosition.BOTTOM,
+  //         duration: Duration(seconds: 2));
+  //   }
+  // }
+
+  //updated cart function
+  // void addToCart(int productID) {
+  //   if (!myCartProduct.containsKey(productID)) {
+  //     myCartProduct[productID] = 1;
+  //   } else {
+  //     int currentQty = myCartProduct[productID]!;
+  //     int stock = allProducts.firstWhere((p) => p['id'] == productID)['stock'];
+
+  //     //logic
+  //     if (currentQty < stock) {
+  //       myCartProduct[productID] = currentQty + 1;
+  //     } else {
+  //       Get.snackbar("Limit", "Cannot add more then availabe stock");
+  //       return;
+  //     }
+  //   }
+  //   Get.snackbar("Cart", "Product Added to Cart!",
+  //       icon: Icon(Icons.shopping_cart),
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       duration: Duration(seconds: 2));
+  // }
+
+  void addToCart(int productID, {int quantity = 1}) {
+    if (!myCartProduct.containsKey(productID)) {
+      myCartProduct[productID] = quantity;
+      Get.snackbar("Cart", "Product Added to Cart!",
+          icon: Icon(Icons.shopping_cart),
           snackPosition: SnackPosition.BOTTOM,
           duration: Duration(seconds: 2));
+    } else {
+      Get.snackbar("Already in Cart", "Item already added to cart");
+    }
+  }
+
+//function for increment with the price and quantity management
+
+  // void increaseQuantity(int ProductID) {
+  //   int stock = allProducts.firstWhere((p) => p['id'] == ProductID,
+  //           orElse: () => null)?['stock'] ??
+  //       0;
+  //   int currentQty = myCartProduct[ProductID] ?? 0;
+  //   if (myCartProduct[ProductID]! < stock) {
+  //     myCartProduct[ProductID] = myCartProduct[ProductID]! + 1;
+  //   } else {
+  //     Get.snackbar("Stock Limit!", "No more items in stock");
+  //   }
+  // }
+
+  // //function for decrease items
+  // void decreaseQuantity(int ProductID) {
+  //   if (myCartProduct[ProductID]! > 1) {
+  //     myCartProduct[ProductID] = myCartProduct[ProductID]! - 1;
+  //   } else {
+  //     removeFromCart(ProductID);
+  //   }
+  // }
+
+  void increaseQuantity(int productId) {
+    try {
+      final product = allProducts.firstWhere((p) => p['id'] == productId);
+      int stock = product['stock'] ?? 0;
+      int currentQty = myCartProduct[productId] ?? 0;
+
+      if (currentQty < stock) {
+        myCartProduct[productId] = currentQty + 1;
+      } else {
+        Get.snackbar("Stock Limit!", "No more items in stock");
+      }
+    } catch (e) {
+      Get.snackbar("Error", "Product not found");
+    }
+  }
+
+  void decreaseQuantity(int productId) {
+    int currentQty = myCartProduct[productId] ?? 0;
+
+    if (currentQty > 1) {
+      myCartProduct[productId] = currentQty - 1;
+    } else if (currentQty == 1) {
+      myCartProduct.remove(productId);
+    } else {
+      // Do nothing if 0
     }
   }
 
   //getter function for the cart products to get
-  List<Map<String, dynamic>> get cartProductDetails => allProducts
-      .where((product) => myCartProduct.contains(product['id']))
-      .toList();
+  // List<Map<String, dynamic>> get cartProductDetails => allProducts
+  //     .where((product) => myCartProduct.contains(product['id']))
+  //     .toList();
+//to get the cart products with quantity
+
+  List<Map<String, dynamic>> get cartProductDetails {
+    return allProducts
+        .where((product) => myCartProduct.containsKey(product['id']))
+        .map((product) {
+      return {
+        ...product,
+        'quantity': myCartProduct[product['id']],
+        'totalprice': myCartProduct[product['id']]! * product['price']
+      };
+    }).toList();
+  }
 
 //clearing all the cart
   void clearCart() => myCartProduct.clear();
@@ -230,4 +329,9 @@ class HomeScreen_ViewController extends GetxController {
   void removeFromCart(int productID) {
     myCartProduct.remove(productID);
   }
+
+  //total price
+
+  double get totalCartPrice => cartProductDetails.fold(
+      0.0, (sum, product) => sum + product['total price']);
 }

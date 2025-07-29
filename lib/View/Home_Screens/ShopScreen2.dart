@@ -15,6 +15,9 @@ class Shopscreen2 extends StatelessWidget {
     final HomeScreen_ViewController controller =
         Get.put(HomeScreen_ViewController());
     final product = Get.arguments as Map<String, dynamic>;
+
+    final RxInt localQty = 1.obs;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -29,32 +32,21 @@ class Shopscreen2 extends StatelessWidget {
                         bottomLeft: Radius.circular(35.r),
                         bottomRight: Radius.circular(35.r))),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(9.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Get.back();
-                              controller.showDetails.value = false;
-                              controller.showCategoryDetails.value = false;
-                              controller.showReviewDetails.value = false;
-                            },
-                            icon: Icon(
-                              Icons.arrow_back_ios,
-                              color: ColorsConstants.blackColor,
-                            ),
-                          ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.ios_share,
-                                color: ColorsConstants.blackColor,
-                              ))
-                        ],
+                      child: IconButton(
+                        onPressed: () {
+                          Get.back();
+                          controller.showDetails.value = false;
+                          controller.showCategoryDetails.value = false;
+                          controller.showReviewDetails.value = false;
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: ColorsConstants.blackColor,
+                        ),
                       ),
                     ),
                     Center(
@@ -75,28 +67,74 @@ class Shopscreen2 extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Row(
+                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                    //   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //   children: [
+                    //     Text(
+                    //       product['title'],
+                    //       style: StringsConstants.ShopScreen2title,
+                    //     ),
+                    //     SizedBox(
+                    //       width: MediaQuery.of(context).size.width,
+                    //     ),
+                    //     InkWell(onTap: () {
+                    //       controller.toggleFavourite(product['id']);
+                    //     }, child: Obx(() {
+                    //       return Icon(
+                    //         controller.isFavourite(product['id'])
+                    //             ? Icons.favorite
+                    //             : Icons.favorite_border,
+                    //         color: controller.isFavourite(product['id'])
+                    //             ? Colors.red
+                    //             : Colors.grey,
+                    //       );
+                    //     })),
+                    //     InkWell(
+                    //         onTap: () {},
+                    //         child: Icon(
+                    //           Icons.ios_share,
+                    //           color: ColorsConstants.blackColor,
+                    //         )),
+                    //   ],
+                    // ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          product['title'],
-                          style: StringsConstants.ShopScreen2title,
+                        Expanded(
+                          child: Text(
+                            product['title'],
+                            style: StringsConstants.ShopScreen2title,
+                            overflow: TextOverflow
+                                .ellipsis, // To prevent overflow in long titles
+                          ),
                         ),
-                        IconButton(onPressed: () {
-                          controller.toggleFavourite(product['id']);
-                        }, icon: Obx(() {
-                          return Icon(
-                            controller.isFavourite(product['id'])
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: controller.isFavourite(product['id'])
-                                ? Colors.red
-                                : Colors.grey,
-                          );
-                        }))
+                        InkWell(
+                          onTap: () {
+                            controller.toggleFavourite(product['id']);
+                          },
+                          child: Obx(() {
+                            return Icon(
+                              controller.isFavourite(product['id'])
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: controller.isFavourite(product['id'])
+                                  ? Colors.red
+                                  : Colors.grey,
+                            );
+                          }),
+                        ),
+                        SizedBox(width: 8), // Some spacing
+                        InkWell(
+                          onTap: () {},
+                          child: Icon(
+                            Icons.ios_share,
+                            color: ColorsConstants.blackColor,
+                          ),
+                        ),
                       ],
                     ),
+
                     Text(
                       product['tags'].join(', '),
                       style: StringsConstants.shopExclusivesubtitle,
@@ -115,7 +153,8 @@ class Shopscreen2 extends StatelessWidget {
                           children: [
                             IconButton(
                                 onPressed: () {
-                                  controller.decrement();
+                                  // controller.decreaseQuantity(product['id']);
+                                  if (localQty.value > 1) localQty.value--;
                                 },
                                 icon: Icon(Icons.remove)),
                             Container(
@@ -127,16 +166,21 @@ class Shopscreen2 extends StatelessWidget {
                                       width: 1.5,
                                       color: ColorsConstants.whiteColor4)),
                               child: Obx(() {
+                                // int qty =
+                                //     controller.myCartProduct[product['id']] ??
+                                // 1;
                                 return Center(
                                     child: Text(
-                                  controller.count.value.toString(),
+                                  // qty.toString(),
+                                  localQty.value.toString(),
                                   style: StringsConstants.shopScreen2counter,
                                 ));
                               }),
                             ),
                             IconButton(
                                 onPressed: () {
-                                  controller.increment();
+                                  // controller.increaseQuantity(product['id']);
+                                  localQty.value++;
                                 },
                                 icon: Icon(
                                   Icons.add,
@@ -144,8 +188,16 @@ class Shopscreen2 extends StatelessWidget {
                                 )),
                           ],
                         ),
-                        Text("\$${product['price']}",
-                            style: StringsConstants.ShopScreen2title),
+                        Obx(() {
+                          // int qty =
+                          //     controller.myCartProduct[product['id']] ?? 1;
+
+                          // double price = product['price'] * qty;
+
+                          double price = product['price'] * localQty.value;
+                          return Text("\$${price.toStringAsFixed(2)}",
+                              style: StringsConstants.ShopScreen2title);
+                        })
                       ],
                     ),
                     SizedBox(

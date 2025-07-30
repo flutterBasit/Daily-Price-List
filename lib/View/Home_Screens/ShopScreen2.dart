@@ -126,7 +126,9 @@ class Shopscreen2 extends StatelessWidget {
                         ),
                         SizedBox(width: 8), // Some spacing
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            controller.shareProduct(product);
+                          },
                           child: Icon(
                             Icons.ios_share,
                             color: ColorsConstants.blackColor,

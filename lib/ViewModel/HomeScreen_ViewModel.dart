@@ -1,9 +1,13 @@
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Services/Api_services.dart';
+import 'package:dio/dio.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeScreen_ViewController extends GetxController {
   RxInt selectedIndex = 0.obs;
@@ -155,6 +159,46 @@ class HomeScreen_ViewController extends GetxController {
   final RxBool showCategoryDetails = false.obs;
   final RxBool showReviewDetails = false.obs;
 
+//making the function for the share button
+
+  Future<void> shareProduct(Map<String, dynamic> product) async {
+    try {
+      final imageUrl = product['images'][0];
+      final fileName = 'product_name.png';
+      final temDir = await getTemporaryDirectory();
+      final filePath = '${temDir.path}/$fileName';
+
+      //Download the image using Dio
+      await Dio().download(imageUrl, filePath);
+
+      //get the current date and time
+      final now = DateTime.now();
+      final formattedDate = DateFormat('EEEE, MMM d, yyyy').format(now);
+
+      //create the message
+      final String message = '''
+     🛍️ ${product['title']}
+📅 Date: $formattedDate
+💵 Price: \$${product['price'].toStringAsFixed(2)}
+
+Add your notes here:
+ ''';
+
+      //  share using shareplus
+
+      await SharePlus.instance.share(ShareParams(
+        files: [XFile(filePath)],
+        text: message,
+        subject: "Check out this product!",
+      ));
+
+      // await SharePlus.instance.share(files: [XFile(filePath)],
+      //     text: message, subject: 'Check out todays price!');
+    } catch (e) {
+      Get.snackbar("Share Failed", "Unable to share product : ${e.toString()}");
+    }
+  }
+
 //----------------------FAVOURITE SCREEN---------------------
   //---Functionallity for the favourite
   var favouriteProduct = <int>[].obs;
@@ -205,42 +249,6 @@ class HomeScreen_ViewController extends GetxController {
   // var myCartProduct = <int>[].obs;
   var myCartProduct = <int, int>{}.obs;
 
-  // //getting the product id
-  // void addToCart(int productID) {
-  //   if (!myCartProduct.contains(productID)) {
-  //     myCartProduct.add(productID);
-  //     Get.snackbar('Cart', 'Product Added to Cart!',
-  //         icon: Icon(
-  //           Icons.shopping_cart,
-  //           color: ColorsConstants.greenColor,
-  //         ),
-  //         snackPosition: SnackPosition.BOTTOM,
-  //         duration: Duration(seconds: 2));
-  //   }
-  // }
-
-  //updated cart function
-  // void addToCart(int productID) {
-  //   if (!myCartProduct.containsKey(productID)) {
-  //     myCartProduct[productID] = 1;
-  //   } else {
-  //     int currentQty = myCartProduct[productID]!;
-  //     int stock = allProducts.firstWhere((p) => p['id'] == productID)['stock'];
-
-  //     //logic
-  //     if (currentQty < stock) {
-  //       myCartProduct[productID] = currentQty + 1;
-  //     } else {
-  //       Get.snackbar("Limit", "Cannot add more then availabe stock");
-  //       return;
-  //     }
-  //   }
-  //   Get.snackbar("Cart", "Product Added to Cart!",
-  //       icon: Icon(Icons.shopping_cart),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       duration: Duration(seconds: 2));
-  // }
-
   void addToCart(int productID, {int quantity = 1}) {
     if (!myCartProduct.containsKey(productID)) {
       myCartProduct[productID] = quantity;
@@ -254,27 +262,6 @@ class HomeScreen_ViewController extends GetxController {
   }
 
 //function for increment with the price and quantity management
-
-  // void increaseQuantity(int ProductID) {
-  //   int stock = allProducts.firstWhere((p) => p['id'] == ProductID,
-  //           orElse: () => null)?['stock'] ??
-  //       0;
-  //   int currentQty = myCartProduct[ProductID] ?? 0;
-  //   if (myCartProduct[ProductID]! < stock) {
-  //     myCartProduct[ProductID] = myCartProduct[ProductID]! + 1;
-  //   } else {
-  //     Get.snackbar("Stock Limit!", "No more items in stock");
-  //   }
-  // }
-
-  // //function for decrease items
-  // void decreaseQuantity(int ProductID) {
-  //   if (myCartProduct[ProductID]! > 1) {
-  //     myCartProduct[ProductID] = myCartProduct[ProductID]! - 1;
-  //   } else {
-  //     removeFromCart(ProductID);
-  //   }
-  // }
 
   void increaseQuantity(int productId) {
     try {
@@ -304,10 +291,6 @@ class HomeScreen_ViewController extends GetxController {
     }
   }
 
-  //getter function for the cart products to get
-  // List<Map<String, dynamic>> get cartProductDetails => allProducts
-  //     .where((product) => myCartProduct.contains(product['id']))
-  //     .toList();
 //to get the cart products with quantity
 
   List<Map<String, dynamic>> get cartProductDetails {

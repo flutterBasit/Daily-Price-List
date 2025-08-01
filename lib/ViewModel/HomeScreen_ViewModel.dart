@@ -199,6 +199,39 @@ Add your notes here:
     }
   }
 
+  //making function and obervable for comment
+  //how a user can add comment
+  var showReviewDetail = false.obs;
+
+  //simulated in memory review map : ProductID => List of Reviews
+  RxMap<String, List<Map<String, dynamic>>> reviewMap =
+      <String, List<Map<String, dynamic>>>{}.obs;
+
+  //star rating and comment bond to the input field
+  RxInt selectedRating = 0.obs;
+  RxString commentText = ''.obs;
+
+  //function for add the comment
+  void addReview(String ProductId, String name, String comment, int rating) {
+    final review = {'reviewName': name, 'comment': comment, 'rating': rating};
+
+    if (!reviewMap.containsKey(ProductId)) {
+      reviewMap[ProductId] = [];
+    }
+
+    reviewMap[ProductId]!.add(review);
+    selectedRating.value = 0;
+    commentText.value = '';
+  }
+
+//getting the reviews
+  List<Map<String, dynamic>> getReviews(
+      String productId, List<Map<String, dynamic>> productApiReviews) {
+    final additional = reviewMap[productId] ?? [];
+    return [...productApiReviews, ...additional]; //... is the spread operator
+    //  insert all elements from a collection (like a List) into another list.
+  }
+
 //----------------------FAVOURITE SCREEN---------------------
   //---Functionallity for the favourite
   var favouriteProduct = <int>[].obs;

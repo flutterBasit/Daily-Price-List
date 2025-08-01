@@ -339,12 +339,34 @@ class Shopscreen2 extends StatelessWidget {
                               ListView.builder(
                                   shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  itemCount: product['reviews'].length,
+                                  itemCount: product['reviews'].length +
+                                      (controller
+                                              .reviewMap[
+                                                  product['id'].toString()]
+                                              ?.length ??
+                                          0),
                                   itemBuilder: (context, index) {
-                                    final review = product['reviews'][index];
+                                    // final review = product['reviews'][index];
 
+                                    //total combined list
+                                    final originalReviews =
+                                        product['reviews'] ?? [];
+                                    final newReviews = controller.reviewMap[
+                                            product['id']?.toString()] ??
+                                        [];
+
+//through ... operator we joined the list the maping list of the newreviews and the reviews from the api
+                                    final allReviews = [
+                                      ...originalReviews,
+                                      ...newReviews
+                                    ];
+
+                                    //all reviews combined
+                                    final review = allReviews[index];
                                     return ListTile(
-                                      title: Text(review['reviewerName']),
+                                      title: Text(review['reviewerName'] ??
+                                          review['reviewName'] ??
+                                          'Anonymous'),
                                       subtitle: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -368,7 +390,89 @@ class Shopscreen2 extends StatelessWidget {
                                         ],
                                       ),
                                     );
-                                  })
+                                  }),
+
+                            //Adding comments from users
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Add your review:'),
+                                Obx(() {
+                                  return Row(
+                                      children: List.generate(
+                                          5,
+                                          (index) => IconButton(
+                                              onPressed: () {
+                                                controller.selectedRating
+                                                    .value = index + 1;
+                                              },
+                                              icon: Icon(
+                                                index <
+                                                        controller
+                                                            .selectedRating
+                                                            .value
+                                                    ? Icons.star
+                                                    : Icons.star_border,
+                                                color:
+                                                    ColorsConstants.AmberColor,
+                                              ))));
+                                }),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                //comment text field
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Expanded(
+                                      child: Obx(() {
+                                        return TextField(
+                                          onChanged: (val) => controller
+                                              .commentText.value = val,
+                                          controller: TextEditingController(
+                                              text:
+                                                  controller.commentText.value)
+                                            ..selection =
+                                                TextSelection.fromPosition(
+                                                    TextPosition(
+                                                        offset: controller
+                                                            .commentText
+                                                            .value
+                                                            .length)),
+                                          decoration: InputDecoration(
+                                              hintText:
+                                                  "Write your comment here",
+                                              border: OutlineInputBorder()),
+                                          maxLines: 3,
+                                        );
+                                      }),
+                                    ),
+                                    //send button
+                                    //submit button
+                                    IconButton(
+                                        onPressed: () {
+                                          if (controller.selectedRating.value >
+                                                  0 &&
+                                              controller.commentText.value
+                                                  .trim()
+                                                  .isNotEmpty) {
+                                            controller.addReview(
+                                                product['id'].toString(),
+                                                "Your Name",
+                                                controller.commentText.value
+                                                    .trim(),
+                                                controller
+                                                    .selectedRating.value);
+                                          } else {
+                                            Get.snackbar('Error',
+                                                'please enter a comment and rating');
+                                          }
+                                        },
+                                        icon: Icon(Icons.send))
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       );

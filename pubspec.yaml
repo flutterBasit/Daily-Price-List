@@ -45,7 +45,13 @@ dependencies:
   share_plus:
   path_provider: 
   intl: 
+  geolocator: ^14.0.0
+  geocoding: ^3.0.0
+  location:
 
+dependency_overrides:
+  geolocator_android: 4.6.1 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

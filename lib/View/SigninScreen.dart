@@ -4,6 +4,7 @@ import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
 import 'package:daily_price_list/ViewModel/phone_ViewModel.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class Signinscreen extends StatefulWidget {
 }
 
 class _SigninscreenState extends State<Signinscreen> {
+  final NumberScreen_Controller numberScreen_Controller =
+      Get.put(NumberScreen_Controller());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,27 +44,69 @@ class _SigninscreenState extends State<Signinscreen> {
             Row(
               children: [
                 CountryCodeDropdown(),
+                // Expanded(
+                //   child: TextField(
+                //     decoration: InputDecoration(
+                //         enabledBorder: InputBorder.none,
+                //         focusedBorder: InputBorder.none,
+                //         disabledBorder: InputBorder.none),
+                //     // maxLength: 10,
+                //     onTap: () {
+                //       Get.toNamed(Routenames.numberScreen);
+                //     },
+                //   ),
+                // )
+
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none),
-                    // maxLength: 10,
-                    onTap: () {
-                      Get.toNamed(Routenames.numberScreen);
-                    },
-                  ),
-                )
+                    child: TextField(
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide.none, // No border
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none, // No border when enabled
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none, // No border when focused
+                      ),
+                      hintText: 'Enter your phone number'),
+                  onChanged: numberScreen_Controller.updatePhoneNumber,
+                  onTap: () =>
+                      numberScreen_Controller.keyboardVisible.value = true,
+                ))
               ],
             ),
             Divider(
               indent: 30,
               endIndent: 30,
             ),
-            SizedBox(
-              height: 20.h,
-            ),
+            Obx(() {
+              return Visibility(
+                  visible: numberScreen_Controller.showNextButton.value,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20.h),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: InkWell(
+                        onTap: () {
+                          numberScreen_Controller.geerateFakeOtp();
+                          Get.toNamed(Routenames.verficationScreen);
+                        },
+                        child: CircleAvatar(
+                          radius: 25.r,
+                          backgroundColor: ColorsConstants.greenColor,
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: ColorsConstants.whiteColor3,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ));
+            }),
             Center(
                 child: Text(
               'Or connect with social media',

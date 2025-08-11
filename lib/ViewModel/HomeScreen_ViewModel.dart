@@ -203,6 +203,9 @@ Add your notes here:
   //how a user can add comment
   var showReviewDetail = false.obs;
 
+  //
+  // RxMap<String,dynamic> commentTextMap = <String,String>{}
+
   //simulated in memory review map : ProductID => List of Reviews
   RxMap<String, List<Map<String, dynamic>>> reviewMap =
       <String, List<Map<String, dynamic>>>{}.obs;

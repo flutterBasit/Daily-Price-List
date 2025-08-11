@@ -1,3 +1,28 @@
+buildscript {
+    ext.kotlin_version = '1.9.0'
+
+    def localProperties = new Properties()
+    def localPropertiesFile = rootProject.file('local.properties')
+    if (localPropertiesFile.exists()) {
+        localPropertiesFile.withReader('UTF-8') { reader ->
+            localProperties.load(reader)
+        }
+    }
+
+    def flutterRoot = localProperties.getProperty('flutter.sdk')
+    ext.flutter = [ sdk: flutterRoot ]
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.1.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -8,9 +33,8 @@ allprojects {
 rootProject.buildDir = "../build"
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
-    project.evaluationDependsOn(":app")
+    // REMOVE or COMMENT OUT this line to fix the circular dependency
+    // project.evaluationDependsOn(":app")
 }
 
 tasks.register("clean", Delete) {

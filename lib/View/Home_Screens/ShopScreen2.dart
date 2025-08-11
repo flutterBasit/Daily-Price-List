@@ -417,9 +417,7 @@ class Shopscreen2 extends StatelessWidget {
                                                     ColorsConstants.AmberColor,
                                               ))));
                                 }),
-                                SizedBox(
-                                  width: 15,
-                                ),
+
                                 //comment text field
                                 Row(
                                   mainAxisSize: MainAxisSize.min,

@@ -191,7 +191,22 @@ class Cartscreen extends StatelessWidget {
                 child: cart.isEmpty
                     //----------------------if the Cart is empty then show this
                     ? Center(
-                        child: Text("No Items Added Yet!"),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'No Items Added Yet!',
+                              style: StringsConstants.shopExclusiveTitle,
+                            ),
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            Icon(
+                              Icons.shopping_cart,
+                              size: 50,
+                            )
+                          ],
+                        ),
                       )
                     //----------------------else if there something in the cart show here
                     : ListView.separated(

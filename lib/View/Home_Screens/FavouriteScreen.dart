@@ -4,6 +4,7 @@ import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/ViewModel/HomeScreen_ViewModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class Favouritescreen extends StatelessWidget {
@@ -31,7 +32,23 @@ class Favouritescreen extends StatelessWidget {
           Expanded(
             child: favourite.isEmpty
                 ? Center(
-                    child: Text('No Favourites Added Yet!'),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'No Favourites Added Yet!',
+                          style: StringsConstants.shopExclusiveTitle,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 50,
+                        )
+                      ],
+                    ),
                   )
                 : ListView.separated(
                     // physics: NeverScrollableScrollPhysics(),

@@ -7,9 +7,11 @@ import 'package:daily_price_list/ViewModel/HomeScreen_ViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Shopscreen extends StatelessWidget {
-  final DropdownController controller = Get.put(DropdownController());
+  // final DropdownController controller = Get.put(DropdownController());
+  final DropdownController controller = Get.find<DropdownController>();
   final HomeScreen_ViewController controller2 =
       Get.put(HomeScreen_ViewController());
 
@@ -26,6 +28,17 @@ class Shopscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Load saved location when screen initializes
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final prefs = await SharedPreferences.getInstance();
+      controller.selectedProvine.value = prefs.getString('savedProvince') ?? '';
+      controller.selectedDistrict.value =
+          prefs.getString('savedDistrict') ?? '';
+      controller.selectedZone.value = prefs.getString('savedZone') ?? '';
+      // Print to verify loaded values
+      print(
+          'Loaded location: ${controller.selectedProvine.value}, ${controller.selectedDistrict.value}');
+    });
     return Scaffold(
         backgroundColor: ColorsConstants.whiteColor,
         body: SafeArea(
@@ -40,19 +53,36 @@ class Shopscreen extends StatelessWidget {
                     SizedBox(
                       height: 10.h,
                     ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Icon(
+                    //       Icons.location_on,
+                    //       color: ColorsConstants.blackColor3,
+                    //     ),
+                    //     Text(
+                    //       "${controller.selectedProvine.value}, ",
+                    //       style: StringsConstants.shopScreenTextColor,
+                    //     ),
+                    //     Text(controller.selectedDistrict.value,
+                    //         style: StringsConstants.shopScreenTextColor)
+                    //   ],
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(
-                          Icons.location_on,
-                          color: ColorsConstants.blackColor3,
-                        ),
-                        Text(
-                          "${controller.selectedProvine.value}, ",
-                          style: StringsConstants.shopScreenTextColor,
-                        ),
-                        Text(controller.selectedDistrict.value,
-                            style: StringsConstants.shopScreenTextColor)
+                        Icon(Icons.location_on,
+                            color: ColorsConstants.blackColor3),
+                        if (controller.selectedProvine.value.isNotEmpty)
+                          Text(
+                            "${controller.selectedProvine.value}, ",
+                            style: StringsConstants.shopScreenTextColor,
+                          ),
+                        if (controller.selectedDistrict.value.isNotEmpty)
+                          Text(
+                            controller.selectedDistrict.value,
+                            style: StringsConstants.shopScreenTextColor,
+                          ),
                       ],
                     ),
                     SizedBox(

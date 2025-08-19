@@ -4,6 +4,7 @@ import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
 import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
 import 'package:daily_price_list/ViewModel/phone_ViewModel.dart';
@@ -19,8 +20,10 @@ class Signinscreen extends StatefulWidget {
 }
 
 class _SigninscreenState extends State<Signinscreen> {
-  final NumberScreen_Controller numberScreen_Controller =
-      Get.put(NumberScreen_Controller());
+  final Authviewmodel auth = Get.put(Authviewmodel());
+
+  final phoneAuthController PhoneAuthController =
+      Get.put(phoneAuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +34,6 @@ class _SigninscreenState extends State<Signinscreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image(image: AssetImage('assets/images/Signin.png')),
-            SizedBox(
-              height: 20.h,
-            ),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Text(
@@ -44,19 +44,6 @@ class _SigninscreenState extends State<Signinscreen> {
             Row(
               children: [
                 CountryCodeDropdown(),
-                // Expanded(
-                //   child: TextField(
-                //     decoration: InputDecoration(
-                //         enabledBorder: InputBorder.none,
-                //         focusedBorder: InputBorder.none,
-                //         disabledBorder: InputBorder.none),
-                //     // maxLength: 10,
-                //     onTap: () {
-                //       Get.toNamed(Routenames.numberScreen);
-                //     },
-                //   ),
-                // )
-
                 Expanded(
                     child: TextField(
                   keyboardType: TextInputType.phone,
@@ -71,9 +58,7 @@ class _SigninscreenState extends State<Signinscreen> {
                         borderSide: BorderSide.none, // No border when focused
                       ),
                       hintText: 'Enter your phone number'),
-                  onChanged: numberScreen_Controller.updatePhoneNumber,
-                  onTap: () =>
-                      numberScreen_Controller.keyboardVisible.value = true,
+                  onChanged: PhoneAuthController.updatePhoneNumber,
                 ))
               ],
             ),
@@ -83,29 +68,20 @@ class _SigninscreenState extends State<Signinscreen> {
             ),
             Obx(() {
               return Visibility(
-                  visible: numberScreen_Controller.showNextButton.value,
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 20.h),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: InkWell(
-                        onTap: () {
-                          numberScreen_Controller.geerateFakeOtp();
-                          Get.toNamed(Routenames.verficationScreen);
-                        },
-                        child: CircleAvatar(
-                          radius: 25.r,
-                          backgroundColor: ColorsConstants.greenColor,
-                          child: Center(
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: ColorsConstants.whiteColor3,
-                            ),
-                          ),
+                  visible: PhoneAuthController.showNextButton.value,
+                  child: InkWell(
+                      onTap: () {
+                        //  numberScreen_Controller.geerateFakeOtp();
+                        auth.startPhoneAuth(
+                            PhoneAuthController.fullPhoneNumber);
+                        Get.toNamed(Routenames.verficationScreen);
+                      },
+                      child: Center(
+                        child: Buttons1(
+                          title: "Submit",
+                          color: ColorsConstants.greenColor,
                         ),
-                      ),
-                    ),
-                  ));
+                      )));
             }),
             Center(
                 child: Text(
@@ -113,7 +89,7 @@ class _SigninscreenState extends State<Signinscreen> {
               style: StringsConstants.signInTextStyle2,
             )),
             SizedBox(
-              height: 20.h,
+              height: 10.h,
             ),
             Center(
               child: Buttons1(
@@ -121,28 +97,20 @@ class _SigninscreenState extends State<Signinscreen> {
                 title: 'Continue with Google',
                 titleStyle: StringsConstants.signInButtonStyle,
                 color: ColorsConstants.blueColor,
-                onTap: () {},
+                onTap: () {
+                  auth.signInWithGoogle();
+                },
               ),
             ),
-
-            SizedBox(
-              height: 18.h,
-            ),
-            // SignInButton(
-            //   Buttons.facebook,
-            //   mini: true,
-            //   onPressed: () {
-            //     Get.toNamed(Routenames.splashScreen);
-            //   },
-            // ),
-
             Center(
               child: Buttons1(
                 assetImagePath: 'assets/images/facebook.png',
                 title: 'Continue with Facebook',
                 color: ColorsConstants.blueColor2,
                 titleStyle: StringsConstants.signInButtonStyle,
-                onTap: () {},
+                onTap: () {
+                  auth.signInWIthFacebook();
+                },
               ),
             )
           ],
@@ -153,7 +121,7 @@ class _SigninscreenState extends State<Signinscreen> {
 }
 
 class CountryCodeDropdown extends StatelessWidget {
-  final phoneController phonecontroller = Get.put(phoneController());
+  final phoneAuthController phonecontroller = Get.put(phoneAuthController());
   CountryCodeDropdown({super.key});
 
   @override

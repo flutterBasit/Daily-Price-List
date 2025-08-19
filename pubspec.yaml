@@ -48,6 +48,11 @@ dependencies:
   geolocator: ^14.0.0
   geocoding: ^3.0.0
   location:
+  firebase_core: ^4.0.0
+  firebase_auth: ^6.0.0
+  google_sign_in: ^7.1.1
+  flutter_facebook_auth: ^7.1.2
+  shared_preferences: ^2.5.3
 
 dependency_overrides:
   geolocator_android: 4.6.1 

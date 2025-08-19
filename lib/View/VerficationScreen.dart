@@ -1,6 +1,7 @@
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
 
 import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
@@ -11,6 +12,8 @@ import 'package:get/get.dart';
 class VerficationScreen extends StatelessWidget {
   final NumberScreen_Controller numberScreen_Controller =
       Get.put(NumberScreen_Controller());
+
+  final RxString enteredOTP = ''.obs;
   VerficationScreen({super.key});
 
   @override
@@ -50,24 +53,23 @@ class VerficationScreen extends StatelessWidget {
                   ),
                   //  CountryCodeDropdown(),
                   TextField(
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none, // No border
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide.none, // No border when enabled
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide.none, // No border when focused
-                          ),
-                          hintText: ' - - - -'),
-                      onChanged: numberScreen_Controller.updateEnteredOTP,
-                      onTap: () {
-                        numberScreen_Controller.keyboardVisible.value = true;
-                      }),
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none, // No border
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none, // No border when enabled
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none, // No border when focused
+                        ),
+                        hintText: ' - - - -'),
+                    onChanged: (val) => enteredOTP.value = val,
+                    // onTap: () {
+                    //   numberScreen_Controller.keyboardVisible.value = true;
+                    // }
+                  ),
                   Divider(
                     indent: 10,
                     endIndent: 10,
@@ -84,7 +86,11 @@ class VerficationScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Authviewmodel.to.startPhoneAuth(
+                                Authviewmodel.to.user?.phoneNumber ?? '',
+                                isResend: true);
+                          },
                           child: Text('Resend Code',
                               style: TextStyle(
                                 color: ColorsConstants.greenColor,

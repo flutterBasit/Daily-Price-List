@@ -307,48 +307,50 @@ class Buttons1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: Material(
-        color: Colors.transparent, // transparent wrapper
-        borderRadius: BorderRadius.circular(19.r),
-        child: Ink(
-          width: 320.w,
-          height: 67.h,
-          decoration: BoxDecoration(
-            color: color, // Button background
-            borderRadius: BorderRadius.circular(19.r),
-          ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(19.r),
-            splashColor: Colors.white.withOpacity(0.3), // visible ripple
-            highlightColor: Colors.white.withOpacity(0.1),
-            onTap: onTap,
-            child: Row(
-              mainAxisAlignment: assetImagePath != null
-                  ? MainAxisAlignment.start
-                  : MainAxisAlignment.center,
-              children: [
-                if (assetImagePath != null) ...[
-                  SizedBox(width: 25.w),
-                  Image.asset(
-                    assetImagePath!,
-                    width: 24.w,
-                    height: 24.w,
-                    fit: BoxFit.contain,
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.h),
+        child: Material(
+          color: Colors.transparent, // transparent wrapper
+          borderRadius: BorderRadius.circular(19.r),
+          child: Ink(
+            width: 320.w,
+            height: 67.h,
+            decoration: BoxDecoration(
+              color: color, // Button background
+              borderRadius: BorderRadius.circular(19.r),
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(19.r),
+              splashColor: Colors.white.withOpacity(0.3), // visible ripple
+              highlightColor: Colors.white.withOpacity(0.1),
+              onTap: onTap,
+              child: Row(
+                mainAxisAlignment: assetImagePath != null
+                    ? MainAxisAlignment.start
+                    : MainAxisAlignment.center,
+                children: [
+                  if (assetImagePath != null) ...[
+                    SizedBox(width: 25.w),
+                    Image.asset(
+                      assetImagePath!,
+                      width: 24.w,
+                      height: 24.w,
+                      fit: BoxFit.contain,
+                    ),
+                    SizedBox(width: 30.w),
+                  ],
+                  Text(
+                    title,
+                    style: titleStyle ??
+                        TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
-                  SizedBox(width: 30.w),
                 ],
-                Text(
-                  title,
-                  style: titleStyle ??
-                      TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ],
+              ),
             ),
           ),
         ),

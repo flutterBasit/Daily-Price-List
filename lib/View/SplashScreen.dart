@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteManager.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,8 +16,10 @@ class Splashscreen extends StatelessWidget {
   Widget build(BuildContext context) {
 //adding delay as its splash scren after few seconds it will move to next screen and this
 //screen will not be in stack as we have used Get.offNamed
-    Future.delayed(Duration(seconds: 3 + Random().nextInt(2)), () {
-      Get.offNamed(Routenames.onBoardingScreen);
+    Future.delayed(Duration(seconds: 3 + Random().nextInt(2)), () async {
+      final initialRoute = await RouteManager.getInitialRoutes();
+      // Authviewmodel.to.checkAuthAndNavigate();
+      Get.offAllNamed(initialRoute);
     });
 
     return Scaffold(

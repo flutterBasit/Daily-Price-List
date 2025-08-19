@@ -7,6 +7,7 @@ import 'package:daily_price_list/ViewModel/DropDown_ViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectlocationScreen extends StatefulWidget {
   SelectlocationScreen({super.key});
@@ -111,18 +112,23 @@ class _SelectlocationScreenState extends State<SelectlocationScreen> {
                     title: 'Submit',
                     color: ColorsConstants.greenColor,
                     titleStyle: StringsConstants.signInButtonStyle,
-                    onTap: () {
+                    onTap: () async {
                       if (controller.selectedProvine.value.isNotEmpty &&
                           controller.selectedDistrict.value.isNotEmpty &&
-                          controller.selectedDistrict.value.isNotEmpty) {
-                        Get.snackbar(
-                          'Success',
-                          'Moving to Log In Screen',
-                          backgroundColor: Colors.green,
-                          colorText: Colors.white,
-                        );
-                        // Get.offNamed(Routenames.logInScreen);
-                        Get.offNamed(Routenames.HomeScreen);
+                          controller.selectedZone.value.isNotEmpty) {
+                        final prefs = await SharedPreferences.getInstance();
+                        // Save all location data
+                        await prefs.setString(
+                            'savedProvince', controller.selectedProvine.value);
+                        await prefs.setString(
+                            'savedDistrict', controller.selectedDistrict.value);
+                        await prefs.setString(
+                            'savedZone', controller.selectedZone.value);
+                        await prefs.setBool('locationSelected', true);
+                        // Print to verify values are being saved
+                        print(
+                            'Saving location: ${controller.selectedProvine.value}, ${controller.selectedDistrict.value}');
+                        Get.offAllNamed(Routenames.HomeScreen);
                       } else {
                         Get.snackbar(
                           'Incomplete Selection',

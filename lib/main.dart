@@ -1,15 +1,25 @@
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/Resources/Routes/Routes.dart';
+import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
 import 'package:daily_price_list/ViewModel/DropDown_ViewModel.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   Get.put(DropdownController());
-  WidgetsFlutterBinding.ensureInitialized();
 
+  WidgetsFlutterBinding.ensureInitialized();
+  //firebase initillization
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  Get.put(Authviewmodel());
   //lock orientation of the screen
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);

@@ -39,13 +39,20 @@ class Authviewmodel extends GetxController {
 
   //--------------------EMAIL LOGIN------------------------
   //SIGNUP
-  Future<void> signupWithEmail(String email, String password) async {
+  Future<void> signupWithEmail(
+      String email, String password, String username) async {
     try {
       final credential = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      //update the username from the signup screen
+      await credential.user?.updateDisplayName(username);
+
       // send email verfication
       await credential.user?.sendEmailVerification();
-      await handlePostLoginNavigation();
+
+      Get.toNamed(Routenames.logInScreen);
+      //await handlePostLoginNavigation();
       Get.snackbar(
           'Success!', "Account Created Successfully\nCheck email verficcation");
     } on FirebaseAuthException catch (e) {

@@ -3,6 +3,7 @@ import 'package:daily_price_list/Resources/Components/CustomTextFormField.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
+import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,7 @@ class Signupscreen extends StatefulWidget {
 }
 
 class _SignupscreenState extends State<Signupscreen> {
+  final _auth = Get.find<Authviewmodel>();
   final _EmailController = TextEditingController();
 
   final _PasswordController = TextEditingController();
@@ -179,12 +181,16 @@ class _SignupscreenState extends State<Signupscreen> {
                       color: ColorsConstants.greenColor,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          Get.snackbar(
-                            'Success',
-                            'Signed Up ✅',
-                            backgroundColor: ColorsConstants.greenColor,
-                            colorText: Colors.white,
-                          );
+                          _auth.signupWithEmail(
+                              _EmailController.text.toString(),
+                              _PasswordController.text.toString(),
+                              _UsernameController.text.toString());
+                          // Get.snackbar(
+                          //   'Success',
+                          //   'Signed Up ✅',
+                          //   backgroundColor: ColorsConstants.greenColor,
+                          //   colorText: Colors.white,
+                          // );
                         } else {
                           Get.snackbar(
                             'Error',

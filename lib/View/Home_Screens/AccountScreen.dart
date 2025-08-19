@@ -102,12 +102,17 @@ class Accountscreen extends StatelessWidget {
             ListTile(
               leading: CircleAvatar(
                 radius: 40.r,
-                backgroundImage: user.photoURL != null
-                    ? NetworkImage(user.photoURL!)
-                    : const AssetImage('assets/images/default_avatar.png')
-                        as ImageProvider,
+                backgroundImage:
+                    user.photoURL != null ? NetworkImage(user.photoURL!) : null,
+                backgroundColor: ColorsConstants.whiteColor5,
+                child: user.photoURL == null
+                    ? Icon(
+                        Icons.person,
+                        color: ColorsConstants.greenColor,
+                      )
+                    : null,
               ),
-              title: Text(user.displayName ?? 'No name'),
+              title: Text(user.displayName ?? 'Unknown'),
               subtitle: Text(user.email ?? 'No email'),
             ),
             Divider(

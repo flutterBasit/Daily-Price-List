@@ -5,7 +5,6 @@ import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
-import 'package:daily_price_list/ViewModel/NumberScreen_ViewModel.dart';
 
 import 'package:daily_price_list/ViewModel/phone_ViewModel.dart';
 import 'package:flutter/material.dart';
@@ -88,8 +87,14 @@ class _SigninscreenState extends State<Signinscreen> {
               'Or connect with social media',
               style: StringsConstants.signInTextStyle2,
             )),
-            SizedBox(
-              height: 10.h,
+            Center(
+              child: Buttons1(
+                title: 'Log In',
+                color: ColorsConstants.greenColor,
+                onTap: () {
+                  Get.offAllNamed(Routenames.logInScreen);
+                },
+              ),
             ),
             Center(
               child: Buttons1(
@@ -112,7 +117,7 @@ class _SigninscreenState extends State<Signinscreen> {
                   auth.signInWIthFacebook();
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

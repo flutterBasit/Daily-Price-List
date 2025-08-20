@@ -1,5 +1,5 @@
-import 'package:daily_price_list/Resources/App_Utils/NetworkUtils.dart';
-import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Utilities/NetworkUtils.dart';
+
 import 'package:daily_price_list/Services/Api_services.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
@@ -55,6 +55,45 @@ class HomeScreen_ViewController extends GetxController {
       }
       rethrow;
     }
+  }
+
+  //Seaech Functionality --------------------------------
+  var searhQuery = ''.obs;
+  var isSearching = false.obs;
+  var searchResult = <dynamic>[].obs;
+
+  //adding search method
+  void searchProduct(String query) {
+    searhQuery.value = query;
+
+    if (query.isEmpty) {
+      isSearching.value = false;
+      searchResult.clear();
+      return;
+    }
+    //if isSearching is true
+    isSearching.value = true;
+    //combining all products list for searching
+    final allProduicts = [...products, ...products2, ...Groceries, ...Meat];
+
+    //Search filter products based on search query
+    searchResult.value = allProduicts.where((product) {
+      final title = product['title']?.toString().toLowerCase() ?? '';
+      final tags = product['tags']?.toString().toLowerCase() ?? '';
+      final description =
+          product['description']?.toString().toLowerCase() ?? '';
+
+      return title.contains(query.toLowerCase()) ||
+          tags.contains(query.toLowerCase()) ||
+          description.contains(query.toLowerCase());
+    }).toList();
+  }
+
+  //clear search
+  void clearSearch() {
+    searhQuery.value = '';
+    isSearching.value = false;
+    searchResult.clear();
   }
 
 // API fetch for the -------------------banner------------

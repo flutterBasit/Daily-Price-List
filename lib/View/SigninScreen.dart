@@ -126,7 +126,7 @@ class _SigninscreenState extends State<Signinscreen> {
 }
 
 class CountryCodeDropdown extends StatelessWidget {
-  final phoneAuthController phonecontroller = Get.put(phoneAuthController());
+  final phoneAuthController phonecontroller = Get.find<phoneAuthController>();
   CountryCodeDropdown({super.key});
 
   @override

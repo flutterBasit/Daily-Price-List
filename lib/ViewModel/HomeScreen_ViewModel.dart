@@ -1,3 +1,4 @@
+import 'package:daily_price_list/Resources/App_Utils/NetworkUtils.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Services/Api_services.dart';
 import 'package:dio/dio.dart';
@@ -23,8 +24,10 @@ class HomeScreen_ViewController extends GetxController {
   // from the discount variable response in the API
 
   var banners = <Map<String, dynamic>>[].obs;
-  var isLoading = true.obs;
-
+  //for loading
+  var isLoading = false.obs;
+//for Checking Internet error
+  var hasInternetError = false.obs;
   @override
   void onInit() {
     //put the banner function
@@ -36,11 +39,29 @@ class HomeScreen_ViewController extends GetxController {
     super.onInit();
   }
 
+//function for the base API calls for tracking the Internet issue
+  Future<dynamic> _makeAPIcalls(Future<dynamic> Function() apiCall) async {
+    try {
+      hasInternetError(false);
+      return await apiCall();
+    } on DioException catch (e) {
+      if (Networkutils.isNetworkError(e)) {
+        hasInternetError(true);
+      }
+      rethrow;
+    } catch (e) {
+      if (Networkutils.isNetworkError(e)) {
+        hasInternetError(true);
+      }
+      rethrow;
+    }
+  }
+
 // API fetch for the -------------------banner------------
-  void fetchPromoBanner() async {
+  Future<void> fetchPromoBanner() async {
     try {
       isLoading(true);
-      final response = await ApiServices.get('products');
+      final response = await _makeAPIcalls(() => ApiServices.get('products'));
 
       List allProducts = response['products'];
       //showing the first 10 products thumbnail as promos
@@ -50,7 +71,9 @@ class HomeScreen_ViewController extends GetxController {
           .toList()
           .cast<Map<String, dynamic>>();
     } catch (e) {
-      Get.snackbar('Error', 'Could not load promotional item');
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Could not load promotional item');
+      }
     } finally {
       isLoading(false);
     }
@@ -64,16 +87,19 @@ class HomeScreen_ViewController extends GetxController {
   var products = <Map<String, dynamic>>[].obs;
 
   // function for fetching the API for the exclusive offers
-  void fetchExclusiveProducts() async {
+  Future<void> fetchExclusiveProducts() async {
     try {
       isLoading.value = true;
-      final response = await ApiServices.get('products/category/groceries');
+      final response = await _makeAPIcalls(
+          () => ApiServices.get('products/category/groceries'));
       products.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('fruits')));
 //for adding favourite
       addProductUnique(products);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
+      }
     } finally {
       isLoading.value = false;
     }
@@ -84,16 +110,19 @@ class HomeScreen_ViewController extends GetxController {
   var products2 = <Map<String, dynamic>>[].obs;
 
   // function for fetching the API for the exclusive offers
-  void fetchBestSellingProducts() async {
+  Future<void> fetchBestSellingProducts() async {
     try {
       isLoading.value = true;
-      final response = await ApiServices.get('products/category/groceries');
+      final response = await _makeAPIcalls(
+          () => ApiServices.get('products/category/groceries'));
       products2.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('vegetables')));
 //for adding favourite
       addProductUnique(products2);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Products \n Internet Error');
+      }
     } finally {
       isLoading.value = false;
     }
@@ -103,16 +132,19 @@ class HomeScreen_ViewController extends GetxController {
 
   var Groceries = <Map<String, dynamic>>[].obs;
 
-  void fetchGroceriesProducts() async {
+  Future<void> fetchGroceriesProducts() async {
     try {
       isLoading.value = true;
-      final response = await ApiServices.get('products/category/groceries');
+      final response = await _makeAPIcalls(
+          () => ApiServices.get('products/category/groceries'));
       Groceries.value = List<Map<String, dynamic>>.from(response['products']);
 
 //for adding favourite
       addProductUnique(Groceries);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      }
     } finally {
       isLoading.value = false;
     }
@@ -122,17 +154,20 @@ class HomeScreen_ViewController extends GetxController {
 
   var Meat = <Map<String, dynamic>>[].obs;
 
-  void fetchMeatProducts() async {
+  Future<void> fetchMeatProducts() async {
     try {
       isLoading.value = true;
-      final response = await ApiServices.get('products/category/groceries');
+      final response = await _makeAPIcalls(
+          () => ApiServices.get('products/category/groceries'));
       Meat.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('meat')));
 
       //for adding favourite
       addProductUnique(Meat);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      }
     } finally {
       isLoading.value = false;
     }

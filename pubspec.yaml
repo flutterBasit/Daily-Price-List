@@ -53,6 +53,7 @@ dependencies:
   google_sign_in: ^7.1.1
   flutter_facebook_auth: ^7.1.2
   shared_preferences: ^2.5.3
+  skeletonizer: ^2.1.0+1
 
 dependency_overrides:
   geolocator_android: 4.6.1 
@@ -83,6 +84,7 @@ flutter:
   assets:
     - assets/images/Icon.png
     - assets/images/
+    - assets/images/onBoardingImage.png
     - assets/fonts/
     - assets/icons/
 

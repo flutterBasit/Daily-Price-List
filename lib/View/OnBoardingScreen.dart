@@ -11,7 +11,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.sizeOf(context).height;
+    // final double height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       body: Stack(
         children: [
@@ -20,7 +20,7 @@ class OnBoardingScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/onBoarding.png'),
+                      image: AssetImage('assets/images/onBoardingImage.png'),
                       fit: BoxFit.cover)),
             ),
           ),

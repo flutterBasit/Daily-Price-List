@@ -59,8 +59,18 @@ class Shopscreen2 extends StatelessWidget {
                             height: 230.h,
                             width: 329.w,
                             fit: BoxFit.fill,
-                            errorBuilder: (context, error, stackTrace) =>
-                                Icon(Icons.broken_image, size: 100),
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                height: 90.h,
+                                width: 100.w,
+                                //  color: Colors.grey,
+                                child: Icon(
+                                  Icons.broken_image_outlined,
+                                  color: Colors.grey[400],
+                                  size: 100.w,
+                                ),
+                              );
+                            },
                           )),
                         ],
                       ),
@@ -72,37 +82,6 @@ class Shopscreen2 extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Row(
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          //   children: [
-                          //     Text(
-                          //       product['title'],
-                          //       style: StringsConstants.ShopScreen2title,
-                          //     ),
-                          //     SizedBox(
-                          //       width: MediaQuery.of(context).size.width,
-                          //     ),
-                          //     InkWell(onTap: () {
-                          //       controller.toggleFavourite(product['id']);
-                          //     }, child: Obx(() {
-                          //       return Icon(
-                          //         controller.isFavourite(product['id'])
-                          //             ? Icons.favorite
-                          //             : Icons.favorite_border,
-                          //         color: controller.isFavourite(product['id'])
-                          //             ? Colors.red
-                          //             : Colors.grey,
-                          //       );
-                          //     })),
-                          //     InkWell(
-                          //         onTap: () {},
-                          //         child: Icon(
-                          //           Icons.ios_share,
-                          //           color: ColorsConstants.blackColor,
-                          //         )),
-                          //   ],
-                          // ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [

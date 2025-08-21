@@ -205,6 +205,18 @@ class Shopscreen extends StatelessWidget {
                 height: 90.h,
                 width: 100.w,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    height: 90.h,
+                    width: 100.w,
+                    // color: Colors.grey,
+                    child: Icon(
+                      Icons.error_outline,
+                      color: Colors.grey[400],
+                      size: 24.w,
+                    ),
+                  );
+                },
               ),
             ),
             SizedBox(height: 8.h),
@@ -293,6 +305,18 @@ class Shopscreen extends StatelessWidget {
                                   product['thumbnail'],
                                   height: double.infinity,
                                   fit: BoxFit.fill,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      height: 90.h,
+                                      width: 100.w,
+                                      //   color: Colors.grey,
+                                      child: Icon(
+                                        Icons.error_outline,
+                                        color: Colors.grey[400],
+                                        size: 24.w,
+                                      ),
+                                    );
+                                  },
                                 ),
                               )),
                           Expanded(
@@ -475,6 +499,18 @@ class Shopscreen extends StatelessWidget {
                             height: 90.h,
                             width: 100.w,
                             fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                height: 90.h,
+                                width: 100.w,
+                                //  color: Colors.grey,
+                                child: Icon(
+                                  Icons.error_outline,
+                                  color: Colors.grey[400],
+                                  size: 24.w,
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Text(product['title'],
@@ -634,6 +670,18 @@ class Shopscreen extends StatelessWidget {
                             height: 90.h,
                             width: 100.w,
                             fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                height: 90.h,
+                                width: 100.w,
+                                //  color: Colors.grey,
+                                child: Icon(
+                                  Icons.error_outline,
+                                  color: Colors.grey[400],
+                                  size: 24.w,
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Text(product['title'],
@@ -867,6 +915,18 @@ class Shopscreen extends StatelessWidget {
                             height: 90.h,
                             width: 100.w,
                             fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                height: 90.h,
+                                width: 100.w,
+                                //  color: Colors.grey,
+                                child: Icon(
+                                  Icons.error_outline,
+                                  color: Colors.grey[400],
+                                  size: 24.w,
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Text(product['title'],

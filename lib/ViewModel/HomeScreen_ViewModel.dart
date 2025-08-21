@@ -25,18 +25,28 @@ class HomeScreen_ViewController extends GetxController {
 
   var banners = <Map<String, dynamic>>[].obs;
   //for loading
-  var isLoading = false.obs;
+  var isLoading = true.obs;
 //for Checking Internet error
   var hasInternetError = false.obs;
   @override
   void onInit() {
-    //put the banner function
-    fetchPromoBanner();
-    fetchExclusiveProducts();
-    fetchBestSellingProducts();
-    fetchGroceriesProducts();
-    fetchMeatProducts();
     super.onInit();
+    fetchAll();
+  }
+
+  //function for the init
+  Future<void> fetchAll() async {
+    try {
+      await Future.wait([
+        fetchPromoBanner(),
+        fetchExclusiveProducts(),
+        fetchBestSellingProducts(),
+        fetchGroceriesProducts(),
+        fetchMeatProducts()
+      ]);
+    } finally {
+      isLoading.value = false;
+    }
   }
 
 //function for the base API calls for tracking the Internet issue

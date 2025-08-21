@@ -16,6 +16,8 @@ class Authviewmodel extends GetxController {
   //phone verfication stroage
   String? _verfication;
   int? _resendToken;
+  //for laoding
+  final isLoading = false.obs;
 
   @override
   void onInit() {
@@ -65,6 +67,7 @@ class Authviewmodel extends GetxController {
   //SIGNIN
   Future<void> signInWithEmail(String email, String password) async {
     try {
+      isLoading.value = true;
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       await handlePostLoginNavigation();
       //on Succes the authStatechaneges will occur and the trigger will be to the HomeScreen
@@ -72,6 +75,8 @@ class Authviewmodel extends GetxController {
       Get.snackbar('SignIn Error!', e.message ?? e.code);
     } catch (e) {
       Get.snackbar('SignIn Error!', e.toString());
+    } finally {
+      isLoading.value = false;
     }
   }
 

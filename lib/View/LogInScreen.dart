@@ -125,14 +125,9 @@ class _LoginscreenState extends State<Loginscreen> {
                       title: 'Log in',
                       titleStyle: StringsConstants.signInButtonStyle,
                       color: ColorsConstants.greenColor,
+                      isLaoding: _auth.isLoading.value,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          // Get.snackbar(
-                          //   'Success',
-                          //   'Logged In ✅',
-                          //   backgroundColor: ColorsConstants.greenColor,
-                          //   colorText: Colors.white,
-                          // );
                           _auth.signInWithEmail(
                               _EmailController.text.toString(),
                               _PasswordController.text.toString());

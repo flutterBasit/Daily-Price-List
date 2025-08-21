@@ -54,21 +54,6 @@ class Accountscreen extends StatelessWidget {
               assetImagePath: "assets/images/logout.png",
               color: ColorsConstants.whiteColor5,
               onTap: () async {
-                // Show loading dialog
-                // Get.dialog(
-                //   Center(child: CircularProgressIndicator()),
-                //   barrierDismissible: false,
-                // );
-
-                // try {
-                //   await _auth.signOut();
-                //   // signOut() should handle navigation internally
-                // } catch (e) {
-                //   // Close loading dialog on error
-                //   if (Get.isDialogOpen!) Get.back();
-                //   Get.snackbar(
-                //       'Logout Failed', 'Could not sign out: ${e.toString()}');
-                // }
                 _showDilogueforLogOut(context, _auth);
               },
             )

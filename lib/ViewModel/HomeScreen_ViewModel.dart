@@ -84,10 +84,23 @@ class HomeScreen_ViewController extends GetxController {
     //if isSearching is true
     isSearching.value = true;
     //combining all products list for searching
-    final allProduicts = [...products, ...products2, ...Groceries, ...Meat];
+    // final allProduicts = [...products, ...products2, ...Groceries, ...Meat];
+
+    //making the uniqueProductMap based on the id of the item so that the item is not duplicated
+    final uniqueProductMap = <int, Map<String, dynamic>>{};
+
+    for (var productList in [products, products2, Groceries, Meat]) {
+      for (var product in productList) {
+        final productId = product['id'] as int;
+        uniqueProductMap[productId] = product;
+      }
+    }
+
+    //Get valuse from the map
+    final allUniqueProducts = uniqueProductMap.values.toList();
 
     //Search filter products based on search query
-    searchResult.value = allProduicts.where((product) {
+    searchResult.value = allUniqueProducts.where((product) {
       final title = product['title']?.toString().toLowerCase() ?? '';
       final tags = product['tags']?.toString().toLowerCase() ?? '';
       final description =

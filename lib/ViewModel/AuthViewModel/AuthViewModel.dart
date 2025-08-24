@@ -71,6 +71,7 @@ class Authviewmodel extends GetxController {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       await handlePostLoginNavigation();
       //on Succes the authStatechaneges will occur and the trigger will be to the HomeScreen
+      Get.snackbar('LogIn Success!', 'Please Select Locaton');
     } on FirebaseAuthException catch (e) {
       Get.snackbar('SignIn Error!', e.message ?? e.code);
     } catch (e) {
@@ -155,39 +156,6 @@ class Authviewmodel extends GetxController {
 
   //----------------------------SIGN OUT ----------------------
 
-  // Future<void> signOut() async {
-  //   try {
-  //     final GoogleSignIn googleSignIn = GoogleSignIn.instance;
-  //     await _auth.signOut();
-  //     await googleSignIn.signOut();
-  //     await FacebookAuth.instance.logOut();
-  //     Get.snackbar('SignOut Success', 'Successfully SignOut');
-  //     Get.offAllNamed(Routenames.signinScreen);
-  //   } catch (e) {
-  //     Get.snackbar("SignOut Error!", e.toString());
-  //   }
-  // }
-
-  // Future<void> signOut() async {
-  //   try {
-  //     // Sign out from all providers
-  //     final GoogleSignIn googleSignIn = GoogleSignIn.instance;
-  //     await _auth.signOut();
-  //     await googleSignIn.signOut();
-  //     await FacebookAuth.instance.logOut();
-
-  //     // Clear location selection
-  //     final prefs = await SharedPreferences.getInstance();
-  //     await prefs.remove('locationSelected');
-
-  //     // Navigate after all operations complete
-  //     Get.offAllNamed(Routenames.signinScreen);
-  //     Get.snackbar('Success', 'Signed out successfully');
-  //   } catch (e) {
-  //     Get.snackbar("SignOut Error!", e.toString());
-  //   }
-  // }
-
   Future<void> signOut() async {
     try {
       //signout from firebase
@@ -198,11 +166,11 @@ class Authviewmodel extends GetxController {
       } catch (e) {
         Get.snackbar("SignOut Error!", e.toString());
       }
-      try {
-        await FacebookAuth.instance.logOut();
-      } catch (e) {
-        Get.snackbar("SignOut Error!", e.toString());
-      }
+      // try {
+      //   await FacebookAuth.instance.logOut();
+      // } catch (e) {
+      //   Get.snackbar("SignOut Error!", e.toString());
+      // }
 
       // // Clear location selection if needed
       // final prefs = await SharedPreferences.getInstance();

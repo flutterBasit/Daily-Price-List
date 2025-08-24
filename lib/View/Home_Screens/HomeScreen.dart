@@ -23,11 +23,15 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Obx(() {
+    return SafeArea(
+      child: Scaffold(body: Obx(() {
         return _screens[controller.selectedIndex.value];
-      }),
-      bottomNavigationBar: Bottomnavbar(),
+      }), bottomNavigationBar: Obx(() {
+        if (controller.hasInternetError.value) {
+          return const SizedBox.shrink();
+        }
+        return Bottomnavbar();
+      })),
     );
   }
 }

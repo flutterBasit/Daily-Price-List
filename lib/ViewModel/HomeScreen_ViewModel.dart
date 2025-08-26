@@ -1,3 +1,4 @@
+import 'package:daily_price_list/Model/categoeyImages.dart';
 import 'package:daily_price_list/Resources/Utilities/NetworkUtils.dart';
 
 import 'package:daily_price_list/Services/Api_services.dart';
@@ -67,7 +68,7 @@ class HomeScreen_ViewController extends GetxController {
     }
   }
 
-  //Seaech Functionality --------------------------------
+  //Seaech Functionality -------------------------------- In ShopScreen-------------
   var searhQuery = ''.obs;
   var isSearching = false.obs;
   var searchResult = <dynamic>[].obs;
@@ -96,7 +97,7 @@ class HomeScreen_ViewController extends GetxController {
       }
     }
 
-    //Get valuse from the map
+    //Get values from the map
     final allUniqueProducts = uniqueProductMap.values.toList();
 
     //Search filter products based on search query
@@ -450,4 +451,103 @@ Add your notes here:
 
   double get totalCartPrice => cartProductDetails.fold(
       0.0, (sum, product) => sum + product['total price']);
+
+  //---------------------EXPLORE SCREEN---------------------------------
+
+  var category = <CategoryModel>[].obs;
+
+  //function for getting the category names
+
+  void fetchCategories() async {
+    try {
+      isLoading.value = false;
+      final response =
+          await _makeAPIcalls(() => ApiServices.get('products/categories'));
+      category.value = CategoryModel.fromList(response);
+    } catch (e) {
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  var product = [].obs;
+
+  //getting the product by category
+  Future<void> fetchProductsByCategory(String category) async {
+    try {
+      isLoading.value = true;
+
+      final response = await _makeAPIcalls(
+          () => ApiServices.get('products/category/$category'));
+
+      product.value = response['products'];
+    } catch (e) {
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //making the Search functionality
+  var searchQuery2 = ''.obs;
+  var searchResult2 = [].obs;
+
+  Future<void> search(String query) async {
+    searchQuery2.value = query.trim();
+
+    if (searchQuery2.value.isEmpty) {
+      searchResult2.clear();
+      return;
+    }
+
+    try {
+      isLoading.value = true;
+      searchResult2.clear();
+
+      //search in categories
+
+      final categoryResults = category
+          .where((cat) =>
+              cat.name.toLowerCase().contains(searchQuery2.value.toLowerCase()))
+          .toList();
+
+      //if categories found add them in results
+
+      for (var cat in categoryResults) {
+        searchResult2.add({'type': 'category', 'data': cat, 'name': cat.name});
+
+        //search in products
+        final productResult = product
+            .where((prod) => prod['name']
+                .toString()
+                .toLowerCase()
+                .contains(searchQuery2.value.toLowerCase()))
+            .toList();
+
+        // if product found add them in results
+
+        for (var prod in productResult) {
+          searchResult2
+              .add({'type': 'product', 'data': prod, 'name': prod['name']});
+        }
+      }
+    } catch (e) {
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //clearing the seach
+  void clearSearch2() {
+    searchQuery2.value = '';
+    searchResult2.clear();
+  }
 }

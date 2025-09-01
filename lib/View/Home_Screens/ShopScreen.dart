@@ -137,8 +137,8 @@ class Shopscreen extends StatelessWidget {
                           height: 15.h,
                         ),
                         if (controller2.isSearching.value)
-                          _buildSearchResults(),
-                        if (!controller2.isSearching.value)
+                          _buildSearchWidget()
+                        else
                           _buildNormalContent()
                       ],
                     ),
@@ -151,7 +151,7 @@ class Shopscreen extends StatelessWidget {
   }
 //---------------if searchResult is there -------------------------------
 
-  Widget _buildSearchResults() {
+  Widget _buildSearchWidget() {
     return Column(
       children: [
         Padding(

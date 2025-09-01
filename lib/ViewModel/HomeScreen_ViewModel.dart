@@ -33,6 +33,7 @@ class HomeScreen_ViewController extends GetxController {
   void onInit() {
     super.onInit();
     fetchAll();
+    fetchCategories();
   }
 
   //function for the init
@@ -460,10 +461,12 @@ Add your notes here:
 
   void fetchCategories() async {
     try {
-      isLoading.value = false;
+      isLoading.value = true;
       final response =
           await _makeAPIcalls(() => ApiServices.get('products/categories'));
+      // print('Categories API response: $response');
       category.value = CategoryModel.fromList(response);
+      // print('Categories parsed: ${category.value}');
     } catch (e) {
       if (!hasInternetError.value) {
         Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');

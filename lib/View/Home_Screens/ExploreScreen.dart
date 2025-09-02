@@ -24,31 +24,30 @@ class Explorescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Center(
-              child: Text(
-                "Find Products",
-                style: StringsConstants.favouriteScreenTitle,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Center(
+                child: Text(
+                  "Find Products",
+                  style: StringsConstants.favouriteScreenTitle,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: Obx(() {
-              if (controller.hasInternetError.value) {
-                return Internetissue(onRefesh: () {
-                  controller.fetchCategories();
-                });
-              }
-              return Skeletonizer(
-                  enabled: controller.isLoading.value,
-                  child: SingleChildScrollView(
+            Expanded(
+              child: Obx(() {
+                if (controller.hasInternetError.value) {
+                  return Internetissue(onRefesh: () {
+                    controller.fetchCategories();
+                  });
+                }
+                return Skeletonizer(
+                    enabled: controller.isLoading.value,
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10),
@@ -59,7 +58,7 @@ class Explorescreen extends StatelessWidget {
                                 hintText: 'Search Store',
                                 hintStyle: StringsConstants.shopSearchTextField,
                                 prefixIcon: Icon(Icons.search),
-                                suffix: controller.searchQuery2.isNotEmpty
+                                suffixIcon: controller.searchQuery2.isNotEmpty
                                     ? Icon(Icons.clear)
                                     : null,
                                 contentPadding:
@@ -78,47 +77,60 @@ class Explorescreen extends StatelessWidget {
                         SizedBox(
                           height: 15,
                         ),
-                        if (controller.isSearching.value)
-                          _buildSearchWidget()
-                        else
-                          _buildNormalContent()
+                        // if (controller.isSearching.value)
+                        //   _buildSearchWidget()
+                        // else
+                        //   _buildNormalContent()
+                        controller.isSearching.value
+                            ? _buildSearchWidget()
+                            : _buildNormalContent(),
                       ],
-                    ),
-                  ));
-            }),
-          )
-        ],
+                    ));
+              }),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildSearchWidget() {
-    return Center();
+    return Center(
+      child: Text('Search results will appear here'),
+    );
   }
 
 //-----------if searchResult is empty -------------------------------------Categories will be displayed
 
   Widget _buildNormalContent() {
     return GridView.builder(
-      shrinkWrap: true,
-      // physics: NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16.0,
-          mainAxisSpacing: 16.0,
-          childAspectRatio: 1.2),
+        crossAxisCount: 2,
+        //  crossAxisSpacing: 6.0,
+        //  mainAxisSpacing: 10.0,
+        //  childAspectRatio: 1.2),
+      ),
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       itemCount: controller.category.length,
       itemBuilder: (context, index) {
         final cat = controller.category[index];
         final color = containerColor[index % containerColor.length];
 
-        return InkWell(
-            onTap: () {
-              controller.fetchProductsByCategory(cat.name);
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        // final categoryImage = controller.categoryImages[cat.name] ??
+        //     'https://via.placeholder.com/150';
+
+        final categoryImage = controller.getCategoryImage(cat.name);
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          child: InkWell(
+              onTap: () {
+                controller.fetchProductsByCategory(cat.name);
+              },
               child: Container(
+                height: 400,
+                width: 100,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: color, width: 2),
@@ -126,25 +138,32 @@ class Explorescreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                        child: Padding(
-                      padding: EdgeInsets.all(12),
+                    ClipRRect(
+                      borderRadius: BorderRadiusGeometry.circular(16),
                       child: Image.network(
-                        cat.image,
+                        categoryImage!,
                         fit: BoxFit.contain,
+                        height: 120,
+                        width: 80,
+                        errorBuilder: (context, index, stackTrace) {
+                          return Icon(Icons.error);
+                        },
                       ),
-                    )),
+                    ),
                     SizedBox(
                       height: 8,
                     ),
                     Text(
                       cat.name,
                       style: StringsConstants.shopExclusiveTitle,
+                    ),
+                    SizedBox(
+                      height: 10,
                     )
                   ],
                 ),
-              ),
-            ));
+              )),
+        );
       },
     );
   }

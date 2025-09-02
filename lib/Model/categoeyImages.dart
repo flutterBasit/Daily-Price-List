@@ -33,43 +33,50 @@ class CategoryModel {
 
   static List<CategoryModel> fromList(List categories) {
     final Map<String, String> categoryImages = {
-      "smartphones": "https://cdn-icons-png.flaticon.com/512/104/104985.png",
-      "laptops": "https://cdn-icons-png.flaticon.com/512/679/679720.png",
-      "fragrances": "https://cdn-icons-png.flaticon.com/512/1053/1053244.png",
-      "skincare": "https://cdn-icons-png.flaticon.com/512/2927/2927347.png",
-      "groceries": "https://cdn-icons-png.flaticon.com/512/1046/1046784.png",
+      "smartphones":
+          "https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg",
+      "laptops":
+          "https://images.pexels.com/photos/812264/pexels-photo-812264.jpeg",
+      "fragrances":
+          "https://images.pexels.com/photos/1040424/pexels-photo-1040424.jpeg",
+      "skincare":
+          "https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg",
+      "groceries":
+          "https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg",
       "home-decoration":
-          "https://cdn-icons-png.flaticon.com/512/2965/2965567.png",
+          "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
       "beauty":
-          "https://cdn-icons-png.flaticon.com/512/2945/2945448.png", // Added
+          "https://images.pexels.com/photos/3373736/pexels-photo-3373736.jpeg",
       "furniture":
-          "https://cdn-icons-png.flaticon.com/512/3320/3320055.png", // Added
+          "https://images.pexels.com/photos/1866149/pexels-photo-1866149.jpeg",
       "kitchen-accessories":
-          "https://cdn-icons-png.flaticon.com/512/284/284691.png", // Added
+          "https://images.pexels.com/photos/205926/pexels-photo-205926.jpeg",
       "mens-shirts":
-          "https://cdn-icons-png.flaticon.com/512/206/206853.png", // Added
+          "https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg",
       "mens-shoes":
-          "https://cdn-icons-png.flaticon.com/512/2589/2589900.png", // Added
+          "https://images.pexels.com/photos/2529157/pexels-photo-2529157.jpeg",
       "mens-watches":
-          "https://cdn-icons-png.flaticon.com/512/206/206811.png", // Added
+          "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg",
       "mobile-accessories":
-          "https://cdn-icons-png.flaticon.com/512/2973/2973316.png", // Added
+          "https://images.pexels.com/photos/1275929/pexels-photo-1275929.jpeg",
       "motorcycle":
-          "https://cdn-icons-png.flaticon.com/512/1042/1042339.png", // Added
+          "https://images.pexels.com/photos/2116475/pexels-photo-2116475.jpeg",
       "sunglasses":
-          "https://cdn-icons-png.flaticon.com/512/1170/1170678.png", // Added
+          "https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg",
       "vehicle":
-          "https://cdn-icons-png.flaticon.com/512/744/744465.png", // Added
+          "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg",
       "womens-bags":
-          "https://cdn-icons-png.flaticon.com/512/1037/1037856.png", // Added
+          "https://images.pexels.com/photos/8532616/pexels-photo-8532616.jpeg",
       "womens-dresses":
-          "https://cdn-icons-png.flaticon.com/512/206/206869.png", // Added
+          "https://images.pexels.com/photos/985635/pexels-photo-985635.jpeg",
       "womens-jewellery":
-          "https://cdn-icons-png.flaticon.com/512/2933/2933245.png", // Added
+          "https://images.pexels.com/photos/965981/pexels-photo-965981.jpeg",
       "womens-shoes":
-          "https://cdn-icons-png.flaticon.com/512/2589/2589903.png", // Added
+          "https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg",
       "womens-watches":
-          "https://cdn-icons-png.flaticon.com/512/206/206811.png", // Added
+          "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg",
+      "default":
+          "https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg"
     };
 
     return categories.map((c) {

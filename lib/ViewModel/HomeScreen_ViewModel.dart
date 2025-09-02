@@ -456,6 +456,8 @@ Add your notes here:
   //---------------------EXPLORE SCREEN---------------------------------
 
   var category = <CategoryModel>[].obs;
+//storing the names of the product through categories
+  RxMap<String, String> categoryImages = <String, String>{}.obs;
 
   //function for getting the category names
 
@@ -467,6 +469,9 @@ Add your notes here:
       // print('Categories API response: $response');
       category.value = CategoryModel.fromList(response);
       // print('Categories parsed: ${category.value}');
+      //fetch product name for each category
+      await Future.wait(
+          category.value.map((cat) => fetchCategoryImage(cat.name)));
     } catch (e) {
       if (!hasInternetError.value) {
         Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
@@ -474,6 +479,57 @@ Add your notes here:
     } finally {
       isLoading.value = false;
     }
+  }
+
+  //fetch the first product image for each category
+  Future<void> fetchCategoryImage(String categoryName) async {
+    try {
+      final response = await _makeAPIcalls(
+          () => ApiServices.get('products/category/$categoryName?limit=1'));
+
+      if (response['products'] != null && response['products'].isNotEmpty) {
+        final firstProduct = response['products'][0];
+        if (firstProduct['images'] != null &&
+            firstProduct['images'].isNotEmpty) {
+          categoryImages[categoryName] = firstProduct['images'][0];
+        }
+      }
+    } catch (e) {
+      print('Error fetching image for $categoryName: $e');
+      categoryImages[categoryName] = 'https://via.placeholder.com/150';
+    }
+  }
+
+  String getCategoryImage(String categoryName) {
+    // Check if we have the image in our map
+    if (categoryImages.containsKey(categoryName)) {
+      return categoryImages[categoryName]!;
+    }
+
+    // If not, try to find it in existing products as fallback
+    try {
+      final allProductsLists = [products, products2, Groceries, Meat, product];
+
+      for (var productList in allProductsLists) {
+        if (productList.isNotEmpty) {
+          for (var prod in productList) {
+            if (prod != null &&
+                prod['category'] != null &&
+                prod['category'].toString().toLowerCase() ==
+                    categoryName.toLowerCase() &&
+                prod['images'] != null &&
+                prod['images'] is List &&
+                prod['images'].isNotEmpty) {
+              return prod['images'][0];
+            }
+          }
+        }
+      }
+    } catch (e) {
+      print('Error in getCategoryImage: $e');
+    }
+
+    return 'https://via.placeholder.com/150';
   }
 
   var product = [].obs;

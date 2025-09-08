@@ -36,6 +36,13 @@ class HomeScreen_ViewController extends GetxController {
     fetchCategories();
   }
 
+  @override
+  void onClose() {
+    shopTextController.clear();
+    exploreTextController.clear();
+    super.onClose();
+  }
+
   //function for the init
   Future<void> fetchAll() async {
     try {
@@ -44,7 +51,8 @@ class HomeScreen_ViewController extends GetxController {
         fetchExclusiveProducts(),
         fetchBestSellingProducts(),
         fetchGroceriesProducts(),
-        fetchMeatProducts()
+        fetchMeatProducts(),
+        fetchAllProducts()
       ]);
     } finally {
       isLoading.value = false;
@@ -73,6 +81,7 @@ class HomeScreen_ViewController extends GetxController {
   var searhQuery = ''.obs;
   var isSearching = false.obs;
   var searchResult = <dynamic>[].obs;
+  final shopTextController = TextEditingController();
 
   //adding search method
   void searchProduct(String query) {
@@ -89,29 +98,25 @@ class HomeScreen_ViewController extends GetxController {
     // final allProduicts = [...products, ...products2, ...Groceries, ...Meat];
 
     //making the uniqueProductMap based on the id of the item so that the item is not duplicated
-    final uniqueProductMap = <int, Map<String, dynamic>>{};
-
-    for (var productList in [products, products2, Groceries, Meat]) {
-      for (var product in productList) {
-        final productId = product['id'] as int;
-        uniqueProductMap[productId] = product;
-      }
-    }
-
-    //Get values from the map
-    final allUniqueProducts = uniqueProductMap.values.toList();
-
-    //Search filter products based on search query
-    searchResult.value = allUniqueProducts.where((product) {
+    // final uniqueProductMap = <int, Map<String, dynamic>>{};
+    //search through entire API
+    searchResult.value = allproduct2.where((product) {
       final title = product['title']?.toString().toLowerCase() ?? '';
-      final tags = product['tags']?.toString().toLowerCase() ?? '';
-      final description =
-          product['description']?.toString().toLowerCase() ?? '';
-
-      return title.contains(query.toLowerCase()) ||
-          tags.contains(query.toLowerCase()) ||
-          description.contains(query.toLowerCase());
+      return title.contains(query.toLowerCase());
     }).toList();
+
+    //ensure that search results are availabe for cart operations
+    for (var product in searchResult) {
+      ensureProductInAllProduct(product);
+    }
+  }
+
+  //helper function for ensuring the product exists in allProduct
+  void ensureProductInAllProduct(Map<String, dynamic> product) {
+    final productId = product['id'];
+    if (!allProducts.any((p) => p['id'] == productId)) {
+      allProducts.add(Map<String, dynamic>.from(product));
+    }
   }
 
   //clear search
@@ -458,9 +463,27 @@ Add your notes here:
   var category = <CategoryModel>[].obs;
 //storing the names of the product through categories
   RxMap<String, String> categoryImages = <String, String>{}.obs;
+  var isExploreLoading = false.obs;
+  var exploreLoadedOnce = false; // ✅ keeps track
+
+  //making the explorescreen to show the skeletonizer
+  // void triggerExploreTabLoading() {
+  //   isLoading.value = true;
+
+  //   fetchCategories();
+  // }
+  void triggerExploreTabLoading() {
+    if (!exploreLoadedOnce) {
+      // ✅ only first time
+      isExploreLoading.value = true;
+      Future.delayed(const Duration(seconds: 2), () {
+        isExploreLoading.value = false;
+        exploreLoadedOnce = true; // ✅ mark as loaded
+      });
+    }
+  }
 
   //function for getting the category names
-
   void fetchCategories() async {
     try {
       isLoading.value = true;
@@ -496,7 +519,9 @@ Add your notes here:
       }
     } catch (e) {
       print('Error fetching image for $categoryName: $e');
-      categoryImages[categoryName] = 'https://via.placeholder.com/150';
+      // categoryImages[categoryName] = 'https://via.placeholder.com/150';
+      categoryImages[categoryName] =
+          'https://placehold.co/150x150?text=No+Image';
     }
   }
 
@@ -529,70 +554,26 @@ Add your notes here:
       print('Error in getCategoryImage: $e');
     }
 
-    return 'https://via.placeholder.com/150';
+    // return 'https://via.placeholder.com/150';
+    return 'https://placehold.co/150x150?text=No+Image';
   }
 
   var product = [].obs;
-
+  var allproduct2 = [].obs;
+  var productByCategory = <dynamic>[].obs;
   //getting the product by category
   Future<void> fetchProductsByCategory(String category) async {
     try {
       isLoading.value = true;
-
+      final normalizeCateogry = category.toLowerCase().trim();
       final response = await _makeAPIcalls(
           () => ApiServices.get('products/category/$category'));
 
-      product.value = response['products'];
-    } catch (e) {
-      if (!hasInternetError.value) {
-        Get.snackbar('Error', 'Failed to Fetch Groceries \n Internet Error');
-      }
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  //making the Search functionality
-  var searchQuery2 = ''.obs;
-  var searchResult2 = [].obs;
-
-  Future<void> search(String query) async {
-    searchQuery2.value = query.trim();
-
-    if (searchQuery2.value.isEmpty) {
-      searchResult2.clear();
-      return;
-    }
-
-    try {
-      isLoading.value = true;
-      searchResult2.clear();
-
-      //search in categories
-
-      final categoryResults = category
-          .where((cat) =>
-              cat.name.toLowerCase().contains(searchQuery2.value.toLowerCase()))
-          .toList();
-
-      //if categories found add them in results
-
-      for (var cat in categoryResults) {
-        searchResult2.add({'type': 'category', 'data': cat, 'name': cat.name});
-
-        //search in products
-        final productResult = product
-            .where((prod) => prod['name']
-                .toString()
-                .toLowerCase()
-                .contains(searchQuery2.value.toLowerCase()))
-            .toList();
-
-        // if product found add them in results
-
-        for (var prod in productResult) {
-          searchResult2
-              .add({'type': 'product', 'data': prod, 'name': prod['name']});
+      productByCategory.value = response['products'];
+      // add them to global list (avoid duplicates)
+      for (var p in response['products']) {
+        if (!allproduct2.any((ap) => ap['id'] == p['id'])) {
+          allproduct2.add(p);
         }
       }
     } catch (e) {
@@ -604,9 +585,76 @@ Add your notes here:
     }
   }
 
+//  var allproduct2 = [].obs;
+  Future<void> fetchAllProducts() async {
+    try {
+      isLoading.value = true;
+
+      final response = await _makeAPIcalls(() => ApiServices.get('products'));
+      allproduct2.value = response['products'] ?? [];
+
+      // Ensure all fetched products are in allProducts for cart operations
+      for (var product in allproduct2) {
+        ensureProductInAllProduct(product);
+      }
+
+      print("DEBUG: Loaded all products = ${allproduct2.length}");
+    } catch (e) {
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Fetch All Products \n Internet Error');
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  //making the Search functionality----for the Explore screen
+  var searchQuery2 = ''.obs;
+  var searchResult2 = [].obs;
+  final exploreTextController = TextEditingController();
+  var isSearching2 = false.obs;
+  Future<void> search(String query) async {
+    searchQuery2.value = query.trim();
+
+    if (searchQuery2.value.isEmpty) {
+      isSearching2.value = false;
+      searchResult2.clear();
+      return;
+    }
+
+    try {
+      isLoading.value = true;
+      isSearching2.value = true;
+      searchResult2.clear();
+
+      // Search only in categories - ONLY BY CATEGORY NAME
+      final categoryResults = category
+          .where((cat) =>
+              cat.name.toLowerCase().contains(searchQuery2.value.toLowerCase()))
+          .toList();
+
+      // Format results for display with proper structure
+      searchResult2.value = categoryResults
+          .map((cat) => {
+                'type': 'category',
+                'data': cat,
+                'name': cat.name,
+                'image': getCategoryImage(cat.name)
+              })
+          .toList();
+    } catch (e) {
+      if (!hasInternetError.value) {
+        Get.snackbar('Error', 'Failed to Search Categories \n Internet Error');
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   //clearing the seach
   void clearSearch2() {
     searchQuery2.value = '';
+    isSearching.value = false;
     searchResult2.clear();
   }
 }

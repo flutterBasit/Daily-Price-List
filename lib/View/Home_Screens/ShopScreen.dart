@@ -107,16 +107,19 @@ class Shopscreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: TextField(
-                            controller: TextEditingController(
-                                text: controller2.searhQuery.value),
+                            // controller: TextEditingController(
+                            //     text: controller2.searhQuery.value),
+                            controller: controller2.shopTextController,
                             decoration: InputDecoration(
                               hintText: 'Search Store',
                               hintStyle: StringsConstants.shopSearchTextField,
                               prefixIcon: Icon(Icons.search),
                               suffixIcon: controller2.searhQuery.isNotEmpty
                                   ? IconButton(
-                                      onPressed: () =>
-                                          controller2.clearSearch(),
+                                      onPressed: () {
+                                        controller2.shopTextController.clear();
+                                        controller2.clearSearch();
+                                      },
                                       icon: Icon(Icons.clear))
                                   : null,
                               contentPadding:

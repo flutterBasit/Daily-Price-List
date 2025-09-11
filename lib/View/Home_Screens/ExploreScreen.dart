@@ -201,7 +201,7 @@ class Explorescreen extends StatelessWidget {
       return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.75,
+          childAspectRatio: 0.88,
           mainAxisSpacing: 10.0,
           crossAxisSpacing: 10.0,
         ),

@@ -237,94 +237,97 @@ class Cartscreen extends StatelessWidget {
                                   fit: BoxFit.fill,
                                 ),
                                 //----------------------making column to show the title and the tag + increment decrement
-                                Column(
-                                  //   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      product['title'],
-                                      style:
-                                          StringsConstants.shopExclusiveTitle,
-                                    ),
-                                    Text(
-                                      product['tags'].join(', '),
-                                      style: StringsConstants
-                                          .shopExclusivesubtitle,
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          height: 46.h,
-                                          width: 46.w,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(17.r),
-                                              border: Border.all(
-                                                  width: 1.5,
+                                Expanded(
+                                  child: Column(
+                                    //   mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        product['title'],
+                                        style:
+                                            StringsConstants.shopExclusiveTitle,
+                                      ),
+                                      Text(
+                                        product['tags'].join(', '),
+                                        style: StringsConstants
+                                            .shopExclusivesubtitle,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: 46.h,
+                                            width: 46.w,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(17.r),
+                                                border: Border.all(
+                                                    width: 1.5,
+                                                    color: ColorsConstants
+                                                        .whiteColor4)),
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  controller.decreaseQuantity(
+                                                      product['id']);
+                                                },
+                                                icon: Icon(Icons.remove)),
+                                          ),
+                                          SizedBox(
+                                            width: 15.w,
+                                          ),
+                                          // Obx(() {
+                                          //   return Center(
+                                          //       child: Text(
+                                          //     controller.count.value.toString(),
+                                          //     style: StringsConstants
+                                          //         .shopScreen2counter,
+                                          //   ));
+                                          // }),
+                                          Obx(() {
+                                            int qty = controller.myCartProduct[
+                                                    product['id']] ??
+                                                1;
+                                            return Center(
+                                                child: Text(
+                                              qty.toString(),
+                                              style: StringsConstants
+                                                  .shopScreen2counter,
+                                            ));
+                                          }),
+                                          SizedBox(
+                                            width: 15.w,
+                                          ),
+                                          Container(
+                                            height: 46.h,
+                                            width: 46.w,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(17.r),
+                                                border: Border.all(
+                                                    width: 1.5,
+                                                    color: ColorsConstants
+                                                        .whiteColor4)),
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  controller.increaseQuantity(
+                                                      product['id']);
+                                                },
+                                                icon: Icon(
+                                                  Icons.add,
                                                   color: ColorsConstants
-                                                      .whiteColor4)),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                controller.decreaseQuantity(
-                                                    product['id']);
-                                              },
-                                              icon: Icon(Icons.remove)),
-                                        ),
-                                        SizedBox(
-                                          width: 15.w,
-                                        ),
-                                        // Obx(() {
-                                        //   return Center(
-                                        //       child: Text(
-                                        //     controller.count.value.toString(),
-                                        //     style: StringsConstants
-                                        //         .shopScreen2counter,
-                                        //   ));
-                                        // }),
-                                        Obx(() {
-                                          int qty = controller.myCartProduct[
-                                                  product['id']] ??
-                                              1;
-                                          return Center(
-                                              child: Text(
-                                            qty.toString(),
-                                            style: StringsConstants
-                                                .shopScreen2counter,
-                                          ));
-                                        }),
-                                        SizedBox(
-                                          width: 15.w,
-                                        ),
-                                        Container(
-                                          height: 46.h,
-                                          width: 46.w,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(17.r),
-                                              border: Border.all(
-                                                  width: 1.5,
-                                                  color: ColorsConstants
-                                                      .whiteColor4)),
-                                          child: IconButton(
-                                              onPressed: () {
-                                                controller.increaseQuantity(
-                                                    product['id']);
-                                              },
-                                              icon: Icon(
-                                                Icons.add,
-                                                color:
-                                                    ColorsConstants.greenColor,
-                                              )),
-                                        ),
-                                        SizedBox(
-                                          width: 50.w,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                                      .greenColor,
+                                                )),
+                                          ),
+                                          SizedBox(
+                                            width: 50.w,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 //---------------------- Column for the remove button and the price tag
                                 Column(

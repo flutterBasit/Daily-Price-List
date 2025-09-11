@@ -163,7 +163,8 @@ class HomeScreen_ViewController extends GetxController {
           () => ApiServices.get('products/category/groceries'));
       products.value = List<Map<String, dynamic>>.from(response['products']
           .where((p) => (p['tags'] as List).contains('fruits')));
-//for adding favourite
+
+      //for adding favourite
       addProductUnique(products);
     } catch (e) {
       if (!hasInternetError.value) {
@@ -370,11 +371,16 @@ Add your notes here:
       .toList();
 //helper for the favourite so that it should not be duplicated
 
+  // void addProductUnique(List<Map<String, dynamic>> newProducts) {
+  //   for (var product in newProducts) {
+  //     if (!allProducts.any((p) => p['id'] == product['id'])) {
+  //       allProducts.add(product);
+  //     }
+  //   }
+  // }
   void addProductUnique(List<Map<String, dynamic>> newProducts) {
     for (var product in newProducts) {
-      if (!allProducts.any((p) => p['id'] == product['id'])) {
-        allProducts.add(product);
-      }
+      ensureProductInAllProduct(product); // ✅ always ensures safe add
     }
   }
 
@@ -390,15 +396,39 @@ Add your notes here:
   var myCartProduct = <int, int>{}.obs;
 
   void addToCart(int productID, {int quantity = 1}) {
-    if (!myCartProduct.containsKey(productID)) {
-      myCartProduct[productID] = quantity;
-      Get.snackbar("Cart", "Product Added to Cart!",
-          icon: Icon(Icons.shopping_cart),
-          snackPosition: SnackPosition.BOTTOM,
-          duration: Duration(seconds: 2));
-    } else {
-      Get.snackbar("Already in Cart", "Item already added to cart");
+    //find in allproducts2
+    final product = allproduct2.firstWhereOrNull((p) => p['id'] == productID);
+    if (product != null) {
+      ensureProductInAllProduct(product);
     }
+    //update cart safetly
+    // if (!myCartProduct.containsKey(productID)) {
+    //   myCartProduct[productID] = myCartProduct[productID]! + quantity;
+    //   Get.snackbar("Cart", "Product Added to Cart!",
+    //       icon: Icon(Icons.shopping_cart),
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       duration: Duration(seconds: 2));
+    // } else {
+    //   Get.snackbar("Already in Cart", "Item already added to cart");
+    //   myCartProduct[productID] = quantity;
+    // }
+    //  final currentQty = myCartProduct[productID] ?? 0;
+    // myCartProduct[productID] = currentQty + quantity;
+    if (myCartProduct.containsKey(productID)) {
+      Get.snackbar(
+        "cart",
+        "Product already in cart!",
+        snackPosition: SnackPosition.TOP,
+      );
+    } else {
+      myCartProduct[productID] = quantity;
+      Get.snackbar(
+        "cart",
+        "Product added to cart!",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+    update();
   }
 
 //function for increment with the price and quantity management
@@ -456,7 +486,7 @@ Add your notes here:
   //total price
 
   double get totalCartPrice => cartProductDetails.fold(
-      0.0, (sum, product) => sum + product['total price']);
+      0.0, (sum, product) => sum + product['totalprice']);
 
   //---------------------EXPLORE SCREEN---------------------------------
 
@@ -565,7 +595,7 @@ Add your notes here:
   Future<void> fetchProductsByCategory(String category) async {
     try {
       isLoading.value = true;
-      final normalizeCateogry = category.toLowerCase().trim();
+
       final response = await _makeAPIcalls(
           () => ApiServices.get('products/category/$category'));
 
@@ -575,6 +605,8 @@ Add your notes here:
         if (!allproduct2.any((ap) => ap['id'] == p['id'])) {
           allproduct2.add(p);
         }
+        // 🔥 Ensure they’re available for cart
+        ensureProductInAllProduct(p);
       }
     } catch (e) {
       if (!hasInternetError.value) {

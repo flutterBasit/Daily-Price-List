@@ -353,10 +353,13 @@ class Cartscreen extends StatelessWidget {
                                           1;
 
                                       double price = product['price'] * qty;
-                                      return Text(
-                                          "\$${price.toStringAsFixed(2)}",
-                                          style: StringsConstants
-                                              .ShopScreen2title);
+                                      return Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(
+                                            "\$${price.toStringAsFixed(2)}",
+                                            style: StringsConstants
+                                                .ShopScreen2title),
+                                      );
                                     }),
                                     SizedBox(
                                       height: 15.h,

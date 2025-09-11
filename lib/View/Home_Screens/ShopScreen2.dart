@@ -256,7 +256,13 @@ class Shopscreen2 extends StatelessWidget {
                                         ),
                                         Row(
                                           children: [
-                                            Text(product['tags'].join(', ')),
+                                            Text(
+                                              (product['tags'] as List)
+                                                  .take(1)
+                                                  .join(', '),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
                                             Icon(
                                               controller
                                                       .showCategoryDetails.value

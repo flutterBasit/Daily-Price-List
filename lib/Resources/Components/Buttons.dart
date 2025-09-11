@@ -10,6 +10,7 @@ class Buttons1 extends StatelessWidget {
   final String? assetImagePath;
   final Widget? child;
   final bool isLaoding;
+  final String? subtitle;
 
   const Buttons1(
       {super.key,
@@ -19,7 +20,8 @@ class Buttons1 extends StatelessWidget {
       this.titleStyle,
       this.assetImagePath,
       this.isLaoding = false,
-      this.child});
+      this.child,
+      this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +75,30 @@ class Buttons1 extends StatelessWidget {
                                   fit: BoxFit.contain,
                                 ),
                                 SizedBox(width: 30.w),
+                              ] else ...[
+                                Text(
+                                  title,
+                                  style: titleStyle ??
+                                      TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                ),
                               ],
-                              Text(
-                                title,
-                                style: titleStyle ??
-                                    TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold,
+                              SizedBox(width: 30.w),
+                              if (subtitle != null) ...[
+                                Padding(
+                                  padding: EdgeInsets.only(right: 8.w),
+                                  child: Text(
+                                    subtitle!,
+                                    style: TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 14.sp,
                                     ),
-                              ),
+                                  ),
+                                ),
+                              ],
                             ],
                           ),
                 )),

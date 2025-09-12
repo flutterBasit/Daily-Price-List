@@ -377,7 +377,7 @@ class Cartscreen extends StatelessWidget {
                     title: 'Go to Checkout',
                     color: ColorsConstants.greenColor,
                     subtitle:
-                        'total ${controller.totalCartPrice.toStringAsFixed(2)}',
+                        "\$${controller.totalCartPrice.toStringAsFixed(2)}",
                     onTap: () {},
                   )
           ],

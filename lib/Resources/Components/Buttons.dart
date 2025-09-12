@@ -12,16 +12,17 @@ class Buttons1 extends StatelessWidget {
   final bool isLaoding;
   final String? subtitle;
 
-  const Buttons1(
-      {super.key,
-      required this.title,
-      this.onTap,
-      this.color = Colors.green, // default color
-      this.titleStyle,
-      this.assetImagePath,
-      this.isLaoding = false,
-      this.child,
-      this.subtitle});
+  const Buttons1({
+    super.key,
+    required this.title,
+    this.onTap,
+    this.color = Colors.green, // default color
+    this.titleStyle,
+    this.assetImagePath,
+    this.isLaoding = false,
+    this.child,
+    this.subtitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,79 +30,91 @@ class Buttons1 extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10.h),
         child: Material(
-          color: Colors.transparent, // transparent wrapper
+          color: Colors.transparent,
           borderRadius: BorderRadius.circular(19.r),
           child: Ink(
             width: 320.w,
             height: 67.h,
             decoration: BoxDecoration(
-              color: isLaoding
-                  ? color.withOpacity(0.7)
-                  : color, // Button background
+              color: isLaoding ? color.withOpacity(0.7) : color,
               borderRadius: BorderRadius.circular(19.r),
             ),
             child: InkWell(
-                borderRadius: BorderRadius.circular(19.r),
-                splashColor: isLaoding
-                    ? Colors.transparent
-                    : Colors.white.withOpacity(0.3), // visible ripple
-                highlightColor: isLaoding
-                    ? Colors.transparent
-                    : Colors.white.withOpacity(0.1),
-                onTap: isLaoding ? null : onTap,
-                child: Center(
-                  child: isLaoding
-                      ? SizedBox(
-                          height: 24.h,
-                          width: 24.w,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                ColorsConstants.whiteColor),
-                            strokeWidth: 2.0,
+              borderRadius: BorderRadius.circular(19.r),
+              splashColor: isLaoding
+                  ? Colors.transparent
+                  : Colors.white.withOpacity(0.3),
+              highlightColor: isLaoding
+                  ? Colors.transparent
+                  : Colors.white.withOpacity(0.1),
+              onTap: isLaoding ? null : onTap,
+              child: isLaoding
+                  ? Center(
+                      child: SizedBox(
+                        height: 24.h,
+                        width: 24.w,
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            ColorsConstants.whiteColor,
                           ),
-                        )
-                      : child ??
-                          Row(
-                            mainAxisAlignment: assetImagePath != null
-                                ? MainAxisAlignment.start
-                                : MainAxisAlignment.center,
-                            children: [
-                              if (assetImagePath != null) ...[
-                                SizedBox(width: 25.w),
-                                Image.asset(
-                                  assetImagePath!,
-                                  width: 24.w,
-                                  height: 24.w,
-                                  fit: BoxFit.contain,
+                          strokeWidth: 2.0,
+                        ),
+                      ),
+                    )
+                  : child ??
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Center title
+                          Text(
+                            title,
+                            style: titleStyle ??
+                                TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                SizedBox(width: 30.w),
-                              ] else ...[
-                                Text(
-                                  title,
-                                  style: titleStyle ??
-                                      TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                            textAlign: TextAlign.center,
+                          ),
+
+                          // Image (left)
+                          if (assetImagePath != null)
+                            Positioned(
+                              left: 15.w,
+                              child: Image.asset(
+                                assetImagePath!,
+                                width: 24.w,
+                                height: 24.h,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+
+                          // Subtitle (right)
+                          if (subtitle != null)
+                            Positioned(
+                              right: 7.w,
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w,
+                                  vertical: 6.h,
                                 ),
-                              ],
-                              SizedBox(width: 30.w),
-                              if (subtitle != null) ...[
-                                Padding(
-                                  padding: EdgeInsets.only(right: 8.w),
-                                  child: Text(
-                                    subtitle!,
-                                    style: TextStyle(
-                                      color: Colors.white70,
-                                      fontSize: 14.sp,
-                                    ),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF489E67),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Text(
+                                  subtitle!,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
-                              ],
-                            ],
-                          ),
-                )),
+                              ),
+                            ),
+                        ],
+                      ),
+            ),
           ),
         ),
       ),

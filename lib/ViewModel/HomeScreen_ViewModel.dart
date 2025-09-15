@@ -689,4 +689,7 @@ Add your notes here:
     isSearching.value = false;
     searchResult2.clear();
   }
+
+  //---------------------------CHECKOUT FUNCTIONS---------------------------------
+  final RxBool showDeliveryDetails = false.obs;
 }

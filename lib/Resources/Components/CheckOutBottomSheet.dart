@@ -42,9 +42,10 @@ class Checkoutbottomsheet extends StatelessWidget {
           Divider(
             color: ColorsConstants.whiteColor4,
           ),
+          //---------------SHOWING DELIVERY DETIALS-------------------
           Obx(() {
             return Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
                   InkWell(
@@ -56,11 +57,15 @@ class Checkoutbottomsheet extends StatelessWidget {
                       children: [
                         Text(
                           "Delivery",
-                          style: StringsConstants.shopeScreen2ProductDetails1,
+                          style: StringsConstants.CheckoutScreenDetailsTitle,
                         ),
                         Row(
                           children: [
-                            Text("Select Method"),
+                            Text(
+                              "Select Method",
+                              style: StringsConstants
+                                  .CheckoutScreenDetailsSubtitle,
+                            ),
                             Icon(
                                 controller.showDeliveryDetails.value
                                     ? Icons.keyboard_arrow_down
@@ -71,11 +76,40 @@ class Checkoutbottomsheet extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (controller.showDeliveryDetails.value) Center()
+                  if (controller.showDeliveryDetails.value)
+                    RadioListTile(
+                        title: Text("Standard Delivery (3-5 days) - \$3.99"),
+                        value: DeliveryMethod.standard,
+                        groupValue: controller.selectedDeliveryMethod.value,
+                        onChanged: (value) =>
+                            controller.selectedDeliveryMethod(value!)),
+                  RadioListTile(
+                      title: Text("Standard Delivery (3-5 days) - \$3.99"),
+                      value: DeliveryMethod.standard,
+                      groupValue: controller.selectedDeliveryMethod.value,
+                      onChanged: (value) =>
+                          controller.selectedDeliveryMethod(value!)),
+                  RadioListTile(
+                      title: Text("Standard Delivery (3-5 days) - \$3.99"),
+                      value: DeliveryMethod.standard,
+                      groupValue: controller.selectedDeliveryMethod.value,
+                      onChanged: (value) =>
+                          controller.selectedDeliveryMethod(value!)),
+                  RadioListTile(
+                      title: Text("Standard Delivery (3-5 days) - \$3.99"),
+                      value: DeliveryMethod.standard,
+                      groupValue: controller.selectedDeliveryMethod.value,
+                      onChanged: (value) =>
+                          controller.selectedDeliveryMethod(value!))
                 ],
               ),
             );
-          })
+          }),
+          Divider(
+            color: ColorsConstants.whiteColor4,
+            indent: 10,
+            endIndent: 10,
+          )
         ],
       ),
     );

@@ -312,4 +312,15 @@ class StringsConstants {
       fontSize: 14.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.blackColor2);
+
+  //------------CHECKOUT SCREEN-------------------
+  static TextStyle CheckoutScreenDetailsTitle = customFontStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.greyColor2);
+
+  static TextStyle CheckoutScreenDetailsSubtitle = customFontStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
 }

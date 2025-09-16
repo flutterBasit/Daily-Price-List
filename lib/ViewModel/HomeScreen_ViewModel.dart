@@ -692,4 +692,29 @@ Add your notes here:
 
   //---------------------------CHECKOUT FUNCTIONS---------------------------------
   final RxBool showDeliveryDetails = false.obs;
+  //Delivery Method
+  var selectedDeliveryMethod = DeliveryMethod.standard.obs;
+
+  double get deliveryCost {
+    switch (selectedDeliveryMethod.value) {
+      case DeliveryMethod.standard:
+        return 3.99;
+      case DeliveryMethod.express:
+        return 7.99;
+      case DeliveryMethod.sameDay:
+        return 12.99;
+      case DeliveryMethod.pickup:
+        return 0.0;
+    }
+  }
+
+  //making the deliverymehtod change
+  void updateDeliveryMethod(DeliveryMethod method) {
+    selectedDeliveryMethod.value = method;
+  }
+
+  //total grand price after adding it with the delivery cost
+  double get totalWithDelivery => totalCartPrice + deliveryCost;
 }
+
+enum DeliveryMethod { standard, express, sameDay, pickup }

@@ -16,7 +16,7 @@ class Splashscreen extends StatelessWidget {
   Widget build(BuildContext context) {
 //adding delay as its splash scren after few seconds it will move to next screen and this
 //screen will not be in stack as we have used Get.offNamed
-    Future.delayed(Duration(seconds: 3 + Random().nextInt(2)), () async {
+    Future.delayed(Duration(seconds: 2 + Random().nextInt(2)), () async {
       final initialRoute = await RouteManager.getInitialRoutes();
       // Authviewmodel.to.checkAuthAndNavigate();
       Get.offAllNamed(initialRoute);
@@ -28,6 +28,9 @@ class Splashscreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 330.h,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -48,6 +51,14 @@ class Splashscreen extends StatelessWidget {
                 ],
               )
             ],
+          ),
+          SizedBox(
+            height: 230.h,
+          ),
+          Image.asset(
+            "assets/images/Edigital.jpg",
+            height: 150.h,
+            width: 250.w,
           )
         ],
       ),

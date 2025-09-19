@@ -693,7 +693,7 @@ Add your notes here:
   //---------------------------CHECKOUT FUNCTIONS---------------------------------
   final RxBool showDeliveryDetails = false.obs;
   //Delivery Method
-  var selectedDeliveryMethod = DeliveryMethod.standard.obs;
+  var selectedDeliveryMethod = Rxn<DeliveryMethod>();
 
   double get deliveryCost {
     switch (selectedDeliveryMethod.value) {
@@ -705,6 +705,25 @@ Add your notes here:
         return 12.99;
       case DeliveryMethod.pickup:
         return 0.0;
+      default:
+        return 0.0;
+    }
+  }
+
+  //get method for showing the delivery method when selected
+
+  String get selectDeliveryText {
+    switch (selectedDeliveryMethod.value) {
+      case DeliveryMethod.standard:
+        return "Standard Delivery";
+      case DeliveryMethod.express:
+        return "Express Delivery";
+      case DeliveryMethod.sameDay:
+        return "Same-Day Delivery";
+      case DeliveryMethod.pickup:
+        return "PickUp";
+      default:
+        return "Select Method";
     }
   }
 
@@ -715,6 +734,9 @@ Add your notes here:
 
   //total grand price after adding it with the delivery cost
   double get totalWithDelivery => totalCartPrice + deliveryCost;
+
+  //payment
+  final RxBool showPaymentDetails = false.obs;
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }

@@ -733,10 +733,66 @@ Add your notes here:
   }
 
   //total grand price after adding it with the delivery cost
-  double get totalWithDelivery => totalCartPrice + deliveryCost;
+  // double get totalWithDelivery => totalCartPrice + deliveryCost;
+  double get totalWithDelivery {
+    double subtotal = totalCartPrice + deliveryCost;
+    return (subtotal - discount.value).clamp(
+        0.0,
+        double
+            .infinity); //clamp used to set the value between the limit defined
+  }
 
   //payment
   final RxBool showPaymentDetails = false.obs;
+  final Rxn<PaymentMethod> selectedPaymentMethod = Rxn<PaymentMethod>();
+  //getter
+  String get selectPayment {
+    switch (selectedPaymentMethod.value) {
+      case PaymentMethod.debitCard:
+        return "Debit Card";
+      case PaymentMethod.EasyPaisa:
+        return "Pay with EasyPaisa";
+      case PaymentMethod.JazzCash:
+        return "Pay with JazzCash";
+      case PaymentMethod.COD:
+        return "Cash on Delivery";
+      default:
+        return "Select Method";
+    }
+  }
+
+  //method to update the selected paymemt method
+  void updatePaymentMethod(PaymentMethod method) {
+    selectedPaymentMethod.value = method;
+  }
+
+  //Promo Code
+  final RxBool showPromoCodeDetails = false.obs;
+  final PromoCodeController = TextEditingController();
+
+  final RxString promoMessage = "".obs;
+  final RxBool isPromoValid = false.obs;
+  final RxDouble discount = 0.0.obs;
+
+  //function for the prmocode is it valid or not
+  //apply promocode
+  void applyPromoCode() {
+    String code = PromoCodeController.text.trim();
+
+    if (code == "DISCOUNT10") {
+      isPromoValid.value = true;
+      promoMessage.value = "Promo Applied! 10% Discount Added.";
+      //Reduce Cart total price by 10 percent
+      discount.value = totalCartPrice * 0.9;
+      //go to the totalCartprice and update the code for the price with and without discount
+    } else {
+      isPromoValid.value = false;
+      promoMessage.value = "Invalid Promo Code";
+      discount.value = 0.0;
+    }
+  }
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }
+
+enum PaymentMethod { debitCard, EasyPaisa, JazzCash, COD }

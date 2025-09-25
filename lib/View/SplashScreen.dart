@@ -55,10 +55,40 @@ class Splashscreen extends StatelessWidget {
           SizedBox(
             height: 230.h,
           ),
-          Image.asset(
-            "assets/images/Edigital.jpg",
-            height: 150.h,
-            width: 250.w,
+          // Image.asset(
+          //   "assets/images/E-digital.jpg",
+          //   height: 150.h,
+          //   width: 250.w,
+          // )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                backgroundColor: Color(0xff26d8a0),
+                radius: 40,
+                child: Image.asset(
+                  "assets/images/logo.png",
+                  height: 60,
+                  width: 70,
+                ),
+              ),
+              const SizedBox(width: 10),
+              RichText(
+                  text: const TextSpan(children: [
+                TextSpan(
+                    text: "E",
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: ColorsConstants.whiteColor,
+                        fontWeight: FontWeight.bold)),
+                TextSpan(
+                    text: "-Digital Pakistan",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: ColorsConstants.whiteColor,
+                        fontWeight: FontWeight.w500)),
+              ])),
+            ],
           )
         ],
       ),

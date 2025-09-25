@@ -120,6 +120,11 @@ class StringsConstants {
     fontWeight: FontWeight.w500,
     color: ColorsConstants.whiteColor,
   );
+  static TextStyle splashScreenStyle3 = customFontStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w500,
+    color: ColorsConstants.whiteColor,
+  );
 
   // ONBOARDING SCREEN
   static TextStyle onBoardingStyle = customFontStyle(

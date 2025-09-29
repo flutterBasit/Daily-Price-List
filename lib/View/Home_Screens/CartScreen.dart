@@ -222,7 +222,8 @@ class Cartscreen extends StatelessWidget {
                         "\$${controller.totalCartPrice.toStringAsFixed(2)}",
                     onTap: () {
                       //Bottom sheet
-                      Get.bottomSheet(Checkoutbottomsheet());
+                      Get.bottomSheet(Checkoutbottomsheet())
+                          .whenComplete(() => controller.Reset_CheckOut());
                     },
                   )
           ],

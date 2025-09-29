@@ -32,6 +32,7 @@ class Checkoutbottomsheet extends StatelessWidget {
                   ),
                   IconButton(
                       onPressed: () {
+                        controller.Reset_CheckOut();
                         Get.back();
                       },
                       icon: Icon(
@@ -192,6 +193,7 @@ class Checkoutbottomsheet extends StatelessWidget {
               return Padding(
                 padding: EdgeInsets.all(18),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     InkWell(
                       onTap: () {
@@ -252,13 +254,89 @@ class Checkoutbottomsheet extends StatelessWidget {
                           )
                         ],
                       ),
-                      Text(
-                        controller.promoMessage.value,
-                        style: TextStyle(
-                            color: controller.isPromoValid.value
-                                ? ColorsConstants.greenColor
-                                : Colors.red),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 80,
+                          ),
+                          Text(
+                            controller.promoMessage.value,
+                            style: TextStyle(
+                                color: controller.isPromoValid.value
+                                    ? ColorsConstants.greenColor
+                                    : Colors.red),
+                          )
+                        ],
                       )
+                    ]
+                  ],
+                ),
+              );
+            }),
+            Divider(
+              color: ColorsConstants.whiteColor4,
+              indent: 10,
+              endIndent: 10,
+            ),
+            //----------------------------------SHOWING THE GRAND TOTAL with details---------------------
+            Obx(() {
+              return Padding(
+                padding: EdgeInsets.all(18),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        controller.showTotalPriceDetails.toggle();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Total Cost",
+                            style: StringsConstants.CheckoutScreenDetailsTitle,
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                "\$${controller.totalWithDelivery.toStringAsFixed(2)}",
+                                style: StringsConstants
+                                    .CheckoutScreenDetailsSubtitle,
+                              ),
+                              Icon(controller.showTotalPriceDetails.value
+                                  ? Icons.keyboard_arrow_down
+                                  : Icons.keyboard_arrow_right)
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    if (controller.showTotalPriceDetails.value) ...[
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: controller.cartProductDetails.length,
+                          itemBuilder: (context, index) {
+                            final item = controller.cartProductDetails[index];
+                            return Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      "${item['title']} x ${item['quantity']}"),
+                                  Text(
+                                    "\$${item['totalprice'].toStringAsFixed(2)}",
+                                  )
+                                ],
+                              ),
+                            );
+                          })
                     ]
                   ],
                 ),

@@ -791,6 +791,27 @@ Add your notes here:
       discount.value = 0.0;
     }
   }
+
+  //showing the total
+  final RxBool showTotalPriceDetails = false.obs;
+
+  void Reset_CheckOut() {
+    //reset
+    selectedDeliveryMethod.value = null;
+    selectedPaymentMethod.value = null;
+
+    //clear promo
+    PromoCodeController.clear();
+    promoMessage.value = '';
+    isPromoValid.value = false;
+    discount.value = 0.0;
+
+    //collopse the sections in checkout
+    showDeliveryDetails.value = false;
+    showPaymentDetails.value = false;
+    showPromoCodeDetails.value = false;
+    showTotalPriceDetails.value = false;
+  }
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }

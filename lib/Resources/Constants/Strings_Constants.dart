@@ -328,4 +328,9 @@ class StringsConstants {
       fontSize: 14.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.blackColor2);
+
+  static TextStyle CheckoutScreenDetailsTermsAndCondition = customFontStyle(
+      fontSize: 12.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.greyColor2);
 }

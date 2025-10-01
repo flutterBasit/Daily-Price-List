@@ -20,6 +20,7 @@ class Checkoutbottomsheet extends StatelessWidget {
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r))),
       child: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -336,12 +337,42 @@ class Checkoutbottomsheet extends StatelessWidget {
                                 ],
                               ),
                             );
-                          })
+                          }),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(controller.selectDeliveryText),
+                            Text(
+                                "\$${controller.deliveryCost.toStringAsFixed(2)}")
+                          ],
+                        ),
+                      )
                     ]
                   ],
                 ),
               );
             }),
+            Divider(
+              color: ColorsConstants.whiteColor4,
+              indent: 10,
+              endIndent: 10,
+            ),
+            //------------------------------Place Order Button----------------------
+            Text(
+              'By placing an Order you agree to our ',
+              style: StringsConstants.CheckoutScreenDetailsTermsAndCondition,
+            ),
+            // RichText(
+            //     text: TextSpan(children: [
+            //   TextSpan(
+            //     text: 'By placing an Order you agree to our',
+            //     style: StringsConstants.CheckoutScreenDetailsTermsAndCondition,
+            //   ),
+            //   TextSpan(text: 'Terms And Conditions')
+            // ])),
+
             SizedBox(
               height: 100,
             ),

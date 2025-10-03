@@ -15,6 +15,7 @@ class Checkoutbottomsheet extends StatelessWidget {
         Get.find<HomeScreen_ViewController>();
     return Container(
       // padding: EdgeInsets.all(16.w),
+      height: 800,
       decoration: BoxDecoration(
           color: ColorsConstants.whiteColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.r))),
@@ -23,7 +24,7 @@ class Checkoutbottomsheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -49,7 +50,7 @@ class Checkoutbottomsheet extends StatelessWidget {
             //---------------SHOWING DELIVERY DETIALS-------------------
             Obx(() {
               return Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.all(14.0),
                 child: Column(
                   children: [
                     InkWell(
@@ -123,7 +124,7 @@ class Checkoutbottomsheet extends StatelessWidget {
             //--------------------SHOWING THE PAYMENT METHOD DETAILS------------------
             Obx(() {
               return Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.all(14.0),
                 child: Column(
                   children: [
                     InkWell(
@@ -192,7 +193,7 @@ class Checkoutbottomsheet extends StatelessWidget {
             //-------------------SHOWING THE PROMOCODE------------------------
             Obx(() {
               return Padding(
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(14),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -286,7 +287,7 @@ class Checkoutbottomsheet extends StatelessWidget {
             //----------------------------------SHOWING THE GRAND TOTAL with details---------------------
             Obx(() {
               return Padding(
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(14),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -360,22 +361,52 @@ class Checkoutbottomsheet extends StatelessWidget {
               endIndent: 10,
             ),
             //------------------------------Place Order Button----------------------
-            Text(
-              'By placing an Order you agree to our ',
-              style: StringsConstants.CheckoutScreenDetailsTermsAndCondition,
+            Row(
+              children: [
+                SizedBox(
+                  width: 14.w,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'By placing an order you agree to our ',
+                      style: StringsConstants
+                          .CheckoutScreenDetailsTermsAndCondition,
+                    ),
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: 'Terms',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: ColorsConstants.blackColor),
+                      ),
+                      TextSpan(
+                        text: ' And',
+                        style: StringsConstants
+                            .CheckoutScreenDetailsTermsAndCondition,
+                      ),
+                      TextSpan(
+                        text: ' Conditions',
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: ColorsConstants.blackColor),
+                      ),
+                    ])),
+                  ],
+                ),
+              ],
             ),
-            // RichText(
-            //     text: TextSpan(children: [
-            //   TextSpan(
-            //     text: 'By placing an Order you agree to our',
-            //     style: StringsConstants.CheckoutScreenDetailsTermsAndCondition,
-            //   ),
-            //   TextSpan(text: 'Terms And Conditions')
-            // ])),
-
+            Buttons1(
+              title: 'Place Order',
+              onTap: () {},
+            ),
             SizedBox(
-              height: 100,
-            ),
+              height: 20,
+            )
           ],
         ),
       ),

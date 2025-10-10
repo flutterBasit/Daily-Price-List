@@ -24,6 +24,14 @@ class Buttons1 extends StatelessWidget {
     this.subtitle,
   });
 
+  // //function  to determine  text color
+  // Color getTextColor(Color BackgroundColor) {
+  //   return ThemeData.estimateBrightnessForColor(BackgroundColor) ==
+  //           Brightness.light
+  //       ? Colors.black
+  //       : Colors.white;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Center(

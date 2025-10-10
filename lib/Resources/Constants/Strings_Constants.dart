@@ -333,4 +333,20 @@ class StringsConstants {
       fontSize: 12.sp,
       fontWeight: FontWeight.w600,
       color: ColorsConstants.greyColor2);
+
+  //-----------ORDER ACCEPTED SCREEN-----------------------------
+  static TextStyle OrderAcceptedScreenTitle = customFontStyle(
+      fontSize: 25.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
+
+  static TextStyle OrderAcceptedScreenTitle2 = customFontStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w400,
+      color: ColorsConstants.greyColor2);
+
+  static TextStyle OrderAcceptedBackhomeButton = customFontStyle(
+      fontSize: 15.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.blackColor2);
 }

@@ -1,7 +1,10 @@
 import 'package:daily_price_list/Model/categoeyImages.dart';
+import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
+import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/Resources/Utilities/NetworkUtils.dart';
 
 import 'package:daily_price_list/Services/Api_services.dart';
+import 'package:daily_price_list/View/Home_Screens/Order_Screens/OrderDeclined.dart';
 import 'package:dio/dio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart';
@@ -811,6 +814,40 @@ Add your notes here:
     showPaymentDetails.value = false;
     showPromoCodeDetails.value = false;
     showTotalPriceDetails.value = false;
+  }
+
+//------------------ORDER CONFIRMATION SCREEN---------------
+  bool get isOrderAccepted {
+    //order only aacepted if the delivery and the payment methods are seleced else it not be accepted
+    return selectedDeliveryMethod.value != null &&
+        selectedPaymentMethod.value != null;
+  }
+
+  //function to navigate if the order is accepted or rejected
+  void proceedToOrder(BuildContext context) async {
+    //showing the loading dilague
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => Center(
+              child: CircularProgressIndicator(
+                color: ColorsConstants.greenColor,
+              ),
+            ));
+
+    //adding delay
+    await Future.delayed(Duration(seconds: 3));
+
+    //clsoe the loading indicator
+    Navigator.of(context).pop();
+    if (selectedDeliveryMethod.value != null &&
+        selectedPaymentMethod.value != null) {
+      Get.back();
+      Get.toNamed(Routenames.OrderAcceptedScreen);
+    } else {
+      Get.back();
+      showOrderDeclinedScreen(context);
+    }
   }
 }
 

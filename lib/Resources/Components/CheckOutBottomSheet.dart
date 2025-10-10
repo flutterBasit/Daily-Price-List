@@ -402,7 +402,10 @@ class Checkoutbottomsheet extends StatelessWidget {
             ),
             Buttons1(
               title: 'Place Order',
-              onTap: () {},
+              onTap: () {
+                controller.proceedToOrder(context);
+                //  Get.back();
+              },
             ),
             SizedBox(
               height: 20,

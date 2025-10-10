@@ -2,6 +2,7 @@ import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:daily_price_list/View/Home_Screens/CartScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/ExploreScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/HomeScreen.dart';
+import 'package:daily_price_list/View/Home_Screens/Order_Screens/OrderAccepted.dart';
 import 'package:daily_price_list/View/Home_Screens/ProductScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/ShopScreen.dart';
 import 'package:daily_price_list/View/Home_Screens/ShopScreen2.dart';
@@ -38,6 +39,8 @@ class Routes {
         page: () {
           final categoryName = Get.arguments as String? ?? '';
           return Productscreen(CategoryName: categoryName);
-        })
+        }),
+    GetPage(
+        name: Routenames.OrderAcceptedScreen, page: () => OrderacceptedScreen())
   ];
 }

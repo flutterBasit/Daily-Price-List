@@ -817,11 +817,6 @@ Add your notes here:
   }
 
 //------------------ORDER CONFIRMATION SCREEN---------------
-  bool get isOrderAccepted {
-    //order only aacepted if the delivery and the payment methods are seleced else it not be accepted
-    return selectedDeliveryMethod.value != null &&
-        selectedPaymentMethod.value != null;
-  }
 
   //function to navigate if the order is accepted or rejected
   void proceedToOrder(BuildContext context) async {
@@ -829,26 +824,75 @@ Add your notes here:
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (_) => Center(
+        builder: (_) => const Center(
               child: CircularProgressIndicator(
                 color: ColorsConstants.greenColor,
               ),
             ));
 
     //adding delay
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
 
     //clsoe the loading indicator
+    if (!context.mounted) return;
     Navigator.of(context).pop();
+
     if (selectedDeliveryMethod.value != null &&
         selectedPaymentMethod.value != null) {
       Get.back();
+
+      if (cartProductDetails.isEmpty) {
+        Get.snackbar("Cart Empty!", "Please add items to your cart first");
+        return;
+      }
+
+      final order = {
+        'id': DateTime.now().millisecondsSinceEpoch.toString(),
+        'items': List<Map<dynamic, dynamic>>.from(cartProductDetails),
+        'total': totalWithDelivery,
+        'deliveryMethod':
+            selectedDeliveryMethod.value?.toString().split('.').last,
+        'paymentMethod':
+            selectedPaymentMethod.value?.toString().split('.').last,
+        'date': DateFormat('yyyy-MM-dd - kk:mn').format(DateTime.now())
+      };
+
+      //adding the above order to the RxList
+      orderHistory.add(order);
+      //adding the expansion tracker for each order
+      orderExpanded.add(false);
+
+      //clearing the cart and checkout
+      clearCart();
+      Reset_CheckOut();
+      //navigate
       Get.toNamed(Routenames.OrderAcceptedScreen);
+
+      Get.snackbar("Order Placed", "You Order has been added to order history",
+          icon: const Icon(
+            Icons.check_circle,
+            color: ColorsConstants.greenColor,
+          ),
+          snackPosition: SnackPosition.BOTTOM,
+          duration: const Duration(seconds: 1));
     } else {
       Get.back();
+      if (!context.mounted) return;
       showOrderDeclinedScreen(context);
     }
   }
+
+  //---------------------------ACCOUNT SCREEN-----------------------------
+  //ORDERS
+  final RxBool ShowOrderDetails = false.obs;
+
+  RxList<Map<String, dynamic>> orderHistory = <Map<String, dynamic>>[].obs;
+
+  RxList<bool> orderExpanded = <bool>[].obs;
+  //the above two RxList are used in the checkout function of procedetoorder
+
+  //MY DETAILS
+  final RxBool showMyDetails = false.obs;
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }

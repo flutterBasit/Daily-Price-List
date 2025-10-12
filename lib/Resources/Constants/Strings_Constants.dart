@@ -359,9 +359,8 @@ class StringsConstants {
       fontWeight: FontWeight.bold,
       color: ColorsConstants.blackColor2);
 
-  static TextStyle AccountScreenDetailsTitle2 = TextStyle(
-      fontFamily: "Gilroy-Bold",
-      fontSize: 22.sp,
-      fontWeight: FontWeight.w400,
-      color: ColorsConstants.blackColor2);
+  static TextStyle AccountLogOutButton = customFontStyle(
+      fontSize: 16.sp,
+      fontWeight: FontWeight.w600,
+      color: ColorsConstants.greenColor);
 }

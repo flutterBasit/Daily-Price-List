@@ -873,8 +873,8 @@ Add your notes here:
             Icons.check_circle,
             color: ColorsConstants.greenColor,
           ),
-          snackPosition: SnackPosition.BOTTOM,
-          duration: const Duration(seconds: 1));
+          snackPosition: SnackPosition.TOP,
+          duration: const Duration(seconds: 3));
     } else {
       Get.back();
       if (!context.mounted) return;
@@ -896,6 +896,21 @@ Add your notes here:
 
   //DELIVERY ADRESS
   final RxBool showDeliveryAddress = false.obs;
+
+  //PAYMENTS METHODS
+  final RxBool showPaymentMethods = false.obs;
+
+  //PROMOCOE DETAILS
+  final RxBool showPromoCodeNote = false.obs;
+
+  //NOTIFICATIONS
+  final RxBool showNotifications = false.obs;
+
+  //HELP CENTER
+  final RxBool showHelpDetails = false.obs;
+
+  //ABOUT
+  final RxBool showAboutDetails = false.obs;
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }

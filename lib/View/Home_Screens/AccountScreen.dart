@@ -2,6 +2,7 @@ import 'package:daily_price_list/Resources/Components/Buttons.dart';
 import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/ViewModel/AuthViewModel/AuthViewModel.dart';
+import 'package:daily_price_list/ViewModel/DropDown_ViewModel.dart';
 import 'package:daily_price_list/ViewModel/HomeScreen_ViewModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,7 @@ class Accountscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final _auth = Get.find<Authviewmodel>();
     final controller = Get.put(HomeScreen_ViewController());
-
+    final DropdownController controller2 = Get.find<DropdownController>();
     return SafeArea(
       child: Obx(() {
         final user = _auth.user;
@@ -174,35 +175,151 @@ class Accountscreen extends StatelessWidget {
             const Divider(
               color: ColorsConstants.whiteColor4,
             ),
-
+            //------------------------MY DETAILS-------------------------------------
             Obx(() {
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset("assets/images/myDetailsIcon.png"),
-                            Text(
-                              "My Details",
-                              style:
-                                  StringsConstants.AccountScreenDetailsSubtitle,
-                            )
-                          ],
-                        ),
-                        Icon(controller.showMyDetails.value
-                            ? Icons.keyboard_arrow_down
-                            : Icons.keyboard_arrow_right)
-                      ],
-                    )
+                    InkWell(
+                      onTap: () {
+                        controller.showMyDetails.toggle();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset("assets/icons/myDetailsIcon.png"),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              Text(
+                                "My Details",
+                                style: StringsConstants
+                                    .AccountScreenDetailsSubtitle,
+                              )
+                            ],
+                          ),
+                          Icon(controller.showMyDetails.value
+                              ? Icons.keyboard_arrow_down
+                              : Icons.keyboard_arrow_right)
+                        ],
+                      ),
+                    ),
+                    if (controller.showMyDetails.value) ...[
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "Name : ${user.displayName}",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      ),
+                      Text(
+                        "Email Adress : ${user.email}",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      ),
+                      Text(
+                        "      LOCATION",
+                        style: StringsConstants.CheckoutScreenDetailsTitle,
+                      ),
+                      Text(
+                        "Province : ${controller2.selectedProvine.value.toString()}",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      ),
+                      Text(
+                        "District : ${controller2.selectedDistrict.value.toString()}",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      ),
+                      Text(
+                        "Zone : ${controller2.selectedZone.value.toString()}",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      )
+                    ]
                   ],
                 ),
               );
             }),
-
+            const Divider(
+              color: ColorsConstants.whiteColor4,
+            ),
+            //-------------------DELIVERY ADRESS---------------------
+            Obx(() {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        controller.showDeliveryAddress.toggle();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                  "assets/icons/deliveryAdressIcon.png"),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              Text(
+                                "Delivery Address",
+                                style: StringsConstants
+                                    .AccountScreenDetailsSubtitle,
+                              ),
+                            ],
+                          ),
+                          Icon(controller.showDeliveryAddress.value
+                              ? Icons.keyboard_arrow_down
+                              : Icons.keyboard_arrow_right)
+                        ],
+                      ),
+                    ),
+                    if (controller.showDeliveryAddress.value) ...[
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "Selected Location : \n${controller2.selectedZone.value.toString()}, ${controller2.selectedDistrict.value.toString()}, ${controller2.selectedProvine.value.toString()}",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Text(
+                        "Add Delivery Address : ",
+                        style: StringsConstants.CheckoutScreenDetailsSubtitle,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              decoration: InputDecoration(
+                                  hintText: 'Add Secondary Delivery Address...',
+                                  contentPadding: EdgeInsets.all(10),
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: ColorsConstants.greenColor),
+                                      borderRadius: BorderRadius.circular(15))),
+                            ),
+                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.send_and_archive_rounded,
+                                color: ColorsConstants.greenColor,
+                                size: 40,
+                              ))
+                        ],
+                      )
+                    ]
+                  ],
+                ),
+              );
+            }),
             //---------------LOGOUT BUTTON-----------------------
             Buttons1(
               title: 'Log Out',

@@ -893,6 +893,9 @@ Add your notes here:
 
   //MY DETAILS
   final RxBool showMyDetails = false.obs;
+
+  //DELIVERY ADRESS
+  final RxBool showDeliveryAddress = false.obs;
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }

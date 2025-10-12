@@ -75,6 +75,7 @@ class Bottomnavbar extends StatelessWidget {
                 if (index == 1) {
                   controller.triggerExploreTabLoading();
                 }
+                controller.closeAllDropdowns();
               },
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),

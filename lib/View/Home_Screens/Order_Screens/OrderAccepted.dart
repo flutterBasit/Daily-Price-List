@@ -44,7 +44,8 @@ class OrderacceptedScreen extends StatelessWidget {
             title: 'Track Order',
             color: ColorsConstants.greenColor,
             onTap: () {
-              Get.offAllNamed(Routenames.ShopScreen);
+              // Get.offAllNamed(Routenames.ShopScreen);
+              Get.back();
             },
           ),
           Ink(

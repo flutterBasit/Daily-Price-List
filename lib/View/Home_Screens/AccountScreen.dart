@@ -582,7 +582,7 @@ class Accountscreen extends StatelessWidget {
                 color: ColorsConstants.whiteColor4,
               ),
               SizedBox(
-                height: 30.h,
+                height: 40.h,
               ),
               //---------------LOGOUT BUTTON-----------------------
               Buttons1(

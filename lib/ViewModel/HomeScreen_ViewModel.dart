@@ -911,6 +911,18 @@ Add your notes here:
 
   //ABOUT
   final RxBool showAboutDetails = false.obs;
+
+//closing all dropdowns
+  void closeAllDropdowns() {
+    ShowOrderDetails.value = false;
+    showMyDetails.value = false;
+    showDeliveryAddress.value = false;
+    showPaymentMethods.value = false;
+    showPromoCodeNote.value = false;
+    showNotifications.value = false;
+    showHelpDetails.value = false;
+    showAboutDetails.value = false;
+  }
 }
 
 enum DeliveryMethod { standard, express, sameDay, pickup }

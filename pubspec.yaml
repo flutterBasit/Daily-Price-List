@@ -54,6 +54,7 @@ dependencies:
   flutter_facebook_auth: ^7.1.2
   shared_preferences: ^2.5.3
   skeletonizer: ^2.1.0+1
+  flutter_launcher_icons: ^0.14.4
 
 dependency_overrides:
   geolocator_android: 4.6.1 
@@ -119,3 +120,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default:21
+  remove_alpha_ios: true

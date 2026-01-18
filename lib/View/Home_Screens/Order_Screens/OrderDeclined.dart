@@ -3,7 +3,6 @@ import 'package:daily_price_list/Resources/Constants/Colors_Constants.dart';
 import 'package:daily_price_list/Resources/Constants/Strings_Constants.dart';
 import 'package:daily_price_list/Resources/Routes/RouteNames.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -66,8 +65,8 @@ void showOrderDeclinedScreen(BuildContext context) {
                   ),
                   child: InkWell(
                     onTap: () {
-                      //  Get.back();
-                      Get.offAllNamed(Routenames.HomeScreen);
+                      Get.back();
+                      // Get.offAllNamed(Routenames.HomeScreen);
                     },
                     borderRadius: BorderRadius.circular(19.r),
                     splashColor: Colors.green.withOpacity(0.3),

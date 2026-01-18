@@ -15,7 +15,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.daily_price_list"
-        minSdk = 23
+        minSdkVersion = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
